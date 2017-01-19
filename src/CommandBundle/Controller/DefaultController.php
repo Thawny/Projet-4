@@ -4,10 +4,10 @@ namespace CommandBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController extends Controller
+class DefaultControllerController extends Controller
 {
-    public function indexAction()
+    public function formAction()
     {
-        return $this->render('CommandBundle:Default:index.html.twig');
+        return $this->render('CommandBundle:Home:form.html.twig');
     }
 }
