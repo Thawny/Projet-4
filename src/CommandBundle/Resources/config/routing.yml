@@ -1,4 +1,4 @@
 command_homepage:
     path:     /
-    defaults: { _controller: CommandBundle:Default:form }
+    defaults: { _controller: CommandBundle:Default:index }
 
