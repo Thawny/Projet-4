@@ -1,9 +1,14 @@
 {% extends "base.html.twig" %}
 
+{% stylesheets 'bundles/CommandBundle/views/Asset/CSS/base.css' %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
+
+{#
 {% block style %}
 <style>
     body {
-        background-image: url('/src/CommandBundle/Resources/views/Images/442-2-1226780166.jpg');
+        background-image: url('../Asset/Images/442-2-1226780166.jpg');
         background-size: cover;
     }
 
@@ -27,3 +32,5 @@
 </style>
 
 {% endblock %}
+
+#}
