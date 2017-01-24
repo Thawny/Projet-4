@@ -42,6 +42,11 @@ class command
      */
     private $dateResa;
 
+    /**
+     * @var date
+     * @ORM\Column(name="date_visit", type="date", nullable=false)
+     */
+    private $dateVisit;
 
     /**
      * Get id
@@ -124,5 +129,28 @@ class command
     {
         return $this->dateResa;
     }
-}
 
+    /**
+     * Set dateVisit
+     *
+     * @param \DateTime $dateVisit
+     *
+     * @return command
+     */
+    public function setDateVisit($dateVisit)
+    {
+        $this->dateVisit = $dateVisit;
+
+        return $this;
+    }
+
+    /**
+     * Get dateVisit
+     *
+     * @return \DateTime
+     */
+    public function getDateVisit()
+    {
+        return $this->dateVisit;
+    }
+}

@@ -65,6 +65,11 @@ class visitor
      */
     private $command;
 
+    /**
+     * @var string
+     * @ORM\Column(name="country", type="string")
+     */
+    private $country;
 
     /**
      * Get id
@@ -219,5 +224,28 @@ class visitor
     {
         return $this->command;
     }
-}
 
+    /**
+     * Set country
+     *
+     * @param string $country
+     *
+     * @return visitor
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+}
