@@ -2,9 +2,25 @@
 
 
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+
+    {{ parent() }}>
+
+    <div class="row">
+        <h3 class="col-xs-12"><span class="label label-success">1</span>Sélectionnez la date de votre visite ainsi que le nombre de billets souhaités</h3>
+        {{ form_start(commandForm) }}
+        {{ form_widget(commandForm) }}
+        {{ form_end(commandForm) }}
+    </div>
+
+    <div class="row">
+        <h3 class="col-xs-12"><span class="label label-success">2</span>Rémplissez les information concernant le/les visiteur(s)</h3>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+
+
+
 {% endblock %}
 
 {% block style %}
@@ -21,7 +37,8 @@
         width: 85%;
         margin: auto;
         border-radius: 10px;
-        padding: 15px;
+        padding: 15px !important;
+        padding-top: 0 !important;
         box-sizing: border-box;
 
     }
@@ -30,6 +47,21 @@
         margin-left: 7.5%;
     }
 
+    .form-group {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+
+    .title2 {
+        margin-top: 0px !important;
+        text-align: center;
+
+
+    }
+
+    span {
+        margin-right: 1%;
+    }
 
 </style>
 {% endblock %}

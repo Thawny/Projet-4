@@ -3,6 +3,7 @@
 namespace CommandBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +14,7 @@ class commandType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('email')->add('dateVisit')        ;
+        $builder->add('email')->add('dateVisit', DateType::class, array('label' => 'Date de visite') )        ;
     }
     
     /**
