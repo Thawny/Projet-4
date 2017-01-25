@@ -24,6 +24,7 @@ class DefaultController extends Controller
         $formBuilder = $this->get('form.factory')->createBuilder(FormType::class, $command);
 
         $formBuilder
+            ->setAction($this->generateUrl('command_visitorform'))
             ->add('dateVisit', DateType::class, array('label' => "Date de votre visite"))
             ->add('numberOfVisitors', ChoiceType::class, array(
                 'choices' => array(
@@ -43,5 +44,10 @@ class DefaultController extends Controller
         return $this->render('CommandBundle:Default:home.html.twig', array(
             'form' => $form->createView()
         ));
+    }
+
+    public function visitorsAction()
+    {
+        return $this->render('CommandBundle:Default:visitorsForm.html.twig');
     }
 }

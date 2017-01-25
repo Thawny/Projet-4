@@ -18,6 +18,10 @@
         {{ form_row(form.dateVisit) }}
         </div>
 
+        <div class="form-group">
+            {{ form_row(form.numberOfVisitors) }}
+        </div>
+
         {# Génération automatique des champs pas encore écrits.
            Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
            et tous les champs cachés (type « hidden »). #}
@@ -57,8 +61,10 @@
     }
 
     .form-group {
-        padding-left: 15px !important;
-        padding-right: 15px !important;
+     /*padding-left: 15px !important;*/
+        /*padding-right: 15px !important; #}*/
+        padding-left: 2% !important;
+        padding-right:2% !important;
     }
 
     .title2 {
@@ -66,6 +72,11 @@
         text-align: center;
 
 
+    }
+
+    .nombredevisiteurs {
+        width : 50% !important;
+        marging-left: 2% !important;
     }
 
     span {

@@ -4,27 +4,33 @@
 
     {{ parent() }}
 
+{#
 
     <div class="row">
         <h3 class="col-xs-12"><span class="label label-success">1</span>Sélectionner la date de votre visite ainsi que le nombre de visiteurs</h3>
         {{ form_start(commandForm, {'attr': {'class': 'form-horizontal'}}) }}
 
-        {# Les erreurs générales du formulaire. #}
+ Les erreurs générales du formulaire.
+
         {{ form_errors(commandForm) }}
 
-        {# Génération du label + error + widget pour un champ. #}
+ Génération du label + error + widget pour un champ.
+
         <div class="form-group">
             {{ form_row(commandForm.dateVisit) }}
         </div>
 
-        {# Génération automatique des champs pas encore écrits.
+ Génération automatique des champs pas encore écrits.
            Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
-           et tous les champs cachés (type « hidden »). #}
+           et tous les champs cachés (type « hidden »).
+
         {{ form_rest(commandForm) }}
 
-        {# Fermeture de la balise <form> du formulaire HTML #}
+ Fermeture de la balise <form> du formulaire HTML
+
         {{ form_end(commandForm) }}
     </div>
+#}
 
 
 

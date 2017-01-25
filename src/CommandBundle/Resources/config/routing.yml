@@ -3,6 +3,6 @@ command_homepage:
     defaults: { _controller: CommandBundle:Default:home }
 
 command_visitorform:
-    path:     /
-    defaults: { _controller: CommandBundle:Default:home }
+    path:     /visitors
+    defaults: { _controller: CommandBundle:Default:visitors }
 
