@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\HttpFoundation\Request;
 
 
 class DefaultController extends Controller
@@ -46,8 +47,14 @@ class DefaultController extends Controller
         ));
     }
 
-    public function visitorsAction()
+    public function visitorsAction(Request $request)
     {
-        return $this->render('CommandBundle:Default:visitorsForm.html.twig');
+
+        $visitor = new visitor();
+        $form = $this->get('form.factory')->create(visitorType::class, $visitor);
+
+        return $this->render('CommandBundle:Default:visitorsForm.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 }
