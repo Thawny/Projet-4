@@ -3,21 +3,30 @@
 
 {% block body %}
 
-    {{ parent() }}>
+    {{ parent() }}
+
 
     <div class="row">
-        <h3 class="col-xs-12"><span class="label label-success">1</span>Sélectionnez la date de votre visite ainsi que le nombre de billets souhaités</h3>
-        {{ form_start(commandForm) }}
-        {{ form_widget(commandForm) }}
-        {{ form_end(commandForm) }}
-    </div>
+        <h3 class="col-xs-12"><span class="label label-success">1</span>Sélectionner la date de votre visite ainsi que le nombre de visiteurs</h3>
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
-    <div class="row">
-        <h3 class="col-xs-12"><span class="label label-success">2</span>Rémplissez les information concernant le/les visiteur(s)</h3>
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
+        {# Les erreurs générales du formulaire. #}
+        {{ form_errors(form) }}
+
+        {# Génération du label + error + widget pour un champ. #}
+        <div class="form-group">
+        {{ form_row(form.dateVisit) }}
+        </div>
+
+        {# Génération automatique des champs pas encore écrits.
+           Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+           et tous les champs cachés (type « hidden »). #}
+       {{ form_rest(form) }}
+
+        {# Fermeture de la balise <form> du formulaire HTML #}
         {{ form_end(form) }}
     </div>
+
 
 
 

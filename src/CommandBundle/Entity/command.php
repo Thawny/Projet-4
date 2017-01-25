@@ -49,6 +49,18 @@ class command
     private $dateVisit;
 
     /**
+     * @var boolean
+     * @ORM\Column(name="full_day_tickets", type="boolean", nullable=false)
+     */
+    private $fullDayTickets;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="number_of_visitors", type="integer", nullable=true)
+     */
+    private $numberOfVisitors;
+
+    /**
      * Get id
      *
      * @return int
@@ -152,5 +164,53 @@ class command
     public function getDateVisit()
     {
         return $this->dateVisit;
+    }
+
+    /**
+     * Set fullDayTickets
+     *
+     * @param boolean $fullDayTickets
+     *
+     * @return command
+     */
+    public function setFullDayTickets($fullDayTickets)
+    {
+        $this->fullDayTickets = $fullDayTickets;
+
+        return $this;
+    }
+
+    /**
+     * Get fullDayTickets
+     *
+     * @return boolean
+     */
+    public function getFullDayTickets()
+    {
+        return $this->fullDayTickets;
+    }
+
+    /**
+     * Set numberOfVisitors
+     *
+     * @param integer $numberOfVisitors
+     *
+     * @return command
+     */
+    public function setNumberOfVisitors($numberOfVisitors)
+    {
+        $this->numberOfVisitors = $numberOfVisitors;
+
+        return $this;
+    }
+
+    /**
+     * Get numberOfVisitors
+     *
+     * @return integer
+     */
+    public function getNumberOfVisitors()
+    {
+        return $this->numberOfVisitors;
     }
 }
