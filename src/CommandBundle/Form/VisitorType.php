@@ -20,6 +20,7 @@ class VisitorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+                ->add('command', commandType::class, array('label' => ''))
                 ->add('firstName', \Symfony\Component\Form\Extension\Core\Type\TextType::class, array('label'=>'Prénom'))
                 ->add('lastName', \Symfony\Component\Form\Extension\Core\Type\TextType::class, array('label'=>'Nom'))
                 ->add('birthday', DateType::class, array('label' => 'Date de naissance'))
