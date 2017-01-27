@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 
 
-class visitorType extends AbstractType
+class VisitorType extends AbstractType
 {
     /**
      * {@inheritdoc}
