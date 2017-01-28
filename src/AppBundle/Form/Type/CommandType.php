@@ -1,13 +1,14 @@
 <?php
 
-namespace AppBundle\Form;
+namespace AppBundle\Form\Type;
 
-use AppBundle\Entity\Command;
+use AppBundle\Form\Model\CommandModel;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 
 class CommandType extends AbstractType
@@ -18,21 +19,20 @@ class CommandType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dateVisit', DateType::class, array('label' => 'Date de visite') )
+            ->add('dateVisit', DateType::class, array('label' => 'Date de visite'))
             ->add('email')
             ->add('fullDayTickets', CheckboxType::class, array('label' => 'Journée complète'))
+            ->add('visitors', CollectionType::class, array('entry_type' => VisitorType::class, 'allow_add' => true));
 
-
-        ;
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Command::class
+            'data_class' => CommandModel::class
         ));
     }
 

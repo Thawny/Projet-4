@@ -2,27 +2,38 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Command;
 use AppBundle\Entity\Visitor;
-use AppBundle\Form\CommandType;
-use AppBundle\Form\VisitorType;
+use AppBundle\Form\Model\CommandModel;
+use AppBundle\Form\Type\CommandType;
+use AppBundle\Form\Type\VisitorType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Form\Model\VisitorModel;
 
 
 class DefaultController extends Controller
 {
     public function homeAction()
     {
-        $command = new Command();
-        $visitor = new Visitor();
-        $form   = $this->get('form.factory')->create(VisitorType::class, $visitor);
+        $tony = new VisitorModel();
+        $tony->birthday = new \DateTime();
+        $tony->country = "France";
+        $tony->discount = true;
+        $tony->firstName = "Tony";
+        $tony->lastName = "Malto";
+
+        $paul = new VisitorModel();
+        $paul->birthday = new \DateTime();
+        $paul->country = "Iran";
+        $paul->discount = true;
+        $paul->firstName = "Paul";
+        $paul->lastName = "Machin";
+
+
+        $commandModel = new CommandModel();
+        $commandModel->visitors->add($tony);
+        $commandModel->visitors->add($paul);
+        $form = $this->get('form.factory')->create(CommandType::class, $commandModel);
 
 
         return $this->render('AppBundle:Default:home.html.twig', array(
@@ -30,7 +41,7 @@ class DefaultController extends Controller
         ));
     }
 
-    public function visitorsAction(Request $request)
+    public function visitorsAction()
     {
         /*$numberOfVisitors = $request->request->get('numberOfVisitors');
         $ieme = 0;
