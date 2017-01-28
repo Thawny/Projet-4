@@ -1,8 +1,0 @@
-command_homepage:
-    path:     /
-    defaults: { _controller: CommandBundle:Default:home }
-
-command_visitorform:
-    path:     /visitors
-    defaults: { _controller: CommandBundle:Default:visitors }
-

@@ -1,0 +1,8 @@
+command_homepage:
+    path:     /
+    defaults: { _controller: AppBundle:Default:home }
+
+command_visitorform:
+    path:     /visitors
+    defaults: { _controller: AppBundle:Default:visitors }
+

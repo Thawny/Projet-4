@@ -1,6 +1,6 @@
 <?php
 
-namespace CommandBundle\Repository;
+namespace AppBundle\Repository;
 
 /**
  * visitorRepository

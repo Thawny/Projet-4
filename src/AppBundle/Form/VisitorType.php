@@ -1,6 +1,6 @@
 <?php
 
-namespace CommandBundle\Form;
+namespace AppBundle\Form;
 
 use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
@@ -35,7 +35,7 @@ class VisitorType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'CommandBundle\Entity\visitor'
+            'data_class' => 'AppBundle\Entity\visitor'
         ));
     }
 

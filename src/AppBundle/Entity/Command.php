@@ -1,6 +1,6 @@
 <?php
 
-namespace CommandBundle\Entity;
+namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * command
  *
  * @ORM\Table(name="command")
- * @ORM\Entity(repositoryClass="CommandBundle\Repository\commandRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\commandRepository")
  */
 class command
 {

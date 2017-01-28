@@ -1,6 +1,6 @@
 <?php
 
-namespace CommandBundle\Form;
+namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -31,7 +31,7 @@ class commandType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'CommandBundle\Entity\command'
+            'data_class' => 'AppBundle\Entity\command'
         ));
     }
 

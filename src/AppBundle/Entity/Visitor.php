@@ -1,6 +1,6 @@
 <?php
 
-namespace CommandBundle\Entity;
+namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * visitor
  *
  * @ORM\Table(name="visitor")
- * @ORM\Entity(repositoryClass="CommandBundle\Repository\visitorRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\visitorRepository")
  */
 class visitor
 {
@@ -60,7 +60,7 @@ class visitor
      * @var \stdClass
      *
      * @ORM\Column(name="command", type="object")
-     * @ORM\ManyToOne(targetEntity="CommandBundle\Entity\command", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\command", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $command;
