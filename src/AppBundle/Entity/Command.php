@@ -1,16 +1,16 @@
 <?php
 
-namespace CommandBundle\Entity;
+namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * command
+ * Command
  *
  * @ORM\Table(name="command")
- * @ORM\Entity(repositoryClass="CommandBundle\Repository\commandRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CommandRepository")
  */
-class command
+class Command
 {
     /**
      * @var int
@@ -75,7 +75,7 @@ class command
      *
      * @param string $email
      *
-     * @return command
+     * @return Command
      */
     public function setEmail($email)
     {
@@ -99,7 +99,7 @@ class command
      *
      * @param string $codeResa
      *
-     * @return command
+     * @return Command
      */
     public function setCodeResa($codeResa)
     {
@@ -123,7 +123,7 @@ class command
      *
      * @param \DateTime $dateResa
      *
-     * @return command
+     * @return Command
      */
     public function setDateResa($dateResa)
     {
@@ -147,7 +147,7 @@ class command
      *
      * @param \DateTime $dateVisit
      *
-     * @return command
+     * @return Command
      */
     public function setDateVisit($dateVisit)
     {
@@ -171,7 +171,7 @@ class command
      *
      * @param boolean $fullDayTickets
      *
-     * @return command
+     * @return Command
      */
     public function setFullDayTickets($fullDayTickets)
     {
@@ -195,7 +195,7 @@ class command
      *
      * @param integer $numberOfVisitors
      *
-     * @return command
+     * @return Command
      */
     public function setNumberOfVisitors($numberOfVisitors)
     {

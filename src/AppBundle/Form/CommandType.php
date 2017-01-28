@@ -1,7 +1,8 @@
 <?php
 
-namespace CommandBundle\Form;
+namespace AppBundle\Form;
 
+use AppBundle\Entity\Command;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -9,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 
-class commandType extends AbstractType
+class CommandType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -31,7 +32,7 @@ class commandType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'CommandBundle\Entity\command'
+            'data_class' => Command::class
         ));
     }
 
@@ -40,7 +41,7 @@ class commandType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'commandbundle_command';
+        return 'appbundle_command';
     }
 
 
