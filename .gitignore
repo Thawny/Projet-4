@@ -1,22 +1,22 @@
-# Cache and logs (Symfony2)
-/app/cache/*
-/app/logs/*
-!app/cache/.gitkeep
-!app/logs/.gitkeep
+# Cache and logs (Symfony3)
+/var/cache/*
+/var/logs/*
+!var/cache/.gitkeep
+!var/logs/.gitkeep
+!app/config/.gitkeep
 
 # Email spool folder
 /app/spool/*
 
 # Cache, session files and logs (Symfony3)
-/var/cache/*
-/var/logs/*
-/var/sessions/*
-!var/cache/.gitkeep
-!var/logs/.gitkeep
+var/cache/*
+var/logs/*
+var/sessions/*
 !var/sessions/.gitkeep
 
 # Parameters
 /app/config/parameters.yml
+/app/config/config_dev.yml
 /app/config/parameters.ini
 
 # Managed by Composer
@@ -45,5 +45,3 @@
 **/Entity/*~
 
 .idea/
-
-/app/config/*
