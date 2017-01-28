@@ -45,3 +45,4 @@ var/sessions/*
 **/Entity/*~
 
 .idea/
+app/config/config_dev.yml
