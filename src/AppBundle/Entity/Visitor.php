@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
  * visitor
  *
  * @ORM\Table(name="visitor")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\visitorRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\VisitorRepository")
  */
-class visitor
+class Visitor
 {
     /**
      * @var int
@@ -60,7 +60,7 @@ class visitor
      * @var \stdClass
      *
      * @ORM\Column(name="command", type="object")
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\command", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Command", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $command;
@@ -86,7 +86,7 @@ class visitor
      *
      * @param string $firstName
      *
-     * @return visitor
+     * @return Visitor
      */
     public function setFirstName($firstName)
     {
@@ -110,7 +110,7 @@ class visitor
      *
      * @param string $lastName
      *
-     * @return visitor
+     * @return Visitor
      */
     public function setLastName($lastName)
     {
@@ -134,7 +134,7 @@ class visitor
      *
      * @param \DateTime $birthday
      *
-     * @return visitor
+     * @return Visitor
      */
     public function setBirthday($birthday)
     {
@@ -158,7 +158,7 @@ class visitor
      *
      * @param boolean $discount
      *
-     * @return visitor
+     * @return Visitor
      */
     public function setDiscount($discount)
     {
@@ -182,7 +182,7 @@ class visitor
      *
      * @param float $ticketFee
      *
-     * @return visitor
+     * @return Visitor
      */
     public function setTicketFee($ticketFee)
     {
@@ -202,11 +202,11 @@ class visitor
     }
 
     /**
-     * Set command
+     * Set Command
      *
      * @param \stdClass $command
      *
-     * @return visitor
+     * @return Visitor
      */
     public function setCommand($command)
     {
@@ -230,7 +230,7 @@ class visitor
      *
      * @param string $country
      *
-     * @return visitor
+     * @return Visitor
      */
     public function setCountry($country)
     {

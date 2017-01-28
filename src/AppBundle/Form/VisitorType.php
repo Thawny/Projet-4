@@ -2,14 +2,13 @@
 
 namespace AppBundle\Form;
 
-use Doctrine\DBAL\Types\TextType;
+use AppBundle\Entity\Visitor;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-
 
 
 class VisitorType extends AbstractType
@@ -20,22 +19,21 @@ class VisitorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('command', commandType::class, array('label' => ''))
-                ->add('firstName', \Symfony\Component\Form\Extension\Core\Type\TextType::class, array('label'=>'Prénom'))
-                ->add('lastName', \Symfony\Component\Form\Extension\Core\Type\TextType::class, array('label'=>'Nom'))
-                ->add('birthday', DateType::class, array('label' => 'Date de naissance'))
-                ->add('country', CountryType::class, array('label' => 'Pays'))
-                ->add('discount', CheckboxType::class, array('label' => 'Tarif réduit'))
-                        ;
+            ->add('command', CommandType::class, array('label' => ''))
+            ->add('firstName', \Symfony\Component\Form\Extension\Core\Type\TextType::class, array('label' => 'Prénom'))
+            ->add('lastName', \Symfony\Component\Form\Extension\Core\Type\TextType::class, array('label' => 'Nom'))
+            ->add('birthday', DateType::class, array('label' => 'Date de naissance'))
+            ->add('country', CountryType::class, array('label' => 'Pays'))
+            ->add('discount', CheckboxType::class, array('label' => 'Tarif réduit'));
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\visitor'
+            'data_class' => Visitor::class
         ));
     }
 
@@ -44,7 +42,7 @@ class VisitorType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'commandbundle_visitor';
+        return 'appbundle_visitor';
     }
 
 

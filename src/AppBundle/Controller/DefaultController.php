@@ -2,9 +2,9 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\command;
-use AppBundle\Entity\visitor;
-use AppBundle\Form\commandType;
+use AppBundle\Entity\Command;
+use AppBundle\Entity\Visitor;
+use AppBundle\Form\CommandType;
 use AppBundle\Form\VisitorType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -20,8 +20,8 @@ class DefaultController extends Controller
 {
     public function homeAction()
     {
-        $command = new command();
-        $visitor = new visitor();
+        $command = new Command();
+        $visitor = new Visitor();
         $form   = $this->get('form.factory')->create(VisitorType::class, $visitor);
 
 
@@ -39,12 +39,12 @@ class DefaultController extends Controller
         {
             $ieme++;
             $var2 = $var1.$ieme;
-            $$var2 = new visitor();
+            $$var2 = new Visitor();
             $form = $this->get('form.factory')->create(visitorType::class, $$var2);
 
         }*/
 
-        $visitor = new visitor();
+        $visitor = new Visitor();
         $form = $this->get('form.factory')->create(VisitorType::class, $visitor);
 
         return $this->render('AppBundle:Default:visitorsForm.html.twig', array(
