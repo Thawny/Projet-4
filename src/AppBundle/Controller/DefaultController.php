@@ -11,10 +11,15 @@ use AppBundle\Form\Model\VisitorModel;
 
 class DefaultController extends Controller
 {
-    public function homeAction()
+    public function homeAction(Request $request)
     {
-        if($this->get('session')->isStarted()){
-            $this->get('session')->getBag('commande');
+//        if($this->get('session')->isStarted()){
+//            $this->get('session')->getBag('commande');
+//        }
+
+        if ($request->isMethod('POST'))
+        {
+            return $this->redirectToRoute('command_visitorform');
         }
 
         $this->get('session');
@@ -44,10 +49,28 @@ class DefaultController extends Controller
 
     public function postCommandAction(Request $request)
     {
+
         // Récupère le form
-        // tu le valide
+        if ($request->isMethod('POST')) {
+            $form = $this->get('form.factory')->create(CommandType::class, $request);
+
+            if ($form->handleRequest($request)->isValid()) {
+
+            }
+            else {
+
+            }
+
+        }
+        else {
+            return $this->redirectToRoute('command_homepage');
+        }
+
+
+
+        // tu le valides
         // si valide
-        // tu sauvegarde la commande
-        // sinon tu affiche les erreurs
+        // tu sauvegardes la commande
+        // sinon tu affiches les erreurs
     }
 }
