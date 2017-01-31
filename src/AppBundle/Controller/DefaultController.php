@@ -7,6 +7,7 @@ use AppBundle\Form\Type\CommandType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\Model\VisitorModel;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class DefaultController extends Controller
@@ -55,10 +56,10 @@ class DefaultController extends Controller
             $form = $this->get('form.factory')->create(CommandType::class, $request);
 
             if ($form->handleRequest($request)->isValid()) {
-
+                return $this->render('AppBundle:Default:visitorsForm.html.twig');
             }
             else {
-
+                return new Response('pas valide');
             }
 
         }
