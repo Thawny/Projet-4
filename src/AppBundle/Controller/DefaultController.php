@@ -2,19 +2,28 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Visitor;
 use AppBundle\Form\Model\CommandModel;
 use AppBundle\Form\Type\CommandType;
-use AppBundle\Form\Type\VisitorType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\Model\VisitorModel;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class DefaultController extends Controller
 {
-    public function homeAction()
+    public function homeAction(Request $request)
     {
+//        if($this->get('session')->isStarted()){
+//            $this->get('session')->getBag('commande');
+//        }
+
+        if ($request->isMethod('POST'))
+        {
+            return $this->redirectToRoute('command_visitorform');
+        }
+
+        $this->get('session');
         $tony = new VisitorModel();
         $tony->birthday = new \DateTime();
         $tony->country = "France";
@@ -29,37 +38,40 @@ class DefaultController extends Controller
         $paul->firstName = "Paul";
         $paul->lastName = "Machin";
 
-
         $commandModel = new CommandModel();
         $commandModel->visitors->add($tony);
         $commandModel->visitors->add($paul);
+
         $form = $this->get('form.factory')->create(CommandType::class, $commandModel);
-
-
         return $this->render('AppBundle:Default:home.html.twig', array(
             'form' => $form->createView()
         ));
     }
 
-    public function visitorsAction()
+    public function postCommandAction(Request $request)
     {
-        /*$numberOfVisitors = $request->request->get('numberOfVisitors');
-        $ieme = 0;
-        $var1 = "visiteur";
-        for ($x = 0; $x < $numberOfVisitors; $x++)
-        {
-            $ieme++;
-            $var2 = $var1.$ieme;
-            $$var2 = new Visitor();
-            $form = $this->get('form.factory')->create(visitorType::class, $$var2);
 
-        }*/
+        // Récupère le form
+        if ($request->isMethod('POST')) {
+            $form = $this->get('form.factory')->create(CommandType::class, $request);
 
-        $visitor = new Visitor();
-        $form = $this->get('form.factory')->create(VisitorType::class, $visitor);
+            if ($form->handleRequest($request)->isValid()) {
+                return $this->render('AppBundle:Default:visitorsForm.html.twig');
+            }
+            else {
+                return new Response('pas valide');
+            }
 
-        return $this->render('AppBundle:Default:visitorsForm.html.twig', array(
-            'form' => $form->createView(),
-        ));
+        }
+        else {
+            return $this->redirectToRoute('command_homepage');
+        }
+
+
+
+        // tu le valides
+        // si valide
+        // tu sauvegardes la commande
+        // sinon tu affiches les erreurs
     }
 }

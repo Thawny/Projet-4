@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,7 +23,9 @@ class CommandType extends AbstractType
             ->add('dateVisit', DateType::class, array('label' => 'Date de visite'))
             ->add('email')
             ->add('fullDayTickets', CheckboxType::class, array('label' => 'Journée complète'))
-            ->add('visitors', CollectionType::class, array('entry_type' => VisitorType::class, 'allow_add' => true));
+            ->add('visitors', CollectionType::class, array('entry_type' => VisitorType::class, 'allow_add' => true))
+            ->add('continuer', SubmitType::class)
+            ;
 
     }
 
