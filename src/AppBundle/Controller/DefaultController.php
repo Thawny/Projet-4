@@ -4,10 +4,13 @@ namespace AppBundle\Controller;
 
 use AppBundle\Form\Model\CommandModel;
 use AppBundle\Form\Type\CommandType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\Model\VisitorModel;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 
 
 class DefaultController extends Controller
@@ -48,24 +51,21 @@ class DefaultController extends Controller
         ));
     }
 
+    /**
+     * @param Request $request
+     * @Route("/order/validate/")
+     * @Method("POST")
+     */
     public function postCommandAction(Request $request)
     {
 
         // Récupère le form
-        if ($request->isMethod('POST')) {
-            $form = $this->get('form.factory')->create(CommandType::class, $request);
 
-            if ($form->handleRequest($request)->isValid()) {
-                return $this->render('AppBundle:Default:visitorsForm.html.twig');
-            }
-            else {
-                return new Response('pas valide');
-            }
 
-        }
-        else {
-            return $this->redirectToRoute('command_homepage');
-        }
+        return $this->render('AppBundle:Default:visitorsForm.html.twig');
+
+
+
 
 
 
