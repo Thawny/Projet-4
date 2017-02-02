@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 
 
-class DefaultController extends Controller
+class CommandController extends Controller
 {
     public function homeAction(Request $request)
     {
@@ -21,10 +21,10 @@ class DefaultController extends Controller
 //            $this->get('session')->getBag('commande');
 //        }
 
-        if ($request->isMethod('POST'))
-        {
-            return $this->redirectToRoute('command_visitorform');
-        }
+
+
+
+
 
 //        $this->get('session');
 //        $tony = new VisitorModel();
@@ -51,11 +51,7 @@ class DefaultController extends Controller
         ));
     }
 
-    /**
-     * @param Request $request
-     * @Route("/order/validate/")
-     * @Method("POST")
-     */
+
     public function postCommandAction(Request $request)
     {
 
@@ -63,14 +59,14 @@ class DefaultController extends Controller
         $commandModel = new CommandModel();
         $form = $this->get('form.factory')->create(CommandType::class, $commandModel);
 
-        if ($form->handleRequest($request)->isValid())
+        if ($form->handleRequest($request)->isValid() && false)
         {
             return $this->render('AppBundle:Default:visitorsForm.html.twig');
         }
-        else
-        {
-            return $this->redirectToRoute('command_homepage');
-        }
+
+        return $this->render('AppBundle:Default:home.html.twig', array(
+            'form' => $form->createView()
+        ));
 
 
 

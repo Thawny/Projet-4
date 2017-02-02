@@ -2,3 +2,10 @@ services:
 #    command.example:
 #        class: AppBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    command.form.type:
+          class: AppBundle\Form\Type\CommandType
+          calls:
+                - [setRouter, ['@router']]
+          tags:
+                - { name: form.type }

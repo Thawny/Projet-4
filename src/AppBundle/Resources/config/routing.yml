@@ -1,8 +1,9 @@
-command_homepage:
+show_command_form:
     path:     /
-    defaults: { _controller: AppBundle:Default:home }
+    defaults: { _controller: AppBundle:Command:home }
+    methods: [GET]
 
-command_visitorform:
-    path:     /order/validate
-    defaults: { _controller: AppBundle:Default:postCommand }
-
+submit_command_form:
+    path:     /submit
+    defaults: { _controller: AppBundle:Command:postCommand }
+    methods: [POST]
