@@ -26,24 +26,24 @@ class DefaultController extends Controller
             return $this->redirectToRoute('command_visitorform');
         }
 
-        $this->get('session');
-        $tony = new VisitorModel();
-        $tony->birthday = new \DateTime();
-        $tony->country = "France";
-        $tony->discount = true;
-        $tony->firstName = "Tony";
-        $tony->lastName = "Malto";
-
-        $paul = new VisitorModel();
-        $paul->birthday = new \DateTime();
-        $paul->country = "Iran";
-        $paul->discount = true;
-        $paul->firstName = "Paul";
-        $paul->lastName = "Machin";
+//        $this->get('session');
+//        $tony = new VisitorModel();
+//        $tony->birthday = new \DateTime();
+//        $tony->country = "France";
+//        $tony->discount = true;
+//        $tony->firstName = "Tony";
+//        $tony->lastName = "Malto";
+//
+//        $paul = new VisitorModel();
+//        $paul->birthday = new \DateTime();
+//        $paul->country = "Iran";
+//        $paul->discount = true;
+//        $paul->firstName = "Paul";
+//        $paul->lastName = "Machin";
 
         $commandModel = new CommandModel();
-        $commandModel->visitors->add($tony);
-        $commandModel->visitors->add($paul);
+//        $commandModel->visitors->add($tony);
+//        $commandModel->visitors->add($paul);
 
         $form = $this->get('form.factory')->create(CommandType::class, $commandModel);
         return $this->render('AppBundle:Default:home.html.twig', array(
@@ -60,9 +60,19 @@ class DefaultController extends Controller
     {
 
         // Récupère le form
+        $commandModel = new CommandModel();
+        $form = $this->get('form.factory')->create(CommandType::class, $commandModel);
+
+        if ($form->handleRequest($request)->isValid())
+        {
+            return $this->render('AppBundle:Default:visitorsForm.html.twig');
+        }
+        else
+        {
+            return $this->redirectToRoute('command_homepage');
+        }
 
 
-        return $this->render('AppBundle:Default:visitorsForm.html.twig');
 
 
 
