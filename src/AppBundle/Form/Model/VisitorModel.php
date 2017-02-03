@@ -15,8 +15,8 @@ class VisitorModel
 {
     /**
      * @Assert\Length(min=2,
-     *     max=50
-     *     minMessage="Votre prénom doit comprendre au moins deux charactères"
+     *     max=50,
+     *     minMessage="Votre prénom doit comprendre au moins deux charactères",
      *      maxMessage="Votre prénom ne peut pas comprendre plus cinquante charactères "
      *   )
      */
@@ -24,8 +24,8 @@ class VisitorModel
 
     /**
      * @Assert\Length(min=1,
-     *     max=50
-     *     minMessage="Votre nom doit comprendre au moins deux charactères"
+     *     max=50,
+     *     minMessage="Votre nom doit comprendre au moins deux charactères",
      *      maxMessage="Votre nom ne peut pas comprendre plus cinquante charactères "
      *   )
      */
