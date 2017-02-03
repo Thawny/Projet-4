@@ -4,6 +4,7 @@ namespace AppBundle\Form\Type;
 
 use AppBundle\Form\Model\VisitorModel;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -21,9 +22,9 @@ class VisitorType extends AbstractType
         $builder
             ->add('firstName', \Symfony\Component\Form\Extension\Core\Type\TextType::class, array('label' => 'Prénom'))
             ->add('lastName', \Symfony\Component\Form\Extension\Core\Type\TextType::class, array('label' => 'Nom'))
-            ->add('birthday', DateType::class, array('label' => 'Date de naissance'))
-            ->add('country', CountryType::class, array('label' => 'Pays'))
-            ->add('discount', CheckboxType::class, array('label' => 'Tarif réduit'));
+            ->add('birthday', BirthdayType::class, array('label' => 'Date de naissance', 'format' => 'dd-MM-yyyy'))
+            ->add('country', CountryType::class, array('label' => 'Pays', 'placeholder' => 'France'))
+            ->add('discount', CheckboxType::class, array('label' => 'Tarif réduit', 'required' => false));
     }
 
     /**

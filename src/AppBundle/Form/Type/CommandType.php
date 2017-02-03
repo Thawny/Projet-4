@@ -28,7 +28,7 @@ class CommandType extends AbstractType
             ->setAction($this->router->generate('submit_command_form'))
             ->add('dateVisit', DateType::class, array('label' => 'Date de visite'))
             ->add('email')
-            ->add('fullDayTickets', CheckboxType::class, array('label' => 'Journée complète'))
+            ->add('fullDayTickets', CheckboxType::class, array('label' => 'Journée complète', 'required' => false))
             ->add('visitors', CollectionType::class, array('entry_type' => VisitorType::class, 'allow_add' => true))
             ->add('continuer', SubmitType::class)
             ;
