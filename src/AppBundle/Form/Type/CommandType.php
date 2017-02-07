@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -27,9 +28,10 @@ class CommandType extends AbstractType
         $builder
             ->setAction($this->router->generate('submit_command_form'))
             ->add('dateVisit', DateType::class, array('label' => 'Date de visite'))
-            ->add('email')
+            ->add('email', EmailType::class, array('required' => false))
             ->add('fullDayTickets', CheckboxType::class, array('label' => 'Journée complète', 'required' => false))
-            ->add('visitors', CollectionType::class, array('entry_type' => VisitorType::class, 'allow_add' => true))
+            ->add('visitors', CollectionType::class, array('entry_type' => VisitorType::class, 'allow_add' => true, 'required' => true,
+                    'label' => false))
             ->add('continuer', SubmitType::class)
             ;
 

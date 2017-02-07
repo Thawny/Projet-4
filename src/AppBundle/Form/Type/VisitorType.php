@@ -23,7 +23,8 @@ class VisitorType extends AbstractType
             ->add('firstName', \Symfony\Component\Form\Extension\Core\Type\TextType::class, array('label' => 'Prénom'))
             ->add('lastName', \Symfony\Component\Form\Extension\Core\Type\TextType::class, array('label' => 'Nom'))
             ->add('birthday', BirthdayType::class, array('label' => 'Date de naissance', 'format' => 'dd-MM-yyyy'))
-            ->add('country', CountryType::class, array('label' => 'Pays', 'placeholder' => 'France'))
+            ->add('country', CountryType::class, array('label' => 'Pays', 'placeholder' => 'France', 'required' => false
+                , 'empty_data' => 'France'))
             ->add('discount', CheckboxType::class, array('label' => 'Tarif réduit', 'required' => false));
     }
 

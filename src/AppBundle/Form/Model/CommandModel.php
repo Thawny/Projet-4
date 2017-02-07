@@ -17,11 +17,7 @@ class CommandModel
     public $dateVisit;
 
     /**
-     * @Assert\Length(min=2,
-     *     max=50,
-     *     minMessage="Votre email doit comprendre au moins deux charactères",
-     *      maxMessage="Votre email ne peut pas comprendre plus cinquante charactères "
-     *   )
+     * @Assert\NotBlank(message="Vous devez saisir votre email")
      */
     public $email;
 
@@ -30,6 +26,9 @@ class CommandModel
     /**
      * @var ArrayCollection
      * @Assert\Valid()
+     * @Assert\IsNull(
+     *     message="La commande doit comporter au moins un visiteur"
+     * )
      */
     public $visitors;
 

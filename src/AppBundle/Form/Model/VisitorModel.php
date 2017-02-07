@@ -10,6 +10,7 @@
 namespace AppBundle\Form\Model;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class VisitorModel
 {
@@ -36,5 +37,24 @@ class VisitorModel
     public $country;
 
     public $discount;
+
+    /**
+     * @return mixed
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * @param mixed $country
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+    }
+
+
+
 
 }
