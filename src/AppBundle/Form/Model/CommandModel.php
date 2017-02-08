@@ -61,7 +61,7 @@ class CommandModel
      */
     public function isVisitorsEmpty(ExecutionContextInterface $context)
     {
-        if ($this->visitors === null)
+        if ($this->visitors->isEmpty())
         {
             $context->buildViolation('Votre commande doit comporter au moins un vsiteur')
                 ->atPath('visitors')
