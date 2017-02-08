@@ -59,7 +59,7 @@ class CommandController extends Controller
         $commandModel = new CommandModel();
         $form = $this->get('form.factory')->create(CommandType::class, $commandModel);
 
-        if ($form->handleRequest($request)->isValid() && false)
+        if ($form->handleRequest($request)->isValid())
         {
             return $this->render('AppBundle:Default:visitorsForm.html.twig');
         }
