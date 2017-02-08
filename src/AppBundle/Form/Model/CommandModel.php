@@ -11,6 +11,7 @@ namespace AppBundle\Form\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class CommandModel
 {
@@ -26,9 +27,7 @@ class CommandModel
     /**
      * @var ArrayCollection
      * @Assert\Valid()
-     * @Assert\IsNull(
-     *     message="La commande doit comporter au moins un visiteur"
-     * )
+     *
      */
     public $visitors;
 
@@ -38,6 +37,36 @@ class CommandModel
     public function __construct()
     {
         $this->visitors = new ArrayCollection();
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getVisitors()
+    {
+        return $this->visitors;
+    }
+
+    /**
+     * @param ArrayCollection $visitors
+     */
+    public function setVisitors($visitors)
+    {
+        $this->visitors = $visitors;
+    }
+
+    /**
+     * @Assert\Callback()
+     * @param OptionsResolverInterface $context
+     */
+    public function isVisitorsEmpty(ExecutionContextInterface $context)
+    {
+        if ($this->visitors === null)
+        {
+            $context->buildViolation('Votre commande doit comporter au moins un vsiteur')
+                ->atPath('visitors')
+                ->addViolation();
+        }
     }
 
 
