@@ -15,10 +15,11 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class CommandModel
 {
+
     public $dateVisit;
 
     /**
-     * @Assert\NotBlank(message="Vous devez saisir votre email")
+     * @Assert\NotBlank(message="Veuillez saisir votre email")
      */
     public $email;
 

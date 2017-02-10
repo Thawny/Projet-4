@@ -11,6 +11,9 @@
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
+    {% stylesheets '@AppBundle/Resources/views/Asset/CSS/base.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    {% endstylesheets %}
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -20,9 +23,15 @@
     <![endif]-->
 </head>
 <body>
-<h1>Musée du Louvre</h1>
 
-<div class="div1 container-fluid">
+<div class="entete container-fluid">
+    <header class="col-xs-12">
+        <div class="logo col-xs-2"></div>
+        <div class="col-xs-6"></div>
+    </header>
+</div>
+
+<div class="container-fluid">
     <div class="row title2">
         <h2 class="col-xs-12">La billeterie en ligne du musée du Louvre</h2>
     </div>

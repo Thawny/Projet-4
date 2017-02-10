@@ -1,44 +1,16 @@
+/*.entete {*/
+    /*position: fixed !important;*/
+    /*!*width: 100% !important;*!*/
+    /*height: 200px !important;*/
+    /*background-color: #5eb5e0;*/
+/*}*/
+
+/*.logo {*/
+    /*background-image: url("/web/logo.png") !important;*/
+    /*width: 100px;*/
+
+/*}*/
+
 /*body {*/
-    /*background-image: url('../Images/442-2-1226780166.jpg');*/
-    /*background-size: cover;*/
-/*}*/
-
-/*.div1 {*/
-    /*border: 1px solid black;*/
-    /*background-color: white;*/
-    /*!*    height: 600px;*!*/
-    /*width: 85%;*/
-    /*margin: auto;*/
-    /*border-radius: 10px;*/
-    /*padding: 15px !important;*/
-    /*padding-top: 0 !important;*/
-    /*box-sizing: border-box;*/
-
-/*}*/
-
-/*h1 {*/
-    /*margin-left: 7.5%;*/
-/*}*/
-
-/*.form-group {*/
-    /*!*padding-left: 15px !important;*!*/
-    /*!*padding-right: 15px !important; *!*/
-    /*padding-left: 2% !important;*/
-    /*padding-right:2% !important;*/
-/*}*/
-
-/*.title2 {*/
-    /*margin-top: 0px !important;*/
-    /*text-align: center;*/
-
-
-/*}*/
-
-/*.nombredevisiteurs {*/
-    /*width : 50% !important;*/
-    /*marging-left: 2% !important;*/
-/*}*/
-
-/*span {*/
-    /*margin-right: 1%;*/
+    /*height: 1000px;*/
 /*}*/
