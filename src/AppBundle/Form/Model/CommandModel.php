@@ -57,6 +57,22 @@ class CommandModel
     }
 
     /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateVisit()
+    {
+        return $this->dateVisit;
+    }
+
+    /**
      * @Assert\Callback()
      * @param OptionsResolverInterface $context
      */
@@ -69,6 +85,40 @@ class CommandModel
                 ->addViolation();
         }
     }
+
+    /**
+     * @Assert\Callback()
+     * @param OptionsResolverInterface $context
+     */
+    public function isEmailValid(ExecutionContextInterface $context)
+    {
+        $email = $this->getEmail();
+
+        if (strlen($email) > 50 || strlen($email) < 3 || !preg_match('#@#', $email) || !preg_match('#.#', $email))
+        {
+            $context->buildViolation('Ceci n\'est pas un email valide')
+                ->atPath('email')
+                ->addViolation();
+        }
+    }
+
+    /**
+     * @Assert\Callback()
+     * @param OptionsResolverInterface $context
+     */
+    public function isDateVisitPast(ExecutionContextInterface $context)
+    {
+        $dateVisit = $this->getDateVisit();
+        $today = new \DateTime();
+
+        if ($dateVisit < $today)
+        {
+            $context->buildViolation('Vous ne pouvez pas réserver pour une date passée')
+                ->atPath('dateVisit')
+                ->addViolation();
+        }
+    }
+
 
 
 }
