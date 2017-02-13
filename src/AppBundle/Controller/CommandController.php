@@ -61,7 +61,10 @@ class CommandController extends Controller
 
         if ($form->handleRequest($request)->isValid())
         {
-            return $this->render('AppBundle:Default:visitorsForm.html.twig');
+            $donnees = $request->request->all();
+
+              return new Response("<pre>".var_dump($donnees)."</pre>");
+//            return $this->render('AppBundle:Default:visitorsForm.html.twig', array('donnees' => $donnees));
         }
 
         return $this->render('AppBundle:Default:home.html.twig', array(
