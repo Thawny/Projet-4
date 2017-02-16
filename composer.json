@@ -32,7 +32,8 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^3.0",
+        "stripe/stripe-php": "4.*"
     },
     "scripts": {
         "symfony-scripts": [
@@ -63,3 +64,5 @@
         "branch-alias": null
     }
 }
+
+

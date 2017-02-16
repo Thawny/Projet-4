@@ -10,9 +10,45 @@
 
     {{ parent() }}
 
+    <script src="https://checkout.stripe.com/checkout.js"></script>
 
-    {{ donnees.dateVisit }}
+    <button id="customButton">Payer</button>
 
+    <script>
+        var handler = StripeCheckout.configure({
+            email: 'tony.malto@fg.com',
+            key: 'pk_test_pu05lfMC3K11Qp0f8K80IpD1',
+            image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+            locale: 'auto',
+            token: function(token) {
+                // You can access the token ID with `token.id`.
+                // Get the token ID to your server-side code for use.
+                $('#stripeToken').val(token.id);
+                $('#myForm').submit();
+            }
+        });
+
+        document.getElementById('customButton').addEventListener('click', function(e) {
+            // Open Checkout with further options:
+            handler.open({
+                name: 'Billeterie du Louvre',
+                description: 'Données de paiement',
+                zipCode: true,
+                currency: 'eur',
+                amount: 2000
+            });
+            e.preventDefault();
+        });
+
+        // Close Checkout on page navigation:
+        window.addEventListener('popstate', function() {
+            handler.close();
+        });
+    </script>
+
+    <form id="myForm" action="{{ path('process_payment') }}" method="POST">
+        <input type="hidden" id="stripeToken" name="stripeToken"/>
+    </form>
 
 
 {% endblock %}

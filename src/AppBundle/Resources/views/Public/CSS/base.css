@@ -1,16 +1,65 @@
-/*.entete {*/
-    /*position: fixed !important;*/
-    /*!*width: 100% !important;*!*/
-    /*height: 200px !important;*/
-    /*background-color: #5eb5e0;*/
-/*}*/
 
-/*.logo {*/
-    /*background-image: url("/web/bundles/AppBundle/Images/logo.png") !important;*/
-    /*width: 100px;*/
+header {
+    width: 100%;
+    padding-left: 0 !important;
+    margin-top: 0 !important;
 
-/*}*/
+}
 
-/*body {*/
-    /*height: 1000px;*/
-/*}*/
+
+
+h1 {
+    color: white;
+    margin-top: 25px;
+    margin-left: 13%;
+    letter-spacing: 9px;
+}
+
+.entete {
+    position: fixed !important;
+    width: 100% !important;
+    background-color: #6C6074;
+    z-index: 1000;
+    /*margin-top: -30px !important;*/
+
+}
+
+.logo {
+    margin-left: 0 !important;
+}
+
+.img-logo {
+    margin-left: -20px !important;
+}
+
+img{
+    height : 100px !important;
+    margin-left: 0 !important;
+
+}
+
+
+.corps {
+    padding-top: 120px;
+}
+
+.bienvenue {
+    text-align: center;
+    color: #6C6074;
+    line-height: 150% !important;
+    /*border: 1px solid black;*/
+    margin-bottom: 24px;
+}
+
+.horaires {
+    background-color: #E6E6E6;
+    color: #727373;
+
+
+}
+
+.container-horaires {
+    margin-left: -14px !important;
+    margin-right: -14px !important;
+
+}

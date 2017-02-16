@@ -6,11 +6,47 @@
 {% endstylesheets %}
 {% endblock %}
 
+
 {% block body %}
 
-    {{ parent() }}
 
-    {{  form_start(form) }}
+  <div class="container-fluid corps">
+
+    <div class="container-fluid debut">
+    <div class="row title2">
+        <h4 class="col-xs-12 bienvenue">Bienvenue sur la billeterie en ligne du musée du Louvre.<br/>
+            Bénéficiez en quelques clics
+        et où que vous soyez de toute la gamme de billets et de tarifs du musée du Louvre</h4>
+    </div>
+
+
+    <div class="container-horaires">
+    <div class="row horaires">
+        <h2 class="col-xs-12">Horaires</h2>
+        <section class="col-xs-12">
+            aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur
+        </section>
+    </div>
+    </div>
+
+
+    <div class="row">
+        <h2 class="col-xs-12">Tarifs</h2>
+        <section class="col-sm-6">qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</section>
+        <section class="col-sm-6">nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur</section>
+    </div>
+
+
+
+</div>
+
+
+
+
+<div class="row">
+    <div class="col-xs-12">
+
+{{  form_start(form) }}
     {# render the task's only field: description #}
     {{ form_row(form.dateVisit) }}
     {{ form_row(form.fullDayTickets) }}
@@ -45,10 +81,16 @@
     {{ form_end(form) }}
 
 
+    </div>
+ </div>
+
+</div>
 
 
-    <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
-    <script   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+<script   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script>
     var $collectionHolder;
@@ -100,8 +142,8 @@
 
 </script>
 
-
 {% endblock %}
+
 
 {% block style %}
 

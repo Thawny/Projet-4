@@ -61,10 +61,9 @@ class CommandController extends Controller
 
         if ($form->handleRequest($request)->isValid())
         {
-            $donnees = $request->request->all();
+            $model = $form->getData();
 
-              return new Response("<pre>".var_dump($donnees)."</pre>");
-//            return $this->render('AppBundle:Default:visitorsForm.html.twig', array('donnees' => $donnees));
+            return $this->render('AppBundle:Default:visitorsForm.html.twig', array('model' => $model));
         }
 
         return $this->render('AppBundle:Default:home.html.twig', array(
@@ -82,5 +81,10 @@ class CommandController extends Controller
         // si valide
         // tu sauvegardes la commande
         // sinon tu affiches les erreurs
+    }
+
+    public function processPaymentAction()
+    {
+        return new Response('paiement ok');
     }
 }
