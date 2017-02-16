@@ -61,13 +61,15 @@ class CommandController extends Controller
 
         if ($form->handleRequest($request)->isValid())
         {
-            
 
 
 
             $model = $form->getData();
+            $birthday = $model->getVisitors()->get('birthday');
 
-            return $this->render('AppBundle:Default:visitorsForm.html.twig', array('model' => $model));
+
+
+            return $this->render('AppBundle:Default:visitorsForm.html.twig', array('model' => $model, 'birthday' => $birthday));
         }
 
         return $this->render('AppBundle:Default:home.html.twig', array(
