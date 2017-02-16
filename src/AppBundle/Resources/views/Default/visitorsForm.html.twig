@@ -1,18 +1,49 @@
 {% extends "base.html.twig" %}
 
 {% block css %}
-{% stylesheets '@AppBundle/Resources/views/Public/CSS/base.css' %}
+{% stylesheets '@AppBundle/Resources/views/Public/CSS/base.css' '@AppBundle/Resources/views/Public/CSS/visitorForm.css'%}
 <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
-{% endstylesheets %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+
+    {% endstylesheets %}
 {% endblock %}
 
 {% block body %}
 
     {{ parent() }}
 
-    <script src="https://checkout.stripe.com/checkout.js"></script>
+
+    <div class="container-fluid recap-container">
+    <div class="row">
+        <section class="col-xs-12">
+            <h3 class="titre-recap">Récapitulatif de vos achats</h3>
+
+        </section>
+semper eadem et loc for erate cerfgadem et loc for erate cerfgadem et loc for erate cerfgadem et loc for erate cerfgadem et loc for erate cerfg
+        </section>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <button id="customButton">Payer</button>
+    </div>
+
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+
+
 
     <script>
         var handler = StripeCheckout.configure({

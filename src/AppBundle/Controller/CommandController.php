@@ -61,6 +61,10 @@ class CommandController extends Controller
 
         if ($form->handleRequest($request)->isValid())
         {
+            
+
+
+
             $model = $form->getData();
 
             return $this->render('AppBundle:Default:visitorsForm.html.twig', array('model' => $model));
@@ -70,18 +74,9 @@ class CommandController extends Controller
             'form' => $form->createView()
         ));
 
-
-
-
-
-
-
-
-        // tu le valides
-        // si valide
-        // tu sauvegardes la commande
-        // sinon tu affiches les erreurs
     }
+
+
 
     public function processPaymentAction()
     {

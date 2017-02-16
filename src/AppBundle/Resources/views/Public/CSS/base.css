@@ -1,4 +1,8 @@
 
+body {
+    height: 2000px;
+}
+
 header {
     width: 100%;
     padding-left: 0 !important;
@@ -51,15 +55,38 @@ img{
     margin-bottom: 24px;
 }
 
-.horaires {
-    background-color: #E6E6E6;
+.details {
+    /*background-color: #E6E6E6;*/
     color: #727373;
 
 
 }
 
-.container-horaires {
-    margin-left: -14px !important;
-    margin-right: -14px !important;
+.tarifs {
+    /*border: 1px solid black;*/
+    color: #6C6074;
+    /*margin-left: -30px !important;*/
+}
 
+.hor {
+    /*border: 1px solid black;*/
+    color: #6C6074;
+}
+
+.titre-horaires {
+    background-color: #6C6074;
+    color: white;
+    height: 30px;
+    padding-left: 5px;
+}
+
+.titre-tarifs {
+    background-color: #6C6074;
+    color: white;
+    height: 30px;
+    padding-left: 5px;
+}
+
+.formulaire {
+    padding-top: 50px;
 }

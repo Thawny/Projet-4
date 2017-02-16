@@ -54,6 +54,29 @@ class VisitorModel
         $this->country = $country;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getBirthday()
+    {
+        return $this->birthday;
+    }
 
+    /**
+     * @param ExecutionContextInterface $
+     * @Assert\Callback()
+     */
+    public function isBirthday(ExecutionContextInterface $context)
+    {
+        $dateVisit = $this->getBirthday();
+        $today = new \DateTime();
+
+        if ($dateVisit > $today)
+        {
+            $context->buildViolation('Le champ anniversaire ne peut pas désigner une date future')
+                ->atPath('birthday')
+                ->addViolation();
+        }
+    }
 
 }
