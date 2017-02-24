@@ -9,3 +9,7 @@ services:
                 - [setRouter, ['@router']]
           tags:
                 - { name: form.type }
+
+
+    ticket.from.bithday:
+          class: AppBundle\TicketFromBirthday\TicketFromBirthday
