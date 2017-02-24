@@ -41,7 +41,8 @@ class CommandModel
     }
 
     /**
-     * @return ArrayCollection
+     * @return ArrayCollection|VisitorModel[]
+     *
      */
     public function getVisitors()
     {

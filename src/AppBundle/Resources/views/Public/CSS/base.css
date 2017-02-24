@@ -37,7 +37,7 @@ h1 {
 }
 
 img{
-    height : 100px !important;
+    height : 100px;
     margin-left: 0 !important;
 
 }
@@ -89,4 +89,13 @@ img{
 
 .formulaire {
     padding-top: 50px;
+}
+
+.img-shrink {
+    height : 60px !important;
+
+}
+
+.title-shrink {
+    font-size: medium; !important;
 }

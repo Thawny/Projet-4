@@ -6,11 +6,13 @@ use AppBundle\Form\Model\CommandModel;
 use AppBundle\Form\Type\CommandType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DependencyInjection\Tests\Compiler\C;
+use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\Model\VisitorModel;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
+use Symfony\Component\HttpFoundation\Session\Session;
 
 
 class CommandController extends Controller
@@ -19,9 +21,8 @@ class CommandController extends Controller
     {
 //        if($this->get('session')->isStarted()){
 //            $this->get('session')->getBag('commande');
-//        }
 
-
+        $session = new Session();
 
 
 
@@ -59,17 +60,28 @@ class CommandController extends Controller
         $commandModel = new CommandModel();
         $form = $this->get('form.factory')->create(CommandType::class, $commandModel);
 
+        //RECUPERATION DE LA SESSION
+        $session = $request->getSession();
+        $session->set('name', 'Jean');
+
         if ($form->handleRequest($request)->isValid())
         {
 
 
 
-            $model = $form->getData();
-            $birthday = $model->getVisitors()->get('birthday');
+            $model = $this->getCommandModel($form);
+            foreach ($model->getVisitors() as $visitor)
+            {
+
+                var_dump($visitor->getBirthday());
+            }
 
 
 
-            return $this->render('AppBundle:Default:visitorsForm.html.twig', array('model' => $model, 'birthday' => $birthday));
+
+
+
+            return $this->render('AppBundle:Default:visitorsForm.html.twig', array('model' => $model));
         }
 
         return $this->render('AppBundle:Default:home.html.twig', array(
@@ -80,8 +92,28 @@ class CommandController extends Controller
 
 
 
-    public function processPaymentAction()
+    public function processPaymentAction(Request $request)
     {
-        return new Response('paiement ok');
+        \Stripe\Stripe::setApiKey("");
+        $token = $request->get('stripeToken');
+        $charge = \Stripe\Charge::create(array(
+            "amount" => 10,
+            "currency" => "eur",
+            "description" => "Example charge",
+            "source" => $token
+        ));
+
+
+        return $this->render('AppBundle:Default:paymentSuccess.html.twig');
+    }
+
+    /**
+     * @param $form
+     * @return CommandModel
+     */
+    private function getCommandModel(\Symfony\Component\Form\Form $form)
+    {
+        return $form->getData();
     }
 }
+
