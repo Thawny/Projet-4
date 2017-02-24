@@ -64,45 +64,39 @@ class CommandController extends Controller
         $session = $request->getSession();
         $session->set('name', 'Jean');
 
+        // vérifier les place disponibles
         if ($form->handleRequest($request)->isValid())
         {
-
-
-
-            $model = $this->getCommandModel($form);
-            foreach ($model->getVisitors() as $visitor)
-            {
-
-                var_dump($visitor->getBirthday());
-            }
-
-
-
-
-
-
+            $command = $this->get('command.factory')->create($this->getCommandModel($form));
+            $command->getTotalAmount();
+            
             return $this->render('AppBundle:Default:visitorsForm.html.twig', array('model' => $model));
         }
 
         return $this->render('AppBundle:Default:home.html.twig', array(
             'form' => $form->createView()
         ));
-
     }
-
-
 
     public function processPaymentAction(Request $request)
     {
+        $command = $request->getSession()->get('command');
+
         \Stripe\Stripe::setApiKey("");
         $token = $request->get('stripeToken');
-        $charge = \Stripe\Charge::create(array(
-            "amount" => 10,
-            "currency" => "eur",
-            "description" => "Example charge",
-            "source" => $token
-        ));
 
+//        try{
+//            $this->chargeUserCreditCart($token);
+//        } catch (Exception $e) {
+//            return $this->redirect();
+//        }
+
+        // vérifier les place disponibles
+        if(true){
+            $this
+                ->get('command.repository')
+                ->insert($command);
+        }
 
         return $this->render('AppBundle:Default:paymentSuccess.html.twig');
     }
@@ -114,6 +108,20 @@ class CommandController extends Controller
     private function getCommandModel(\Symfony\Component\Form\Form $form)
     {
         return $form->getData();
+    }
+
+    /**
+     * @param $token
+     * @return \Stripe\Charge
+     */
+    protected function chargeUserCreditCart($token)
+    {
+        return $charge = \Stripe\Charge::create(array(
+            "amount" => 10,
+            "currency" => "eur",
+            "description" => "Example charge",
+            "source" => $token
+        ));
     }
 }
 

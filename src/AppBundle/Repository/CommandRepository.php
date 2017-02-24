@@ -10,4 +10,7 @@ namespace AppBundle\Repository;
  */
 class CommandRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function insert(Command $command){
+        $this->_em->persist($command);
+    }
 }

@@ -9,3 +9,15 @@ services:
                 - [setRouter, ['@router']]
           tags:
                 - { name: form.type }
+    command.factory:
+        class: AppBundle\Entity\CommandFactory
+        calls:
+          - [ setVisitorFactory, ['@visitor.factory']]
+
+    visitor.factory:
+        class: AppBundle\Entity\VisitorFactory
+
+    command.repository:
+            class: AppBundle\Repository\CommandRepository
+            parent: doctrine.orm.entity_manager
+
