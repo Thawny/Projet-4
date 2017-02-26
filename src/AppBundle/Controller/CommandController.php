@@ -94,19 +94,22 @@ class CommandController extends Controller
 
     public function processPaymentAction(Request $request)
     {
+        $command = $request->getSession()->get('command');
         \Stripe\Stripe::setApiKey("");
         $token = $request->get('stripeToken');
-        $charge = \Stripe\Charge::create(array(
-            "amount" => 10,
-            "currency" => "eur",
-            "description" => "Example charge",
-            "source" => $token
-        ));
-
-
+//        try{
+//            $this->chargeUserCreditCart($token);
+//        } catch (Exception $e) {
+//            return $this->redirect();
+//        }
+        // vérifier les place disponibles
+        if(true){
+            $this
+                ->get('command.repository')
+                ->insert($command);
+        }
         return $this->render('AppBundle:Default:paymentSuccess.html.twig');
     }
-
     /**
      * @param $form
      * @return CommandModel
@@ -114,6 +117,19 @@ class CommandController extends Controller
     private function getCommandModel(\Symfony\Component\Form\Form $form)
     {
         return $form->getData();
+    }
+    /**
+     * @param $token
+     * @return \Stripe\Charge
+     */
+    protected function chargeUserCreditCart($token)
+    {
+        return $charge = \Stripe\Charge::create(array(
+            "amount" => 10,
+            "currency" => "eur",
+            "description" => "Example charge",
+            "source" => $token
+        ));
     }
 }
 

@@ -19,7 +19,10 @@ class CommandFactory
      */
     public function create(CommandModel $model)
     {
-        return new Command();
+        $command = new Command();
+        $command->setEmail($model->getEmail());
+
+//        return new Command();
     }
 
     /**
