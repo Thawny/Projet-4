@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -59,6 +60,27 @@ class Command
      * @ORM\Column(name="number_of_visitors", type="integer", nullable=true)
      */
     private $numberOfVisitors;
+
+    /**
+     * @var Visitor[]
+     */
+    private $visitors;
+
+    /**
+     * Command constructor.
+     * @param Visitor[] $visitors
+     */
+    public function __construct()
+    {
+        $this->visitors = new ArrayCollection();
+    }
+
+    /**
+     * @param Visitor $visitor
+     */
+    public function addVisitor(Visitor $visitor){
+        $this->visitors->add($visitor);
+    }
 
     /**
      * Get id
@@ -212,5 +234,14 @@ class Command
     public function getNumberOfVisitors()
     {
         return $this->numberOfVisitors;
+    }
+
+    public function getTotalAmount(){
+        $totalAmount = 0;
+        foreach($this->visitors as $visitor){
+            $totalAmount+=$visitor->getPrice();
+        }
+
+        return $totalAmount;
     }
 }

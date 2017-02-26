@@ -248,4 +248,9 @@ class Visitor
     {
         return $this->country;
     }
+
+    public function getPrice(){
+        // copier le code de ton service TixketFromBirthday
+        return 0;
+    }
 }

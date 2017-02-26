@@ -67,21 +67,14 @@ class CommandController extends Controller
         if ($form->handleRequest($request)->isValid())
         {
 
-            //RECUPERATION SERVICE POUR CALCULER LE PRIX DES TICKETS
-            $ticket_from_birthday =  $this->get('ticket.from.bithday');
+
+
             $model = $this->getCommandModel($form);
             foreach ($model->getVisitors() as $visitor)
             {
-                $birthday = $visitor->getBirthday();
-                $discount = $visitor->discount;
-                $price = $ticket_from_birthday->ticketPrice($birthday, $discount);
-            }
 
-//            foreach ($model->getVisitors() as $visitor)
-//            {
-//
-//                var_dump($visitor->getBirthday());
-//            }
+                var_dump($visitor->getBirthday());
+            }
 
 
 
@@ -122,7 +115,5 @@ class CommandController extends Controller
     {
         return $form->getData();
     }
-
-
 }
 
