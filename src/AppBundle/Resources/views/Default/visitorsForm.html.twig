@@ -19,11 +19,84 @@
             <h3 class="titre-recap">Récapitulatif de vos achats</h3>
 
         </section>
-semper eadem et loc for erate cerfgadem et loc for erate cerfgadem et loc for erate cerfgadem et loc for erate cerfgadem et loc for erate cerfg
 
-        </section>
+         <div class="container-fluid">
+            <table class="table">
+                <tr>
+                    <td>Email</td>
+                    <td>{{ model.email }}</td>
+                </tr>
+                <tr>
+                    <td>Date de visite</td>
+                    <td>{{ model.dateVisit|date("d/m/Y") }}</td>
+                </tr>
+                <tr>
+                    <td>Journée complète</td>
+                    <td>{% if model.fullDayTickets %}
+                            Oui
+                        {% else %}
+                            Non
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+
+             <h4>Visiteur(s)</h4>
+             {#<table class="table">#}
+                {#<tr>#}
+                    {#<td>Nom</td>#}
+                    {#<td>Tony</td>#}
+                {#</tr>#}
+                {#<tr>#}
+                    {#<td>Prénom</td>#}
+                    {#<td>Tony</td>#}
+                {#</tr>#}
+                {#<tr>#}
+                    {#<td>Date de naissance</td>#}
+                    {#<td>18/11/1993</td>#}
+                {#</tr>#}
+                {#<tr>#}
+                    {#<td>Tarif réduit</td>#}
+                    {#<td>Non</td>#}
+                {#</tr>#}
+                {#<tr>#}
+                    {#<td>Prix du billet</td>#}
+                    {#<td>16,00 €</td>#}
+                {#</tr>#}
+            {#</table>#}
+
+             {% for visitors in model.visitors %}
+             <table class="table">
+                 <tr>
+                     <td>Nom</td>
+                     <td>{{ visitors.lastName }}</td>
+                 </tr>
+                 <tr>
+                     <td>Prénom</td>
+                     <td>{{ visitors.firstName }}</td>
+                 </tr>
+                 <tr>
+                     <td>Date de naissance</td>
+                     <td>{{ visitors.birthday|date("d/m/Y") }}</td>
+                 </tr>
+                 <tr>
+                     <td>Journée complète</td>
+                     <td>{% if visitors.discount %}
+                             Oui
+                         {% else %}
+                             Non
+                         {% endif %}
+                     </td>
+                 </tr>
+                 <tr>
+                     <td>Prix du billet</td>
+                     <td>{{ visitors.ticket_price }}</td>
+                 </tr>
+             </table>
+             {% endfor %}
+
+         </div>
     </div>
-
 
 
 

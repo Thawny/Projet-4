@@ -21,8 +21,13 @@ class CommandFactory
     {
         $command = new Command();
         $command->setEmail($model->getEmail());
+        $command->setDateVisit($model->getDateVisit());
+        $command->setFullDayTickets(($model->fullDayTickets));
+        $this->getVisitorFactory()->create($model->getVisitors());
 
-//        return new Command();
+        return $command;
+
+
     }
 
     /**
@@ -31,5 +36,13 @@ class CommandFactory
     public function setVisitorFactory($visitorFactory)
     {
         $this->visitorFactory = $visitorFactory;
+    }
+
+    /**
+     * @return VisitorFactory
+     */
+    public function getVisitorFactory()
+    {
+        return $this->visitorFactory;
     }
 }

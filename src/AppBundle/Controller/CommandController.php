@@ -22,29 +22,27 @@ class CommandController extends Controller
 //        if($this->get('session')->isStarted()){
 //            $this->get('session')->getBag('commande');
 
-        $session = new Session();
-
-
+//        $session = new Session();
 
 
 //        $this->get('session');
-//        $tony = new VisitorModel();
-//        $tony->birthday = new \DateTime();
-//        $tony->country = "France";
-//        $tony->discount = true;
-//        $tony->firstName = "Tony";
-//        $tony->lastName = "Malto";
-//
-//        $paul = new VisitorModel();
-//        $paul->birthday = new \DateTime();
-//        $paul->country = "Iran";
-//        $paul->discount = true;
-//        $paul->firstName = "Paul";
-//        $paul->lastName = "Machin";
+        $tony = new VisitorModel();
+        $tony->birthday = new \DateTime();
+        $tony->country = "France";
+        $tony->discount = true;
+        $tony->firstName = "Tony";
+        $tony->lastName = "Malto";
+
+        $paul = new VisitorModel();
+        $paul->birthday = new \DateTime();
+        $paul->country = "Iran";
+        $paul->discount = true;
+        $paul->firstName = "Paul";
+        $paul->lastName = "Machin";
 
         $commandModel = new CommandModel();
-//        $commandModel->visitors->add($tony);
-//        $commandModel->visitors->add($paul);
+        $commandModel->visitors->add($tony);
+        $commandModel->visitors->add($paul);
 
         $form = $this->get('form.factory')->create(CommandType::class, $commandModel);
         return $this->render('AppBundle:Default:home.html.twig', array(
@@ -53,6 +51,10 @@ class CommandController extends Controller
     }
 
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function postCommandAction(Request $request)
     {
 
@@ -61,8 +63,8 @@ class CommandController extends Controller
         $form = $this->get('form.factory')->create(CommandType::class, $commandModel);
 
         //RECUPERATION DE LA SESSION
-        $session = $request->getSession();
-        $session->set('name', 'Jean');
+//        $session = $request->getSession();
+//        $session->set('name', 'Jean');
 
         if ($form->handleRequest($request)->isValid())
         {
@@ -72,10 +74,8 @@ class CommandController extends Controller
             $model = $this->getCommandModel($form);
             foreach ($model->getVisitors() as $visitor)
             {
-
-                var_dump($visitor->getBirthday());
+                $visitor->setTicketPrice($visitor->ticketPriceCalculator());
             }
-
 
 
 
