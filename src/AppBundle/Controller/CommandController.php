@@ -3,7 +3,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Form\Model\CommandModel;
+use AppBundle\Form\Model\ConfirmationPaymentModel;
 use AppBundle\Form\Type\CommandType;
+use AppBundle\Form\Type\ConfirmationPaymentType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\Tests\Compiler\C;
@@ -17,6 +19,10 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class CommandController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function homeAction(Request $request)
     {
 //        if($this->get('session')->isStarted()){
@@ -41,8 +47,13 @@ class CommandController extends Controller
         $paul->lastName = "Machin";
 
         $commandModel = new CommandModel();
-        $commandModel->visitors->add($tony);
-        $commandModel->visitors->add($paul);
+//        $commandModel->visitors->add($tony);
+//        $commandModel->visitors->add($paul);
+
+        if ($this->get('session')->has('command'))
+        {
+            $commandModel = $this->get("session")->get('command');
+        }
 
         $form = $this->get('form.factory')->create(CommandType::class, $commandModel);
         return $this->render('AppBundle:Default:home.html.twig', array(
@@ -60,32 +71,21 @@ class CommandController extends Controller
 
         // Récupère le form
         $commandModel = new CommandModel();
-        $form = $this->get('form.factory')->create(CommandType::class, $commandModel);
+        $commandForm = $this->get('form.factory')->create(CommandType::class, $commandModel);
 
-        //RECUPERATION DE LA SESSION
-//        $session = $request->getSession();
-//        $session->set('name', 'Jean');
 
-        if ($form->handleRequest($request)->isValid())
+
+        if ($commandForm->handleRequest($request)->isValid())
         {
+            $session = $this->get('session');
+            $command = $commandForm->getData();
+            $session->set('command', $command);
 
-
-
-            $model = $this->getCommandModel($form);
-            foreach ($model->getVisitors() as $visitor)
-            {
-                $visitor->setTicketPrice($visitor->ticketPriceCalculator());
-            }
-
-
-
-
-
-            return $this->render('AppBundle:Default:visitorsForm.html.twig', array('model' => $model));
+            return $this->render('AppBundle:Default:visitorsForm.html.twig', array('model' => $command));
         }
 
         return $this->render('AppBundle:Default:home.html.twig', array(
-            'form' => $form->createView()
+            'form' => $commandForm->createView()
         ));
 
     }
