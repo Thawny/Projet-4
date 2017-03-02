@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block css %}
+    {% stylesheets '@AppBundle/Resources/views/Public/CSS/base.css' '@AppBundle/Resources/views/Public/CSS/visitorForm.css'%}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+
+    {{ parent() }}
+
+
+
+<div>
+ {{ token }}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

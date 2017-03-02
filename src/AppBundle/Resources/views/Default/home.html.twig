@@ -1,75 +1,102 @@
 {% extends "base.html.twig" %}
 
 {% block css %}
-{% stylesheets '@AppBundle/Resources/views/Asset/CSS/base.css' %}
+{% stylesheets '@AppBundle/Resources/views/Public/CSS/base.css' %}
 <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
 {% endstylesheets %}
 {% endblock %}
 
+
 {% block body %}
 
-    {{ parent() }}
 
-    {{  form_start(form) }}
+  <div class="container-fluid corps">
+
+    <div class="container-fluid debut">
+    <div class="row title2">
+        <h4 class="col-xs-12 bienvenue">Bienvenue sur la billeterie en ligne du musée du Louvre.<br/>
+            Bénéficiez en quelques clics
+        et où que vous soyez de toute la gamme de billets et de tarifs du musée du Louvre</h4>
+    </div>
+
+
+
+    <div class="row details">
+        <section class="col-sm-6 col-xs-12 hor">
+            <h3 class="titre-horaires">Horaires</h3>
+            Ouvert tous les jours de 9h à 18h à l’exception du mardi ainsi que du 1er mai et du 25 décembre.
+        </section>
+        <section class="col-sm-6 col-xs-12 tarifs">
+            <h3 class="titre-tarifs">Tarifs</h3>
+                <ul style="list-style: none; margin-left: -33px">
+                    <li>de 0 ans à 4 ans - gratuit</li>
+                    <li>de 4 ans à 12 - tarif enfant - 8 euros</li>
+                    <li>de 12 ans à 60 - tarif normal - 16 euros - tarif réduit - 10 euros</li>
+                    <li>à partir de 60 ans - tarif sénior - 12 euros</li>
+                </ul>
+        </section>
+    </div>
+
+
+</div>
+
+
+<div class="container-fluid formulaire">
+
+<div class="row">
+    <div class="col-xs-12">
+
+{{  form_start(form) }}
     {# render the task's only field: description #}
     {{ form_row(form.dateVisit) }}
     {{ form_row(form.fullDayTickets) }}
-    {{ form_row(form.email) }}
+    {{ form_label(form.email) }}
+    {{ form_widget(form.email) }}
+    {#<div class="alert-danger">#}
 
-    <h3>Visitors</h3>
-    <ul class="visitors" data-prototype="{{ form_widget(form.visitors.vars.prototype)|e('html_attr') }}">
+        {{ form_errors(form.email, {'attr': {'class': 'alert alert-danger'}}) }}
 
-    {# iterate over each existing Visitor and render its only field: name #}
+    {#</div>#}
+    <div class="alert-danger">
+        {{ form_errors(form)}}
+    </div>
+
+
+    <h3>Visiteur(s)</h3>
+    <ul class="visitors list-unstyled" data-prototype="{{ form_widget(form.visitors.vars.prototype)|e('html_attr') }}">
+
         {% for visitor in form.visitors %}
-            <li>
-            <ul>
+
+            <ul class="list-unstyled">
             <li>{{ form_row(visitor.firstName) }}</li>
             <li>{{ form_row(visitor.lastName) }}</li>
             <li>{{ form_row(visitor.birthday) }}</li>
             <li>{{ form_row(visitor.country) }}</li>
             <li>{{ form_row(visitor.discount) }}</li>
             </ul>
-            </li>
+
         {% endfor %}
     </ul>
 
     {{ form_end(form) }}
 
 
-    {#<div class="row">#}
-        {#<h3 class="col-xs-12"><span class="label label-success">1</span>Sélectionner la date de votre visite ainsi que le nombre de visiteurs</h3>#}
-        {#{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}#}
+    </div>
+ </div>
 
-        {# Les erreurs générales du formulaire. #}
-        {#{{ form_errors(form) }}#}
-
-        {# Génération du label + error + widget pour un champ. #}
-        {#<div class="form-group">#}
-        {#{{ form_row(form.dateVisit) }}#}
-        {#</div>#}
-
-        {#<div class="form-group">#}
-            {#{{ form_row(form.numberOfVisitors) }}#}
-        {#</div>#}
-
-        {# Génération automatique des champs pas encore écrits.#}
-           {#Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)#}
-           {#et tous les champs cachés (type « hidden »). #}
-       {#{{ form_rest(form) }}#}
-
-        {# Fermeture de la balise <form> du formulaire HTML #}
-        {#{{ form_end(form) }}#}
-    {#</div>#}
+</div>
 
 
-    <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
-    <script   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+<script   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script>
     var $collectionHolder;
 
     // setup an "add a Visitor" link
-    var $addVisitorLink = $('<a href="#" class="add_visitor_link">Add a Visitor</a>');
+    var $addVisitorLink = $('<a href="#" class="add_visitor_link">Ajouter un visiteur</a>');
     var $newLinkLi = $('<li></li>').append($addVisitorLink);
 
     jQuery(document).ready(function() {
@@ -115,8 +142,8 @@
 
 </script>
 
-
 {% endblock %}
+
 
 {% block style %}
 

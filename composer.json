@@ -28,11 +28,13 @@
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
-        "symfony/assetic-bundle": "^2.8"
+        "symfony/assetic-bundle": "^2.8",
+        "stripe/stripe-php": "4.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^3.0",
+        "stripe/stripe-php": "4.*"
     },
     "scripts": {
         "symfony-scripts": [
@@ -63,3 +65,5 @@
         "branch-alias": null
     }
 }
+
+

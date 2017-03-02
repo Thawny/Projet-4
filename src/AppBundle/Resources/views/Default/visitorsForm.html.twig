@@ -1,9 +1,11 @@
 {% extends "base.html.twig" %}
 
 {% block css %}
-{% stylesheets '@AppBundle/Resources/views/Asset/CSS/base.css' %}
+{% stylesheets '@AppBundle/Resources/views/Public/CSS/base.css' '@AppBundle/Resources/views/Public/CSS/visitorForm.css'%}
 <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
-{% endstylesheets %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+
+    {% endstylesheets %}
 {% endblock %}
 
 {% block body %}
@@ -11,8 +13,147 @@
     {{ parent() }}
 
 
+    <div class="container-fluid recap-container">
+    <div class="row">
+        <section class="col-xs-12">
+            <h3 class="titre-recap">Récapitulatif de vos achats</h3>
+
+        </section>
+
+         <div class="container-fluid">
+            <table class="table">
+                <tr>
+                    <td>Email</td>
+                    <td>{{ model.email }}</td>
+                </tr>
+                <tr>
+                    <td>Date de visite</td>
+                    <td>{{ model.dateVisit|date("d/m/Y") }}</td>
+                </tr>
+                <tr>
+                    <td>Journée complète</td>
+                    <td>{% if model.fullDayTickets %}
+                            Oui
+                        {% else %}
+                            Non
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+
+             <h4>Visiteur(s)</h4>
+             {#<table class="table">#}
+                {#<tr>#}
+                    {#<td>Nom</td>#}
+                    {#<td>Tony</td>#}
+                {#</tr>#}
+                {#<tr>#}
+                    {#<td>Prénom</td>#}
+                    {#<td>Tony</td>#}
+                {#</tr>#}
+                {#<tr>#}
+                    {#<td>Date de naissance</td>#}
+                    {#<td>18/11/1993</td>#}
+                {#</tr>#}
+                {#<tr>#}
+                    {#<td>Tarif réduit</td>#}
+                    {#<td>Non</td>#}
+                {#</tr>#}
+                {#<tr>#}
+                    {#<td>Prix du billet</td>#}
+                    {#<td>16,00 €</td>#}
+                {#</tr>#}
+            {#</table>#}
+
+             {% for visitors in model.visitors %}
+             <table class="table">
+                 <tr>
+                     <td>Nom</td>
+                     <td>{{ visitors.lastName }}</td>
+                 </tr>
+                 <tr>
+                     <td>Prénom</td>
+                     <td>{{ visitors.firstName }}</td>
+                 </tr>
+                 <tr>
+                     <td>Date de naissance</td>
+                     <td>{{ visitors.birthday|date("d/m/Y") }}</td>
+                 </tr>
+                 <tr>
+                     <td>Journée complète</td>
+                     <td>{% if visitors.discount %}
+                             Oui
+                         {% else %}
+                             Non
+                         {% endif %}
+                     </td>
+                 </tr>
+                 <tr>
+                     <td>Prix du billet</td>
+                     <td>{{ visitors.ticket_price }}</td>
+                 </tr>
+             </table>
+             {% endfor %}
+
+         </div>
+    </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <button id="customButton">Payer</button>
+    </div>
+
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+
+
+
+    <script>
+        var handler = StripeCheckout.configure({
+            email: 'tony.malto@fg.com',
+            key: 'pk_test_pu05lfMC3K11Qp0f8K80IpD1',
+            image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+            locale: 'auto',
+            token: function(token) {
+                // You can access the token ID with `token.id`.
+                // Get the token ID to your server-side code for use.
+                $('#stripeToken').val(token.id);
+                $('#myForm').submit();
+            }
+        });
+
+        document.getElementById('customButton').addEventListener('click', function(e) {
+            // Open Checkout with further options:
+            handler.open({
+                name: 'Billeterie du Louvre',
+                description: 'Données de paiement',
+                zipCode: true,
+                currency: 'eur',
+                amount: 2000
+            });
+            e.preventDefault();
+        });
+
+        // Close Checkout on page navigation:
+        window.addEventListener('popstate', function() {
+            handler.close();
+        });
+    </script>
+
+    <form id="myForm" action="{{ path('process_payment') }}" method="POST">
+        <input type="hidden" id="stripeToken" name="stripeToken"/>
+    </form>
 
 
 {% endblock %}

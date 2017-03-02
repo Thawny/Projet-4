@@ -1,0 +1,103 @@
+
+body {
+    height: 2000px;
+}
+
+header {
+    width: 100%;
+    padding-left: 0 !important;
+    margin-top: 0 !important;
+
+}
+
+
+
+h1 {
+    color: white;
+    margin-top: 25px;
+    margin-left: 13%;
+    letter-spacing: 9px;
+    /*text-align: center;*/
+}
+
+.entete {
+    position: fixed !important;
+    width: 100% !important;
+    background-color: #6C6074;
+    z-index: 1000;
+    /*margin-top: -30px !important;*/
+    max-height: 100px;
+
+}
+
+.logo {
+    margin-left: 0 !important;
+}
+
+.img-logo {
+    margin-left: -20px !important;
+}
+
+img{
+    height : 100px;
+    margin-left: 0 !important;
+
+}
+
+
+.corps {
+    padding-top: 120px;
+}
+
+.bienvenue {
+    text-align: center;
+    color: #6C6074;
+    line-height: 150% !important;
+    /*border: 1px solid black;*/
+    margin-bottom: 24px;
+}
+
+.details {
+    /*background-color: #E6E6E6;*/
+    color: #727373;
+
+
+}
+
+.tarifs {
+    /*border: 1px solid black;*/
+    color: #6C6074;
+    /*margin-left: -30px !important;*/
+}
+
+.hor {
+    /*border: 1px solid black;*/
+    color: #6C6074;
+}
+
+.titre-horaires {
+    background-color: #6C6074;
+    color: white;
+    height: 30px;
+    padding-left: 5px;
+}
+
+.titre-tarifs {
+    background-color: #6C6074;
+    color: white;
+    height: 30px;
+    padding-left: 5px;
+}
+
+.formulaire {
+    padding-top: 50px;
+}
+
+.img-shrink {
+    height : 60px !important;
+
+}
+
+.title-shrink {
+    font-size: medium; !important;
+}
