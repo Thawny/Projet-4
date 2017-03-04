@@ -2,6 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Command;
+use AppBundle\Entity\CommandFactory;
+use AppBundle\Entity\VisitorFactory;
 use AppBundle\Form\Model\CommandModel;
 use AppBundle\Form\Model\ConfirmationPaymentModel;
 use AppBundle\Form\Type\CommandType;
@@ -96,18 +99,27 @@ class CommandController extends Controller
     {
         $command = $request->getSession()->get('command');
         \Stripe\Stripe::setApiKey("");
-        $token = $request->get('stripeToken');
+//        $token = $request->get('stripeToken');
 //        try{
 //            $this->chargeUserCreditCart($token);
 //        } catch (Exception $e) {
 //            return $this->redirect();
 //        }
         // vérifier les place disponibles
-        if(true){
-            $this
-                ->get('command.repository')
-                ->insert($command);
-        }
+//        if(true){
+//            $this
+//                ->get('command.repository')
+//                ->insert($command);
+//        }
+
+        $commandFactory = new CommandFactory();
+        $visitorFactory = new VisitorFactory();
+        $commandFactory->setVisitorFactory($visitorFactory);
+        $commandEntity = $commandFactory->create($command);
+        $em  = $this->getDoctrine()->getManager();
+        $em->persist($commandEntity);
+        $em->flush();
+
         return $this->render('AppBundle:Default:paymentSuccess.html.twig');
     }
     /**
