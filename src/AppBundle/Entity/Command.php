@@ -39,7 +39,7 @@ class Command
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_resa", type="datetime")
+     * @ORM\Column(name="date_resa", type="datetime,", nullable=true)
      */
     private $dateResa;
 
@@ -67,12 +67,21 @@ class Command
     private $visitors;
 
     /**
+     * @param Visitor[] $visitors
+     */
+    public function setVisitors($visitors)
+    {
+        $this->visitors = $visitors;
+    }
+
+    /**
      * Command constructor.
      * @param Visitor[] $visitors
      */
     public function __construct()
     {
         $this->visitors = new ArrayCollection();
+//        $this->setDateResa(new \DateTime());
     }
 
     /**

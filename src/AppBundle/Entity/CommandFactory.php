@@ -23,7 +23,12 @@ class CommandFactory
         $command->setEmail($model->getEmail());
         $command->setDateVisit($model->getDateVisit());
         $command->setFullDayTickets(($model->fullDayTickets));
-        $this->getVisitorFactory()->create($model->getVisitors());
+        foreach ($model->getVisitors() as $visitor)
+        {
+           $visior_entity = $this->getVisitorFactory()->create($visitor);
+           $command->addVisitor($visior_entity);
+        }
+
 
         return $command;
 
