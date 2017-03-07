@@ -63,6 +63,7 @@ class Command
 
     /**
      * @var Visitor[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Visitor",mappedBy="command")
      */
     private $visitors;
 

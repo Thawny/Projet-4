@@ -60,7 +60,7 @@ class Visitor
      * @var \stdClass
      *
      * @ORM\Column(name="command", type="object")
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Command", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Command",inversedBy="visitors", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $command;
