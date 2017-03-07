@@ -39,7 +39,7 @@ class Command
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_resa", type="datetime,", nullable=true)
+     * @ORM\Column(name="date_resa", type="datetime", nullable=true)
      */
     private $dateResa;
 
