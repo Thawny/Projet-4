@@ -10,7 +10,34 @@ namespace AppBundle\Repository;
  */
 class CommandRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function insert(Command $command){
+    public function insert(Command $command)
+    {
         $this->_em->persist($command);
+    }
+
+//    public function findVisitorsFromDate($dateVisit)
+//    {
+//        $qb = $this->createQueryBuilder('c');
+//
+//        $qb->where('c.dateVisit = :dateVisit')
+//            ->setParameter('dateVisit', $dateVisit);
+//
+//        return $qb
+//            ->getQuery()
+//            ->getResult();
+//    }
+
+    public function findCommandsWithItsVisitors($dateVisit)
+    {
+        $qb = $this->createQueryBuilder('c');
+
+        $qb->where('c.dateVisit = :dateVisit')
+            ->setParameter('dateVisit', $dateVisit);
+        $qb->leftJoin('c.visitors', 'visitors')
+            ->addSelect('visitors');
+
+        return $qb
+            ->getQuery()
+            ->getResult();
     }
 }

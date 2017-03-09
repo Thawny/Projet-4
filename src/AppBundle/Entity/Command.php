@@ -63,7 +63,7 @@ class Command
 
     /**
      * @var Visitor[]
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Visitor",mappedBy="command")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Visitor",mappedBy="command", cascade={"persist"})
      */
     private $visitors;
 

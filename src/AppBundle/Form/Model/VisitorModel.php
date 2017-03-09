@@ -113,6 +113,14 @@ class VisitorModel
         }
     }
 
+    // de 0 à 4   => gratuit
+    // de 4 à 12  => 8 euros
+    // de 12 à 60 => tarif réduit   => 10 euros
+    //            sans tarif réduit => 16 euros
+    // à partir de 60 => 12 euros
+
+
+
 
     public function ticketPriceCalculator()
     {

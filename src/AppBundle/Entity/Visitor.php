@@ -52,13 +52,11 @@ class Visitor
     /**
      * @var float
      *
-     * @ORM\Column(name="ticket_fee", type="float")
+     * @ORM\Column(name="ticket_fee", type="float", nullable=true)
      */
     private $ticketFee;
 
     /**
-     * @var \stdClass
-     *
      * @ORM\Column(name="command", type="object")
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Command",inversedBy="visitors", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)

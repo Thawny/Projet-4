@@ -27,6 +27,7 @@ class CommandFactory
         {
            $visior_entity = $this->getVisitorFactory()->create($visitor);
            $command->addVisitor($visior_entity);
+           $visior_entity->setCommand($command);
         }
 
 

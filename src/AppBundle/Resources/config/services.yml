@@ -21,3 +21,8 @@ services:
     command.repository:
             class: AppBundle\Repository\CommandRepository
             parent: doctrine.orm.entity_manager
+
+    overbooking.checker:
+            class: AppBundle\OverbookingChecker\OverbookingChecker\OverbookingChecker
+            arguments:
+              - AppBundle\Repository\CommandRepository
