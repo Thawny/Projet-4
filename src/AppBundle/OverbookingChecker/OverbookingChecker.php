@@ -9,6 +9,8 @@
 
 namespace AppBundle\OverbookingChecker\OverbookingChecker;
 
+use AppBundle\Entity\Command;
+
 /**
  * Class OverbookingChecker
  */
@@ -21,15 +23,16 @@ class OverbookingChecker
         $this->commandRepository = $commandRepository;
     }
 
-    public function isOverbooked($dateVisit)
+    public function isValidReservation(Command $command)
     {
-        $counter = 0;
+        $dateVisit = $command->getDateVisit();
+        $totalReservetions = $this->commandRepository->countReservationAt($dateVisit);
 
-        $commands = $this
-            ->commandRepository
-            ->findCommandsWithItsVisitors($dateVisit);
-
-//        foreach ($commands->
-
+        if ($command->getNumberOfVisitors()+ $totalReservetions <= 1000)
+            return true;
+        else {
+            $leftTickets = 1000 - $totalReservetions;
+            return $leftTickets;
+        }
     }
 }

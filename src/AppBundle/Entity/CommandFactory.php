@@ -12,6 +12,7 @@ class CommandFactory
      * @var VisitorFactory
      */
     private $visitorFactory;
+    private $count = 0;
 
     /**
      * @param CommandModel $model
@@ -28,8 +29,10 @@ class CommandFactory
            $visior_entity = $this->getVisitorFactory()->create($visitor);
            $command->addVisitor($visior_entity);
            $visior_entity->setCommand($command);
+           $this->count++;
         }
 
+        $command->setNumberOfVisitors($this->count);
 
         return $command;
 

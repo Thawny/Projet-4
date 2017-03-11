@@ -57,9 +57,8 @@ class Visitor
     private $ticketFee;
 
     /**
-     * @ORM\Column(name="command", type="object")
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Command",inversedBy="visitors", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(name="command", referencedColumnName="id")
      */
     private $command;
 

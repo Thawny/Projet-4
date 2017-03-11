@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Command;
+
 /**
  * CommandRepository
  *
@@ -13,6 +15,7 @@ class CommandRepository extends \Doctrine\ORM\EntityRepository
     public function insert(Command $command)
     {
         $this->_em->persist($command);
+        $this->_em->flush();
     }
 
 //    public function findVisitorsFromDate($dateVisit)
@@ -27,17 +30,18 @@ class CommandRepository extends \Doctrine\ORM\EntityRepository
 //            ->getResult();
 //    }
 
-    public function findCommandsWithItsVisitors($dateVisit)
+    public function countReservationAt($dateVisit)
     {
         $qb = $this->createQueryBuilder('c');
 
-        $qb->where('c.dateVisit = :dateVisit')
+        $qb ->select('count(visitors)')
+            ->where('c.dateVisit = :dateVisit')
             ->setParameter('dateVisit', $dateVisit);
         $qb->leftJoin('c.visitors', 'visitors')
             ->addSelect('visitors');
 
         return $qb
             ->getQuery()
-            ->getResult();
+            ->getSingleScalarResult();
     }
 }

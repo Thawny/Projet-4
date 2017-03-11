@@ -35,19 +35,19 @@ class CommandController extends Controller
 
 
 //        $this->get('session');
-        $tony = new VisitorModel();
-        $tony->birthday = new \DateTime();
-        $tony->country = "France";
-        $tony->discount = true;
-        $tony->firstName = "Tony";
-        $tony->lastName = "Malto";
-
-        $paul = new VisitorModel();
-        $paul->birthday = new \DateTime();
-        $paul->country = "Iran";
-        $paul->discount = true;
-        $paul->firstName = "Paul";
-        $paul->lastName = "Machin";
+//        $tony = new VisitorModel();
+//        $tony->birthday = new \DateTime();
+//        $tony->country = "France";
+//        $tony->discount = true;
+//        $tony->firstName = "Tony";
+//        $tony->lastName = "Malto";
+//
+//        $paul = new VisitorModel();
+//        $paul->birthday = new \DateTime();
+//        $paul->country = "Iran";
+//        $paul->discount = true;
+//        $paul->firstName = "Paul";
+//        $paul->lastName = "Machin";
 
         $commandModel = new CommandModel();
 //        $commandModel->visitors->add($tony);
@@ -98,9 +98,9 @@ class CommandController extends Controller
     public function processPaymentAction(Request $request)
     {
         $command = $request->getSession()->get('command');
-        \Stripe\Stripe::setApiKey("");
+//        \Stripe\Stripe::setApiKey("");
 //        $token = $request->get('stripeToken');
-//        try{
+////        try{
 //            $this->chargeUserCreditCart($token);
 //        } catch (Exception $e) {
 //            return $this->redirect();
@@ -108,17 +108,19 @@ class CommandController extends Controller
         // vérifier les place disponibles
 //        if(true){
 //            $this
-//                ->get('command.repository')
-//                ->insert($command);
+//
+//
 //        }
 
-        $commandFactory = new CommandFactory();
-        $visitorFactory = new VisitorFactory();
-        $commandFactory->setVisitorFactory($visitorFactory);
+
+        $commandFactory = $this->get('command.factory');
         $commandEntity = $commandFactory->create($command);
-        $em  = $this->getDoctrine()->getManager();
-        $em->persist($commandEntity);
-        $em->flush();
+
+        $commandRepository = $this->getDoctrine()
+                                  ->getManager()
+                                  ->getRepository('AppBundle:Command');
+        $commandRepository->insert($commandEntity);
+
 
         return $this->render('AppBundle:Default:paymentSuccess.html.twig');
     }

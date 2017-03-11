@@ -243,7 +243,7 @@ class Command
      */
     public function getNumberOfVisitors()
     {
-        return $this->numberOfVisitors;
+        return $this->visitors->count();
     }
 
     public function getTotalAmount(){
