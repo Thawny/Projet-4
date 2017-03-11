@@ -7,7 +7,7 @@
  * Time: 15:33
  */
 
-namespace AppBundle\OverbookingChecker\OverbookingChecker;
+namespace AppBundle\OverbookingChecker;
 
 use AppBundle\Entity\Command;
 
@@ -18,7 +18,12 @@ class OverbookingChecker
 {
     private $commandRepository;
 
-    public function __construct(\AppBundle\Repository\CommandRepository $commandRepository)
+//    public function __construct(\AppBundle\Repository\CommandRepository $commandRepository)
+//    {
+//        $this->commandRepository = $commandRepository;
+//    }
+
+    public function setCommandRepository(\AppBundle\Repository\CommandRepository $commandRepository)
     {
         $this->commandRepository = $commandRepository;
     }
