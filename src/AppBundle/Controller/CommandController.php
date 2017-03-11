@@ -98,32 +98,40 @@ class CommandController extends Controller
     public function processPaymentAction(Request $request)
     {
         $command = $request->getSession()->get('command');
-//        \Stripe\Stripe::setApiKey("");
-//        $token = $request->get('stripeToken');
-////        try{
+        $commandFactory = $this->get('command.factory');
+        $commandEntity = $commandFactory->create($command);
+
+
+        \Stripe\Stripe::setApiKey("");
+        $token = $request->get('stripeToken');
+        $overbookingChecker = $this->get('overbooking.checker');
+        if ($overbookingChecker->isValidReservation($commandEntity) == true)
+        {
+            $commandRepository = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:Command');
+            $commandRepository->insert($commandEntity);
+            return $this->render('AppBundle:Default:paymentSuccess.html.twig');
+        } else {
+            $numberOfTicketsLeft = $overbookingChecker->isValidReservation($commandEntity);
+            $flashMessage = "Nombre de tickets insuffisant, il ne reste que ".$numberOfTicketsLeft;
+            $this->get('session')->getFlashBag->add('insuffisant', $flashMessage);
+            $this->redirectToRoute('show_command_form');
+        }
+//        try{
 //            $this->chargeUserCreditCart($token);
 //        } catch (Exception $e) {
 //            return $this->redirect();
 //        }
-        // vérifier les place disponibles
+//        vérifier les place disponibles
 //        if(true){
-//            $this
-//
-//
 //        }
 
 
-        $commandFactory = $this->get('command.factory');
-        $commandEntity = $commandFactory->create($command);
-
-        $commandRepository = $this->getDoctrine()
-                                  ->getManager()
-                                  ->getRepository('AppBundle:Command');
-        $commandRepository->insert($commandEntity);
 
 
-        return $this->render('AppBundle:Default:paymentSuccess.html.twig');
     }
+
     /**
      * @param $form
      * @return CommandModel

@@ -67,7 +67,7 @@
 
         {% for visitor in form.visitors %}
 
-            <ul class="list-unstyled">
+            <ul class="list-unstyled new-visitor">
             <li>{{ form_row(visitor.firstName) }}</li>
             <li>{{ form_row(visitor.lastName) }}</li>
             <li>{{ form_row(visitor.birthday) }}</li>
@@ -104,6 +104,11 @@
     // Get the ul that holds the collection of Visitors
     $collectionHolder = $('ul.visitors');
 
+     // add a delete link to all of the existing tag form li elements
+     $collectionHolder.find('.new-visitor').each(function() {
+         addTagFormDeleteLink($(this));
+      });
+
     // add the "add a Visitor" anchor and li to the Visitors ul
     $collectionHolder.append($newLinkLi);
 
@@ -120,6 +125,18 @@
     });
     });
 
+    function addTagFormDeleteLink($tagFormLi) {
+        var $removeFormA = $('<a href="#">Supprimer ce visiteur</a>');
+        $tagFormLi.append($removeFormA);
+
+        $removeFormA.on('click', function(e) {
+            // prevent the link from creating a "#" on the URL
+            e.preventDefault();
+
+            // remove the li for the tag form
+            $tagFormLi.remove();
+        });
+    }
 
     function addVisitorForm($collectionHolder, $newLinkLi) {
         // Get the data-prototype explained earlier
@@ -138,6 +155,9 @@
         // Display the form in the page in an li, before the "Add a Visitor" link li
         var $newFormLi = $('<li></li>').append(newForm);
         $newLinkLi.before($newFormLi);
+
+        // add a delete link to the new form
+        addTagFormDeleteLink($newFormLi);
     }
 
 </script>
@@ -148,4 +168,3 @@
 {% block style %}
 
 {% endblock %}
-

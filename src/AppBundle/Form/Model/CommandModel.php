@@ -73,6 +73,11 @@ class CommandModel
         return $this->dateVisit;
     }
 
+    public function removeVisitor(VisitorModel $visitor)
+    {
+        $this->visitors->removeElement($visitor);
+    }
+
     /**
      * @Assert\Callback()
      * @param OptionsResolverInterface $context
