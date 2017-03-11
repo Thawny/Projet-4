@@ -26,3 +26,4 @@ services:
             class: AppBundle\OverbookingChecker\OverbookingChecker\OverbookingChecker
             arguments:
               - AppBundle\Repository\CommandRepository
+

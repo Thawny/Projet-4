@@ -105,11 +105,9 @@ class CommandController extends Controller
         \Stripe\Stripe::setApiKey("");
         $token = $request->get('stripeToken');
         $overbookingChecker = $this->get('overbooking.checker');
-        if ($overbookingChecker->isValidReservation($commandEntity) == true)
+        if ($overbookingChecker->isValidReservation($commandEntity) === true)
         {
-            $commandRepository = $this->getDoctrine()
-                ->getManager()
-                ->getRepository('AppBundle:Command');
+            $commandRepository = $this->get('command.repository');
             $commandRepository->insert($commandEntity);
             return $this->render('AppBundle:Default:paymentSuccess.html.twig');
         } else {
