@@ -40,6 +40,11 @@
 
 </div>
 
+      {% for flashMessage in app.session.flashBag.get('insuffisant') %}
+      {{ flashMessage }}
+      {% endfor %}
+
+      {#https://shapebootstrap.net/item/1524982-ethanol-free-portfolio-template#}
 
 <div class="container-fluid formulaire">
 

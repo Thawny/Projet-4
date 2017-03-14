@@ -125,6 +125,37 @@ class CommandModel
         }
     }
 
+    /**
+     * @Assert\Callback()
+     * @param ExecutionContextInterface $context
+     */
+    public function isTheMuseumOpen(ExecutionContextInterface $context)
+    {
+        $dateVisit = $this->getDateVisit();
+
+        $dateVisit_day = date_format($dateVisit, 'D');
+        $tuesday = date('D', time());
+
+        if ($dateVisit_day == $tuesday)
+        {
+            $context->buildViolation('Le musée n\'est pas ouvert le mardi')
+                    ->atPath('dateVisit')
+                    ->addViolation();
+        }
+
+        $dateVisit_m_d = date_format($dateVisit, 'm-d');
+        $first_nov = date('m-d', mktime(0,0,0,11,1));
+        $first_may = date('m-d', mktime(0,0,0,05,1));
+        $christmas = date('m-d', mktime(0,0,0,12,25));
+
+        if ($dateVisit_m_d == $first_may || $dateVisit_m_d == $first_nov || $dateVisit_m_d == $christmas)
+        {
+            $context->buildViolation('Le musée est fermé le 1er novembre, le 1er mai ainsi que le 25 décembre')
+                ->atPath('dateVisit')
+                ->addViolation();
+        }
+
+    }
 
 
 }

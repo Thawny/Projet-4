@@ -18,27 +18,17 @@ class CommandRepository extends \Doctrine\ORM\EntityRepository
         $this->_em->flush();
     }
 
-//    public function findVisitorsFromDate($dateVisit)
-//    {
-//        $qb = $this->createQueryBuilder('c');
-//
-//        $qb->where('c.dateVisit = :dateVisit')
-//            ->setParameter('dateVisit', $dateVisit);
-//
-//        return $qb
-//            ->getQuery()
-//            ->getResult();
-//    }
+
 
     public function countReservationAt($dateVisit)
     {
         $qb = $this->createQueryBuilder('c');
 
-        $qb ->select('count(visitors)')
+        $qb ->select('count(v.id)')
             ->where('c.dateVisit = :dateVisit')
             ->setParameter('dateVisit', $dateVisit);
-        $qb->leftJoin('c.visitors', 'visitors')
-            ->addSelect('visitors');
+        $qb->leftJoin('c.visitors', 'v');
+
 
         return $qb
             ->getQuery()

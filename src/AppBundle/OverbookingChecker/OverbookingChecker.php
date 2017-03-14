@@ -23,7 +23,7 @@ class OverbookingChecker
 //        $this->commandRepository = $commandRepository;
 //    }
 
-    public function setCommandRepository(\AppBundle\Repository\CommandRepository $commandRepository)
+    public function setCommandRepository($commandRepository)
     {
         $this->commandRepository = $commandRepository;
     }
@@ -31,12 +31,12 @@ class OverbookingChecker
     public function isValidReservation(Command $command)
     {
         $dateVisit = $command->getDateVisit();
-        $totalReservetions = $this->commandRepository->countReservationAt($dateVisit);
+        $totalReservations = $this->commandRepository->countReservationAt($dateVisit);
 
-        if ($command->getNumberOfVisitors()+ $totalReservetions <= 1000)
+        if ($command->getNumberOfVisitors()+ $totalReservations <= 4)
             return true;
         else {
-            $leftTickets = 1000 - $totalReservetions;
+            $leftTickets = 4 - $totalReservations;
             return $leftTickets;
         }
     }

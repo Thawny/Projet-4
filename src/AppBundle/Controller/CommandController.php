@@ -113,8 +113,8 @@ class CommandController extends Controller
         } else {
             $numberOfTicketsLeft = $overbookingChecker->isValidReservation($commandEntity);
             $flashMessage = "Nombre de tickets insuffisant, il ne reste que ".$numberOfTicketsLeft;
-            $this->get('session')->getFlashBag->add('insuffisant', $flashMessage);
-            $this->redirectToRoute('show_command_form');
+            $this->get('session')->getFlashBag()->add('insuffisant', $flashMessage);
+            return $this->redirectToRoute('show_command_form');
         }
 //        try{
 //            $this->chargeUserCreditCart($token);
