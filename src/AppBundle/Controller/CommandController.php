@@ -64,7 +64,6 @@ class CommandController extends Controller
         ));
     }
 
-
     /**
      * @param Request $request
      * @return Response
@@ -83,6 +82,8 @@ class CommandController extends Controller
             $session = $this->get('session');
             $command = $commandForm->getData();
             $session->set('command', $command);
+
+
 
             return $this->render('AppBundle:Default:visitorsForm.html.twig', array('model' => $command));
         }

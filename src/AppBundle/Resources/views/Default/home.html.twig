@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block css %}
-{% stylesheets '@AppBundle/Resources/views/Public/CSS/base.css' %}
+{% stylesheets 'bundles/app/CSS/base.css' %}
 <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
 {% endstylesheets %}
 {% endblock %}
@@ -10,13 +10,28 @@
 {% block body %}
 
 
-  <div class="container-fluid corps">
+    <div class="parallax">
 
-    <div class="container-fluid debut">
-    <div class="row title2">
-        <h4 class="col-xs-12 bienvenue">Bienvenue sur la billeterie en ligne du musée du Louvre.<br/>
-            Bénéficiez en quelques clics
-        et où que vous soyez de toute la gamme de billets et de tarifs du musée du Louvre</h4>
+        <div class="overlay" style="background-image:url('{{ asset('bundles/app/images/Louvre.jpg') }}');
+                background-attachment: fixed;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                ">
+            <div class="text-center titre">
+                <h1>Bienvenue sur la billeterie en ligne du <strong>musée du Louvre</strong></h1>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="yellow-rectangle text-center">
+        <div class="intro">
+            Bénéficiez en quelques clics où que vous soyez à toute la gamme de billets du musée du Louvre
+        </div>
     </div>
 
 
@@ -44,7 +59,6 @@
       {{ flashMessage }}
       {% endfor %}
 
-      {#https://shapebootstrap.net/item/1524982-ethanol-free-portfolio-template#}
 
 <div class="container-fluid formulaire">
 
