@@ -1,0 +1,10 @@
+.recap-container {
+    padding-top: 100px;
+}
+
+.titre-recap {
+    background-color: #6C6074;
+    color: white;
+    height: 30px;
+    padding-left: 5px;
+}

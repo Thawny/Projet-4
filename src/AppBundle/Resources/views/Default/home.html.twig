@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block css %}
-{% stylesheets 'bundles/app/CSS/base.css' %}
+{% stylesheets 'bundles/app/css/base.css' filter="cssrewrite"%}
 <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
 {% endstylesheets %}
 {% endblock %}
@@ -10,14 +10,9 @@
 {% block body %}
 
 
-    <div class="parallax">
+    <div class="parallax" style="background-image: url('{{ asset('bundles/app/images/Louvre.jpg') }}')">
 
-        <div class="overlay" style="background-image:url('{{ asset('bundles/app/images/Louvre.jpg') }}');
-                background-attachment: fixed;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: cover;
-                ">
+        <div class="overlay">
             <div class="text-center titre">
                 <h1>Bienvenue sur la billeterie en ligne du <strong>musée du Louvre</strong></h1>
             </div>

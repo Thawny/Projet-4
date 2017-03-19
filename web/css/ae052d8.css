@@ -115,7 +115,7 @@ body {
 .parallax {
     margin-top: 40px;
 
-    background-image: url('../images/Louvre.jpg');
+    background-image: url('../../bundles/app/images/Louvre.jpg');
     /*    height: 20%;*/
     background-attachment: fixed;
     background-position: center;
@@ -182,3 +182,14 @@ strong {
 
 
 
+
+.recap-container {
+    padding-top: 100px;
+}
+
+.titre-recap {
+    background-color: #6C6074;
+    color: white;
+    height: 30px;
+    padding-left: 5px;
+}

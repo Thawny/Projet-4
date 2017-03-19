@@ -115,7 +115,7 @@ body {
 .parallax {
     margin-top: 40px;
 
-    /*background-image: url('../images/Louvre.jpg');*/
+    background-image: url('../images/Louvre.jpg');
     /*    height: 20%;*/
     background-attachment: fixed;
     background-position: center;

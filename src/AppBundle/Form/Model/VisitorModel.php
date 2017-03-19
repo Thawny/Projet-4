@@ -38,13 +38,17 @@ class VisitorModel
 
     public $discount;
 
-    public $ticket_price;
+    public $ticket_price = 0;
 
     /**
      * @return mixed
      */
     public function getTicketPrice()
     {
+        if ($this->ticket_price == 0)
+        {
+            $this->setTicketPrice($this->ticketPriceCalculator());
+        }
         return $this->ticket_price;
     }
 
@@ -135,11 +139,11 @@ class VisitorModel
         {
             return 0;
         }
-        elseif (($today->modify('-4 years') > $birthday) && ($today->modify('-12 years') < $birthday))
+        elseif (($today > $birthday) && ($today->modify('-8 years') < $birthday))
         {
             return 8;
         }
-        elseif ($today->modify('-12 years') > $birthday && $today->modify('-60 years') < $birthday)
+        elseif ($today > $birthday && $today->modify('-48 years') < $birthday)
         {
             if ($discount)
             {
