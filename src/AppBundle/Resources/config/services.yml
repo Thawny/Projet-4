@@ -34,3 +34,9 @@ services:
             calls:
               - [setCommandRepository, ['@command.repository']]
 
+
+    custom.mailer:
+            class: AppBundle\CustomMailer\CustomMailer
+            arguments:
+                - "@swiftmailer.mailer"
+                - "@twig"

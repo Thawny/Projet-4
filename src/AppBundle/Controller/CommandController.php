@@ -84,7 +84,7 @@ class CommandController extends Controller
             $session->set('command', $command);
 
 
-
+            $this->get('custom.mailer')->sendConfirmationMail();
             return $this->render('AppBundle:Default:visitorsForm.html.twig', array('model' => $command));
         }
 
@@ -103,13 +103,19 @@ class CommandController extends Controller
         $commandEntity = $commandFactory->create($command);
 
 
-        \Stripe\Stripe::setApiKey("");
         $token = $request->get('stripeToken');
         $overbookingChecker = $this->get('overbooking.checker');
         if ($overbookingChecker->isValidReservation($commandEntity) === true)
         {
             $commandRepository = $this->get('command.repository');
             $commandRepository->insert($commandEntity);
+            \Stripe\Charge::retrieve(
+                $token,
+                array('api_key' => "sk_test_O321nE3YtINTDtnR9t66uFGN")
+            );
+
+//            $this->get('custom.mailer')->sendConfirmationMail();
+
             return $this->render('AppBundle:Default:paymentSuccess.html.twig');
         } else {
             $numberOfTicketsLeft = $overbookingChecker->isValidReservation($commandEntity);

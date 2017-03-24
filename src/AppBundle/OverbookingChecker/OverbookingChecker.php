@@ -33,10 +33,10 @@ class OverbookingChecker
         $dateVisit = $command->getDateVisit();
         $totalReservations = $this->commandRepository->countReservationAt($dateVisit);
 
-        if ($command->getNumberOfVisitors()+ $totalReservations <= 4)
+        if ($command->getNumberOfVisitors()+ $totalReservations <= 1000)
             return true;
         else {
-            $leftTickets = 4 - $totalReservations;
+            $leftTickets = 1000 - $totalReservations;
             return $leftTickets;
         }
     }
