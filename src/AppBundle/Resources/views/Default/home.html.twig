@@ -1,6 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block css %}
+
 {% stylesheets 'bundles/app/css/base.css' filter="cssrewrite"%}
 <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
 {% endstylesheets %}
@@ -8,6 +9,8 @@
 
 
 {% block body %}
+
+
 
 
     <div class="parallax" style="background-image: url('{{ asset('bundles/app/images/Louvre.jpg') }}')">
@@ -29,26 +32,62 @@
         </div>
     </div>
 
+    <div>
 
-
-    <div class="row details">
-        <section class="col-sm-6 col-xs-12 hor">
-            <h3 class="titre-horaires">Horaires</h3>
-            Ouvert tous les jours de 9h à 18h à l’exception du mardi ainsi que du 1er mai et du 25 décembre.
-        </section>
-        <section class="col-sm-6 col-xs-12 tarifs">
-            <h3 class="titre-tarifs">Tarifs</h3>
-                <ul style="list-style: none; margin-left: -33px">
-                    <li>de 0 ans à 4 ans - gratuit</li>
-                    <li>de 4 ans à 12 - tarif enfant - 8 euros</li>
-                    <li>de 12 ans à 60 - tarif normal - 16 euros - tarif réduit - 10 euros</li>
-                    <li>à partir de 60 ans - tarif sénior - 12 euros</li>
-                </ul>
-        </section>
     </div>
 
+    {#EXPLICATION DES ÉTAPES À SUIVRES#}
 
-</div>
+    <div class="container-fluid conteneeur">
+        <div class="row red row1">
+            <div class="col-lg-12 col-sm-12">
+                <div class="vline"></div>
+                <div class="row">
+                    <div class="blue col-lg-11 col-sm-11 innerblue row">
+                        <div class="col-lg-12 col-sm-12 green">
+                            <div class="col-xs-2 yellow">
+                                <div class="round"><span>1</span></div>
+                            </div>
+                            <div class="col-xs-10 yellow texte">
+                                <p>
+                                    <span>PREMIÈRE ÉTAPE</span><br>
+                                    Choisissez la date de votre visite puis renseignez le champ email avec votre adresse électronique.<br>
+                                    Cliquez sur "Ajouter un visiteur" pour ajouter un visiteur à votre commande ou "supprimer"<br> pour le supprimer. Une fois satisfait, cliquez sur "Continuer".
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-sm-12 green">
+                            <div class="col-xs-2 yellow">
+                                <div class="round"><span>2</span></div>
+                            </div>
+                            <div class="col-xs-10 yellow texte">
+                                <p>
+                                    <span>DEUXIÈME ÉTAPE</span><br>
+                                    Vérifiez que le récapitulatif correspond bien à votre commande. Pour effectuer une modification, cliquez sur "Modifier".<br class="modifier">
+                                    Si vous êtes satisfait, cliquez sur "Payer". Vous seront alors demandées vos coordonnées bancaire. Le paiement alors traité en toute sécurité grâce au serivice de paiement Stripe.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-sm-12 green">
+                            <div class="col-xs-2 yellow">
+                                <div class="round"><span>3</span></div>
+                            </div>
+                            <div class="col-xs-10 yellow texte">
+                                <p>
+                                    <span>DERNIÈRE ÉTAPE</span><br>
+                                    Rendez-vous sur votre messagerie électronique. Vous avez reçu email de confirmation contenant le récapitulatif de votre commande. Celui-ci fait office de billet pour tous les visiteurs.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {#FIN DE L'EXPLICATION DES ÉTAPES À SUIVRE#}
+
+
 
       {% for flashMessage in app.session.flashBag.get('insuffisant') %}
       {{ flashMessage }}
@@ -175,6 +214,23 @@
     }
 
 </script>
+
+    <script>
+        $(function() {
+
+            $(window).resize(function () {
+                var viewportWidth = $(window).width();
+                var viewportHeight = $(window).height();
+                console.log(viewportHeight);
+                console.log(viewportWidth);
+                if(viewportWidth < 1120) {
+                    $(".modifier").remove();
+                }
+
+            })
+        });
+
+    </script>
 
 {% endblock %}
 

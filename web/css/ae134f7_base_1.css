@@ -151,7 +151,7 @@ body {
     padding: 13% 0;
     padding-left: 10%;
     padding-right: 10%;
-    background: rgba(0, 0, 0, 0.2);
+    /*background: rgba(0, 0, 0, 0.2);*/
 
 }
 
@@ -159,26 +159,98 @@ body {
     /*    background:  rgba(0, 0, 0, 0.1);*/
     /*      border: 1px solid red;*/
     margin-bottom: 5%;
-    /*    background: rgba(0, 0, 0, 0.2);*/
+    background: rgba(0, 0, 0, 0.2);
     padding-bottom: 1%;
     padding-top: 1%;
+    font-size: 500px !important;
 
 
 }
 
 h1 {
     color: #fff;
+    font-weight: bold;
 }
 
 strong {
     color: #e5b112 !important;
 
 }
-
 .intro {
     color: white;
 }
+/*ÉTAPES À SUIVRE*/
 
+@media (max-width: 800px){
+    .innerblue {
+        right: 13px;
+    }
+}
 
+.row1 {
+    height: 400px;
+    background-color: #f3f3f3;
+    padding-left: 15%;
+}
+.vline {
+    background-color: white;
+    height: 400px;
+    width: 4px;
+    position: absolute;
+}
+.innerblue {
+    height: 400px;
+    padding: 0;
+              /*border: 2px solid orange;*/
+    margin-left: -35px;
 
+}
+.green {
+              /*border: 1px solid green;*/
+    height: 133px;
+    padding: 0;
+}
+.yellow {
+    /*border: 1px solid yellow;*/
+    height: 133px;
+    padding-top: 30px;
+    /*padding-right: 0px;*/
+    /*padding-left: 0px;*/
+}
+.round {
+    border: 5px solid white;
+    border-radius: 0 50px 50px 50px;
+    height: 70px;
+    width: 70px;
+    min-width: 70px;
+    display: table-cell;
+    background-color: #FFCC33;
+    color: white;
+    font-weight: bolder;
+    font-size: 30px;
+    padding-top: 5px;
+}
+.round span {
+    margin-left: 20px;
+}
+.yellow p{
+    /*        text-align: justify;*/
+    /*border: 1px solid black;*/
+    /*margin-top: -10px;*/
+}
 
+@media (max-width: 980px) {
+    .yellow p {
+        margin-top: -10px;
+    }
+}
+@media (max-width: 733px) {
+    .yellow p {
+        font-size:13px;
+    }
+}
+
+p span {
+    font-weight: bold;
+    line-height: 2em;
+}
