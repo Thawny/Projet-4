@@ -278,3 +278,33 @@ p span {
     padding-left:0px;
     padding-right: 0px;
 }
+
+
+.ouverture {
+    padding-top: 20px;
+}
+.ouverture span {
+    line-height: 3em;
+    display: block;
+}
+.tarifs {
+    color: white;
+}
+
+.tarifs span {
+    font-weight: bold;
+    display: block;
+    padding-top: 20px;
+}
+.tarifs ul {
+    margin-left: 80px;
+    line-height: 1.9em;
+}
+
+
+
+
+
+
+
+
