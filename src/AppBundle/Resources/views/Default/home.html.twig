@@ -114,7 +114,52 @@
             </div>
             <div class="col-sm-12 col-md-4 col-md-pull-8 formblock">
 
-                <div class="formulaire col-sm-12"></div>
+                <div class=" col-sm-12">
+
+                   {#FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF#}
+
+
+
+
+                    {{  form_start(form) }}
+                    {#render the task's only field: description#}
+                    {{ form_row(form.dateVisit) }}
+                    {{ form_row(form.fullDayTickets) }}
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email) }}
+                    <div class="alert-danger">
+
+                        {{ form_errors(form.email, {'attr': {'class': 'alert alert-danger'}}) }}
+
+                    </div>
+                    <div class="alert-danger">
+                        {{ form_errors(form)}}
+                    </div>
+
+
+                    <h3>Visiteur(s)</h3>
+                    <ul class="visitors list-unstyled" data-prototype="{{ form_widget(form.visitors.vars.prototype)|e('html_attr') }}">
+
+                        {% for visitor in form.visitors %}
+
+                            <ul class="list-unstyled new-visitor">
+                                <li>{{ form_row(visitor.firstName) }}</li>
+                                <li>{{ form_row(visitor.lastName) }}</li>
+                                <li>{{ form_row(visitor.birthday) }}</li>
+                                <li>{{ form_row(visitor.country) }}</li>
+                                <li>{{ form_row(visitor.discount) }}</li>
+                            </ul>
+
+                        {% endfor %}
+                    </ul>
+
+                    {{ form_end(form) }}
+
+
+                    {#FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF#}
+
+
+                </div>
             </div>
         </div>
 
@@ -132,13 +177,13 @@
       {% endfor %}
 
 
-{#<div class="container-fluid formulaire">#}
+{#<div class="container-fluid">#}
 
 {#<div class="row">#}
     {#<div class="col-xs-12">#}
 
-{#{{  form_start(form) }}#}
-    {# render the task's only field: description #}
+    {#{{  form_start(form) }}#}
+    {#render the task's only field: description#}
     {#{{ form_row(form.dateVisit) }}#}
     {#{{ form_row(form.fullDayTickets) }}#}
     {#{{ form_label(form.email) }}#}
@@ -159,17 +204,18 @@
         {#{% for visitor in form.visitors %}#}
 
             {#<ul class="list-unstyled new-visitor">#}
-            {#<li>{{ form_row(visitor.firstName) }}</li>#}
-            {#<li>{{ form_row(visitor.lastName) }}</li>#}
-            {#<li>{{ form_row(visitor.birthday) }}</li>#}
-            {#<li>{{ form_row(visitor.country) }}</li>#}
-            {#<li>{{ form_row(visitor.discount) }}</li>#}
+                {#<li>{{ form_row(visitor.firstName) }}</li>#}
+                {#<li>{{ form_row(visitor.lastName) }}</li>#}
+                {#<li>{{ form_row(visitor.birthday) }}</li>#}
+                {#<li>{{ form_row(visitor.country) }}</li>#}
+                {#<li>{{ form_row(visitor.discount) }}</li>#}
             {#</ul>#}
 
         {#{% endfor %}#}
     {#</ul>#}
 
     {#{{ form_end(form) }}#}
+
 
 
     {#</div>#}

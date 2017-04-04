@@ -263,7 +263,8 @@ p span {
 
 
 .formulaire {
-    background-color: white;
+    /*background-color: white;*/
+    border:1px solid black;
     height: 400px;
 }
 .horaires {
