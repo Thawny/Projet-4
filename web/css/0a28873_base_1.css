@@ -254,3 +254,27 @@ p span {
     font-weight: bold;
     line-height: 2em;
 }
+
+
+
+
+/*ZONE FORULAIRE, TARIFS, HORAIRES*/
+
+
+
+.formulaire {
+    background-color: white;
+    height: 400px;
+}
+.horaires {
+    background-color: #f3f3f3;
+    height: 200px;
+}
+.tarifs {
+    background-color: #e5b112;
+    height: 200px;
+}
+.formblock {
+    padding-left:0px;
+    padding-right: 0px;
+}

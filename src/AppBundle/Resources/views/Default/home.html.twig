@@ -89,55 +89,78 @@
 
 
 
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-sm-12 col-md-4 col-md-push-8 formblock">
+                <div class="tarifs col-sm-12"></div>
+                <div class="horaires col-sm-12"></div>
+
+            </div>
+            <div class="col-sm-12 col-md-4 col-md-pull-8 formblock">
+
+                <div class="formulaire col-sm-12"></div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
       {% for flashMessage in app.session.flashBag.get('insuffisant') %}
       {{ flashMessage }}
       {% endfor %}
 
 
-<div class="container-fluid formulaire">
+{#<div class="container-fluid formulaire">#}
 
-<div class="row">
-    <div class="col-xs-12">
+{#<div class="row">#}
+    {#<div class="col-xs-12">#}
 
-{{  form_start(form) }}
+{#{{  form_start(form) }}#}
     {# render the task's only field: description #}
-    {{ form_row(form.dateVisit) }}
-    {{ form_row(form.fullDayTickets) }}
-    {{ form_label(form.email) }}
-    {{ form_widget(form.email) }}
+    {#{{ form_row(form.dateVisit) }}#}
+    {#{{ form_row(form.fullDayTickets) }}#}
+    {#{{ form_label(form.email) }}#}
+    {#{{ form_widget(form.email) }}#}
     {#<div class="alert-danger">#}
 
-        {{ form_errors(form.email, {'attr': {'class': 'alert alert-danger'}}) }}
+        {#{{ form_errors(form.email, {'attr': {'class': 'alert alert-danger'}}) }}#}
 
     {#</div>#}
-    <div class="alert-danger">
-        {{ form_errors(form)}}
-    </div>
+    {#<div class="alert-danger">#}
+        {#{{ form_errors(form)}}#}
+    {#</div>#}
 
 
-    <h3>Visiteur(s)</h3>
-    <ul class="visitors list-unstyled" data-prototype="{{ form_widget(form.visitors.vars.prototype)|e('html_attr') }}">
+    {#<h3>Visiteur(s)</h3>#}
+    {#<ul class="visitors list-unstyled" data-prototype="{{ form_widget(form.visitors.vars.prototype)|e('html_attr') }}">#}
 
-        {% for visitor in form.visitors %}
+        {#{% for visitor in form.visitors %}#}
 
-            <ul class="list-unstyled new-visitor">
-            <li>{{ form_row(visitor.firstName) }}</li>
-            <li>{{ form_row(visitor.lastName) }}</li>
-            <li>{{ form_row(visitor.birthday) }}</li>
-            <li>{{ form_row(visitor.country) }}</li>
-            <li>{{ form_row(visitor.discount) }}</li>
-            </ul>
+            {#<ul class="list-unstyled new-visitor">#}
+            {#<li>{{ form_row(visitor.firstName) }}</li>#}
+            {#<li>{{ form_row(visitor.lastName) }}</li>#}
+            {#<li>{{ form_row(visitor.birthday) }}</li>#}
+            {#<li>{{ form_row(visitor.country) }}</li>#}
+            {#<li>{{ form_row(visitor.discount) }}</li>#}
+            {#</ul>#}
 
-        {% endfor %}
-    </ul>
+        {#{% endfor %}#}
+    {#</ul>#}
 
-    {{ form_end(form) }}
+    {#{{ form_end(form) }}#}
 
 
-    </div>
- </div>
+    {#</div>#}
+ {#</div>#}
 
-</div>
+{#</div>#}
 
 
 
