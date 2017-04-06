@@ -20,7 +20,7 @@ class CustomMailer
         $this->twig_Environment = $twig_Environment;
     }
 
-    public function sendConfirmationMail()
+    public function sendConfirmationMail($command)
     {
         $message = \Swift_Message::newInstance()
             ->setSubject('Musée du Louvre - Confirmation')
@@ -28,7 +28,7 @@ class CustomMailer
             ->setTo('tony.malto.simon@gmail.com')
             ->setContentType('text/html')
             ->setBody(
-                $this->twig_Environment->render('@App/Default/email.html.twig')
+                $this->twig_Environment->render('@App/Default/email.html.twig',array('command' => $command))
             );
         $this->mailer->send($message);
     }

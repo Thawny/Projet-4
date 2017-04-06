@@ -28,30 +28,9 @@ class CommandController extends Controller
      */
     public function homeAction(Request $request)
     {
-//        if($this->get('session')->isStarted()){
-//            $this->get('session')->getBag('commande');
 
-//        $session = new Session();
-
-
-//        $this->get('session');
-//        $tony = new VisitorModel();
-//        $tony->birthday = new \DateTime();
-//        $tony->country = "France";
-//        $tony->discount = true;
-//        $tony->firstName = "Tony";
-//        $tony->lastName = "Malto";
-//
-//        $paul = new VisitorModel();
-//        $paul->birthday = new \DateTime();
-//        $paul->country = "Iran";
-//        $paul->discount = true;
-//        $paul->firstName = "Paul";
-//        $paul->lastName = "Machin";
 
         $commandModel = new CommandModel();
-//        $commandModel->visitors->add($tony);
-//        $commandModel->visitors->add($paul);
 
         if ($this->get('session')->has('command'))
         {
@@ -84,7 +63,7 @@ class CommandController extends Controller
             $session->set('command', $command);
 
 
-            $this->get('custom.mailer')->sendConfirmationMail();
+//            $this->get('custom.mailer')->sendConfirmationMail();
             return $this->render('AppBundle:Default:visitorsForm.html.twig', array('model' => $command));
         }
 
@@ -104,17 +83,21 @@ class CommandController extends Controller
 
 
         $token = $request->get('stripeToken');
+        \Stripe\Stripe::setApiKey("");
+
         $overbookingChecker = $this->get('overbooking.checker');
         if ($overbookingChecker->isValidReservation($commandEntity) === true)
         {
             $commandRepository = $this->get('command.repository');
             $commandRepository->insert($commandEntity);
-            \Stripe\Charge::retrieve(
-                $token,
-                array('api_key' => "sk_test_O321nE3YtINTDtnR9t66uFGN")
-            );
+//            \Stripe\Charge::retrieve(
+//                $token,
+//                array('api_key' => "sk_test_O321nE3YtINTDtnR9t66uFGN")
+//            );
+            \Stripe\Stripe::setApiKey("");
+            $this->chargeUserCreditCart($token);
 
-//            $this->get('custom.mailer')->sendConfirmationMail();
+            $this->get('custom.mailer')->sendConfirmationMail($command);
 
             return $this->render('AppBundle:Default:paymentSuccess.html.twig');
         } else {
@@ -149,10 +132,10 @@ class CommandController extends Controller
      * @param $token
      * @return \Stripe\Charge
      */
-    protected function chargeUserCreditCart($token)
+    protected function chargeUserCreditCart($token, $amount)
     {
         return $charge = \Stripe\Charge::create(array(
-            "amount" => 10,
+            "amount" => $amount,
             "currency" => "eur",
             "description" => "Example charge",
             "source" => $token

@@ -32,7 +32,7 @@ services:
             class: AppBundle\OverbookingChecker\OverbookingChecker
 #            arguments: AppBundle\Repository\CommandRepository
             calls:
-              - [setCommandRepository, ['@command.repository']]
+              - [setCommandGateway, ['@command.repository']]
 
 
     custom.mailer:

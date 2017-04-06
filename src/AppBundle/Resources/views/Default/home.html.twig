@@ -89,82 +89,48 @@
 
 
 
-    <div class="container-fluid">
-        <div class="row">
+    {#<div class="container-fluid">#}
+        {#<div class="row">#}
 
-            <div class="col-sm-12 col-md-4 col-md-push-8 formblock">
-                <div class="tarifs col-sm-12">
+            {#<div class="col-sm-12 col-md-4 col-md-push-8 formblock">#}
+                {#<div class="tarifs col-sm-12">#}
 
-                    <p>
-                        <span class="text-center">TARIFS</span><br>
-                        <ul>
-                            <li>O à 4 ans    -  gratuit</li>
-                            <li>4 à 12 ans   -  8 €</li>
-                            <li>12 À 60 ans  -  16 €</li>
-                        </ul>
-                    </p>
-                </div>
-                <div class="horaires col-sm-12">
-                    <p class="ouverture text-center">
-                        <span>OUVERTURE</span><br>
-                        Ouvert du tous les jours de 9h à 18h à l'excéption du mardi ainsi que du 1er novembre et du 25 décembre.
-                    </p>
-                </div>
+                    {#<p>#}
+                        {#<span class="text-center">TARIFS</span><br>#}
+                        {#<ul>#}
+                            {#<li>O à 4 ans    -  gratuit</li>#}
+                            {#<li>4 à 12 ans   -  8 €</li>#}
+                            {#<li>12 À 60 ans  -  16 €</li>#}
+                        {#</ul>#}
+                    {#</p>#}
+                {#</div>#}
+                {#<div class="horaires col-sm-12">#}
+                    {#<p class="ouverture text-center">#}
+                        {#<span>OUVERTURE</span><br>#}
+                        {#Ouvert du tous les jours de 9h à 18h à l'excéption du mardi ainsi que du 1er novembre et du 25 décembre.#}
+                    {#</p>#}
+                {#</div>#}
 
-            </div>
-            <div class="col-sm-12 col-md-4 col-md-pull-8 formblock">
+            {#</div>#}
+            {#<div class="col-sm-12 col-md-4 col-md-pull-8 formblock">#}
 
-                <div class=" col-sm-12">
+                {#<div class=" col-sm-12">#}
 
                    {#FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF#}
 
 
 
 
-                    {{  form_start(form) }}
-                    {#render the task's only field: description#}
-                    {{ form_row(form.dateVisit) }}
-                    {{ form_row(form.fullDayTickets) }}
-                    {{ form_label(form.email) }}
-                    {{ form_widget(form.email) }}
-                    <div class="alert-danger">
-
-                        {{ form_errors(form.email, {'attr': {'class': 'alert alert-danger'}}) }}
-
-                    </div>
-                    <div class="alert-danger">
-                        {{ form_errors(form)}}
-                    </div>
-
-
-                    <h3>Visiteur(s)</h3>
-                    <ul class="visitors list-unstyled" data-prototype="{{ form_widget(form.visitors.vars.prototype)|e('html_attr') }}">
-
-                        {% for visitor in form.visitors %}
-
-                            <ul class="list-unstyled new-visitor">
-                                <li>{{ form_row(visitor.firstName) }}</li>
-                                <li>{{ form_row(visitor.lastName) }}</li>
-                                <li>{{ form_row(visitor.birthday) }}</li>
-                                <li>{{ form_row(visitor.country) }}</li>
-                                <li>{{ form_row(visitor.discount) }}</li>
-                            </ul>
-
-                        {% endfor %}
-                    </ul>
-
-                    {{ form_end(form) }}
-
 
                     {#FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF#}
 
 
-                </div>
-            </div>
-        </div>
+                {#</div>#}
+            {#</div>#}
+        {#</div>#}
 
 
-    </div>
+    {#</div>#}
 
 
 
@@ -177,51 +143,84 @@
       {% endfor %}
 
 
-{#<div class="container-fluid">#}
+<div class="container-fluid">
 
-{#<div class="row">#}
-    {#<div class="col-xs-12">#}
-
-    {#{{  form_start(form) }}#}
-    {#render the task's only field: description#}
-    {#{{ form_row(form.dateVisit) }}#}
-    {#{{ form_row(form.fullDayTickets) }}#}
-    {#{{ form_label(form.email) }}#}
-    {#{{ form_widget(form.email) }}#}
-    {#<div class="alert-danger">#}
-
-        {#{{ form_errors(form.email, {'attr': {'class': 'alert alert-danger'}}) }}#}
-
-    {#</div>#}
-    {#<div class="alert-danger">#}
-        {#{{ form_errors(form)}}#}
-    {#</div>#}
+    <div class="row">
 
 
-    {#<h3>Visiteur(s)</h3>#}
-    {#<ul class="visitors list-unstyled" data-prototype="{{ form_widget(form.visitors.vars.prototype)|e('html_attr') }}">#}
-
-        {#{% for visitor in form.visitors %}#}
-
-            {#<ul class="list-unstyled new-visitor">#}
-                {#<li>{{ form_row(visitor.firstName) }}</li>#}
-                {#<li>{{ form_row(visitor.lastName) }}</li>#}
-                {#<li>{{ form_row(visitor.birthday) }}</li>#}
-                {#<li>{{ form_row(visitor.country) }}</li>#}
-                {#<li>{{ form_row(visitor.discount) }}</li>#}
-            {#</ul>#}
-
-        {#{% endfor %}#}
-    {#</ul>#}
-
-    {#{{ form_end(form) }}#}
+        <div class="col-md-4 col-sm-12 partie-info">
+            <div class="col-xs-12 aaa">
+                <div class="note-prix panel panel-default">
+                    <div class="panel-heading text-center">TARIFS</div>
+                    <div class="panel-body">
+                        <ul class="text-center">
+                            <li>De O à 4 ans    -  gratuit</li>
+                            <li>De 4 à 12 ans   -  8 €</li>
+                            <li>De 12 À 60 ans  -  16* €</li>
+                            <li>À partir de 60  -  12</li>
+                        </ul>
+                        <div class="panel-footer text-center">*10 € pour les militaires, le personnel du musée ainsi que les employés du ministère de la culture
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 bbb">
+                <div class="note-horaires panel panel-default">
+                    <div class="panel-heading text-center">OUVERTURE</div>
+                    <div class="panel-body text-center">
+                    Ouvert du tous les jours de 9h à 18h à l'excéption du mardi ainsi que du 1er novembre et du 25 décembre.
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
-    {#</div>#}
- {#</div>#}
+        <div class="col-md-8 col-sm-12 col-  le-formulaire">
 
-{#</div>#}
+        {{  form_start(form) }}
+        {#render the task's only field: description#}
+        {{ form_row(form.dateVisit) }}
+        {{ form_row(form.fullDayTickets) }}
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email) }}
+        <div class="alert-danger">
+
+            {{ form_errors(form.email, {'attr': {'class': 'alert alert-danger'}}) }}
+
+        </div>
+        <div class="alert-danger">
+            {{ form_errors(form)}}
+        </div>
+
+
+        <h3>Visiteur(s)</h3>
+        <ul class="visitors list-unstyled" data-prototype="{{ form_widget(form.visitors.vars.prototype)|e('html_attr') }}">
+
+            {% for visitor in form.visitors %}
+
+                <ul class="list-unstyled new-visitor">
+                    <li>{{ form_row(visitor.firstName) }}</li>
+                    <li>{{ form_row(visitor.lastName) }}</li>
+                    <li>{{ form_row(visitor.birthday) }}</li>
+                    <li>{{ form_row(visitor.country) }}</li>
+                    <li>{{ form_row(visitor.discount) }}</li>
+                </ul>
+
+            {% endfor %}
+        </ul>
+
+        {{ form_end(form) }}
+
+
+
+        </div>
+
+
+
+     </div>
+
+</div>
 
 
 
@@ -311,7 +310,10 @@
                     $(".modifier").remove();
                 }
 
-            })
+            });
+
+            $('.glyphicon-exclamation-sign').removeClass();
+            $('.has-error').removeClass();
         });
 
     </script>

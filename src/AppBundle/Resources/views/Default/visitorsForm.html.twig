@@ -16,84 +16,82 @@
     <div class="container-fluid recap-container">
     <div class="row">
         <section class="col-xs-12">
-            <h3 class="titre-recap">Récapitulatif de vos achats</h3>
+            {#<h3 class="titre-recap">Récapitulatif de vos achats</h3>#}
 
         </section>
 
          <div class="container-fluid">
-            <table class="table">
-                <tr>
-                    <td>Email</td>
-                    <td>{{ model.email }}</td>
-                </tr>
-                <tr>
-                    <td>Date de visite</td>
-                    <td>{{ model.dateVisit|date("d/m/Y") }}</td>
-                </tr>
-                <tr>
-                    <td>Journée complète</td>
-                    <td>{% if model.fullDayTickets %}
-                            Oui
-                        {% else %}
-                            Non
-                        {% endif %}
-                    </td>
-                </tr>
-            </table>
+             <div class="panel">
+                 <div class="panel-heading">Votre commande</div>
+                    <div class="panel-body panel-2">
+                        <table class="table table-hover">
+                            <tr>
+                                <td>Email</td>
+                                <td>{{ model.email }}</td>
+                            </tr>
+                            <tr>
+                                <td>Date de visite</td>
+                                <td>{{ model.dateVisit|date("d/m/Y") }}</td>
+                            </tr>
+                            <tr>
+                                <td>Journée complète</td>
+                                <td>{% if model.fullDayTickets %}
+                                        Oui
+                                    {% else %}
+                                        Non
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+             </div>
 
-             <h4>Visiteur(s)</h4>
-             {#<table class="table">#}
-                {#<tr>#}
-                    {#<td>Nom</td>#}
-                    {#<td>Tony</td>#}
-                {#</tr>#}
-                {#<tr>#}
-                    {#<td>Prénom</td>#}
-                    {#<td>Tony</td>#}
-                {#</tr>#}
-                {#<tr>#}
-                    {#<td>Date de naissance</td>#}
-                    {#<td>18/11/1993</td>#}
-                {#</tr>#}
-                {#<tr>#}
-                    {#<td>Tarif réduit</td>#}
-                    {#<td>Non</td>#}
-                {#</tr>#}
-                {#<tr>#}
-                    {#<td>Prix du billet</td>#}
-                    {#<td>16,00 €</td>#}
-                {#</tr>#}
-            {#</table>#}
 
              {% for visitors in model.visitors %}
-             <table class="table">
-                 <tr>
-                     <td>Nom</td>
-                     <td>{{ visitors.lastName }}</td>
-                 </tr>
-                 <tr>
-                     <td>Prénom</td>
-                     <td>{{ visitors.firstName }}</td>
-                 </tr>
-                 <tr>
-                     <td>Date de naissance</td>
-                     <td>{{ visitors.birthday|date("d/m/Y") }}</td>
-                 </tr>
-                 <tr>
-                     <td>Journée complète</td>
-                     <td>{% if visitors.discount %}
-                             Oui
-                         {% else %}
-                             Non
-                         {% endif %}
-                     </td>
-                 </tr>
-                 <tr>
-                     <td>Prix du billet</td>
-                     <td>{{ visitors.getTicketPrice}}</td>
-                 </tr>
-             </table>
+             <div class="panel">
+                 <div class="panel-heading">{{ visitors.firstName }}</div>
+                 <div class="panel-body panel-2">
+
+
+                         <table class="table table-hover">
+                             <tr>
+                                 <td>Nom</td>
+                                 <td>{{ visitors.lastName }}</td>
+                             </tr>
+                             <tr>
+                                 <td>Prénom</td>
+                                 <td>{{ visitors.firstName }}</td>
+                             </tr>
+                             <tr>
+                                 <td>Date de naissance</td>
+                                 <td>{{ visitors.birthday|date("d/m/Y") }}</td>
+                             </tr>
+                             <tr>
+                                 <td>Journée complète</td>
+                                 <td>{% if visitors.discount %}
+                                         Oui
+                                     {% else %}
+                                         Non
+                                     {% endif %}
+                                 </td>
+                             </tr>
+                             <tr>
+                                 <td>Prix du billet</td>
+                                 <td>{{ visitors.getTicketPrice}}</td>
+                             </tr>
+                         </table>
+
+
+
+
+                 </div>
+             </div>
              {% endfor %}
+
+
+             <button id="customButton">Payer</button>
+             <a href="{{ path('show_command_form') }}"><button>Modifier</button></a>
+         </div>
 
          </div>
     </div>
@@ -114,9 +112,7 @@
 
 
 
-    <button id="customButton">Payer</button>
-    <a href="{{ path('show_command_form') }}"><button>Modifier</button></a>
-    </div>
+
 
     <script src="https://checkout.stripe.com/checkout.js"></script>
 

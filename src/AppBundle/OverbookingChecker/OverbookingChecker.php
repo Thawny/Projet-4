@@ -10,28 +10,33 @@
 namespace AppBundle\OverbookingChecker;
 
 use AppBundle\Entity\Command;
+use AppBundle\Repository\CommandGateway;
 
 /**
  * Class OverbookingChecker
  */
 class OverbookingChecker
 {
-    private $commandRepository;
+    /**
+     * @var CommandGateway
+     */
+    private $commandGateway;
 
 //    public function __construct(\AppBundle\Repository\CommandRepository $commandRepository)
 //    {
 //        $this->commandRepository = $commandRepository;
 //    }
 
-    public function setCommandRepository($commandRepository)
+
+    public function setCommandGateway(CommandGateway $commandGateway)
     {
-        $this->commandRepository = $commandRepository;
+        $this->commandGateway = $commandGateway;
     }
 
     public function isValidReservation(Command $command)
     {
         $dateVisit = $command->getDateVisit();
-        $totalReservations = $this->commandRepository->countReservationAt($dateVisit);
+        $totalReservations = $this->commandGateway->countReservationAt($dateVisit);
 
         if ($command->getNumberOfVisitors()+ $totalReservations <= 1000)
             return true;

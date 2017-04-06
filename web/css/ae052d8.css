@@ -106,6 +106,7 @@
 body {
     height: 2000px;
     font-family: 'Lato', sans-serif;
+    color: #6f6f6f;
 }
 .navbar-text {
     font-weight: bold;
@@ -305,11 +306,97 @@ p span {
 
 
 
+.partie-info {
+    /*border:1px solid black;*/
+    padding-left: 0;
+    padding-right: 0;
 
 
+}
 
+.aaa {
+    height: 300px;
+    /*background-color: #b2b2b2;*/
 
+    padding: 40px;
+}
+.bbb {
+    height: 300px;
+    padding: 40px;
+    padding-top: 10px !important;
 
+    /*background-color: #e5b112;*/
+}
+
+.note-prix {
+    /*padding: 30px;*/
+    /*background-color: #393E41;*/
+    min-height: 200px;
+
+}
+.note-horaires {
+    height: 200px;
+}
+.note-horaires .panel-body {
+    padding-top: 40px;
+}
+
+.le-formulaire {
+    padding-top: 40px;
+    padding-right: 40px;
+}
+
+.aaa ul {
+    list-style: none;
+    margin-left: -40px;
+}
+
+.panel-footer {
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-bottom: -15px;
+    background-color: white;
+}
+.panel-heading, panel-footer {
+    background-color: #e5b112 !important;
+    font-weight:bold;
+    color: white !important;
+}
+
+span ul {
+    color: #a94442;
+}
+
+.panel-heading {
+    background-color: #e5b112;
+    color: white;
+    border-color: #e5b112;
+}
+.panel {
+    border: 0.5px solid #e5b112;
+}
+.panel-2 {
+    padding: 0;
+    padding-left: 10px !important;
+}
+
+button {
+    background-color: #e5b112;
+    color: white;
+    font-weight: bold;
+    border: none;
+    height: 35px;
+    width: 90px;
+    margin-right: 5px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.recap-container .row {
+    padding-left: 6%;
+    padding-right: 6%;
+}
 .recap-container {
     padding-top: 100px;
 }
