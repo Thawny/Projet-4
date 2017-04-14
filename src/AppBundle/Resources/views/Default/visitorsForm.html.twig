@@ -42,6 +42,10 @@
                                     {% endif %}
                                 </td>
                             </tr>
+                            <tr>
+                                <td>Prix total</td>
+                                <td>{{ model.totalAmount }}</td>
+                            </tr>
                         </table>
                     </div>
              </div>
@@ -132,6 +136,12 @@
             }
         });
 
+        var amount = (function(){
+            var rawAmount = {{ model.totalAmount }};
+            var stripeAmount = rawAmount.toString() + '00';
+            return parseInt(stripeAmount);
+        })();
+
         document.getElementById('customButton').addEventListener('click', function(e) {
             // Open Checkout with further options:
             handler.open({
@@ -139,7 +149,7 @@
                 description: 'Données de paiement',
                 zipCode: true,
                 currency: 'eur',
-                amount: 2000
+                amount: amount
             });
             e.preventDefault();
         });

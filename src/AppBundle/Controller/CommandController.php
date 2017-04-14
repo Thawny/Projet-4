@@ -60,10 +60,10 @@ class CommandController extends Controller
         {
             $session = $this->get('session');
             $command = $commandForm->getData();
+            $command->bindTotalAmount();
             $session->set('command', $command);
 
 
-//            $this->get('custom.mailer')->sendConfirmationMail();
             return $this->render('AppBundle:Default:visitorsForm.html.twig', array('model' => $command));
         }
 
@@ -81,9 +81,11 @@ class CommandController extends Controller
         $commandFactory = $this->get('command.factory');
         $commandEntity = $commandFactory->create($command);
 
+        $amount = $command->getTotalAmount();
+
 
         $token = $request->get('stripeToken');
-        \Stripe\Stripe::setApiKey("");
+        \Stripe\Stripe::setApiKey("sk_test_mfJw0Iv3XC5qJQENGOhoDxyr");
 
         $overbookingChecker = $this->get('overbooking.checker');
         if ($overbookingChecker->isValidReservation($commandEntity) === true)
@@ -94,8 +96,8 @@ class CommandController extends Controller
 //                $token,
 //                array('api_key' => "sk_test_O321nE3YtINTDtnR9t66uFGN")
 //            );
-            \Stripe\Stripe::setApiKey("");
-            $this->chargeUserCreditCart($token);
+            \Stripe\Stripe::setApiKey("sk_test_mfJw0Iv3XC5qJQENGOhoDxyr");
+            $this->chargeUserCreditCart($token, $amount);
 
             $this->get('custom.mailer')->sendConfirmationMail($command);
 
@@ -134,8 +136,12 @@ class CommandController extends Controller
      */
     protected function chargeUserCreditCart($token, $amount)
     {
+        $stripeFormatAmount = (string) $amount;
+        $stripeFormatAmount = $stripeFormatAmount . "00";
+        $stripeFormatAmount = (int) $stripeFormatAmount;
+
         return $charge = \Stripe\Charge::create(array(
-            "amount" => $amount,
+            "amount" => $stripeFormatAmount,
             "currency" => "eur",
             "description" => "Example charge",
             "source" => $token

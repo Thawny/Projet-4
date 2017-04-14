@@ -10,6 +10,7 @@
 namespace AppBundle\Form\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
@@ -31,6 +32,34 @@ class CommandModel
      *
      */
     public $visitors;
+
+    /**
+     * @return Integer
+     */
+    public $totalAmount;
+
+    public function getTotalAmount()
+    {
+        return $this->totalAmount;
+    }
+
+    /**
+     * @param mixed $totalAmount
+     */
+    public function setTotalAmount($totalAmount)
+    {
+        $this->totalAmount = $totalAmount;
+    }
+
+    public function bindTotalAmount()
+    {
+        $visitors = $this->getVisitors();
+        $amount = 0;
+        foreach ($visitors as $visitor){
+            $amount+= $visitor->getTicketPrice();
+        }
+        $this->setTotalAmount($amount);
+    }
 
     /**
      * CommandModel constructor.
