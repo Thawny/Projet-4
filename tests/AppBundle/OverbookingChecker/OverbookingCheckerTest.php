@@ -9,9 +9,11 @@
 namespace AppBundle\OverbookingChecker;
 
 
+
 use AppBundle\Entity\Command;
 use AppBundle\Repository\InMemoryCommandGateway;
 use PHPUnit\Framework\TestCase;
+
 
 class OverbookingCheckerTest extends TestCase
 {
@@ -21,7 +23,7 @@ class OverbookingCheckerTest extends TestCase
     public function addsUpToMoreThanAThousand_ReturnsUnvalidReservation(){
         $overBookingChecker = new OverbookingChecker();
         $overBookingChecker->setCommandGateway(new InMemoryCommandGateway());
-        InMemoryCommandGateway::$countReservations = 1000;
+        InMemoryCommandGateway::$countReservations = 1001;
         $actual = $overBookingChecker->isValidReservation(new Command());
         $this->assertFalse($actual);
     }

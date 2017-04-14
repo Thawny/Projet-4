@@ -5,9 +5,9 @@
  * Date: 06/04/2017
  * Time: 20:15
  */
-
 namespace AppBundle\Repository;
 
+require_once __DIR__ . '/../../../src/AppBundle/Repository/CommandGateway.php';
 
 use AppBundle\Entity\Command;
 
