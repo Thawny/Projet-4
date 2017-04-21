@@ -9,6 +9,7 @@ use AppBundle\Form\Model\CommandModel;
 use AppBundle\Form\Model\ConfirmationPaymentModel;
 use AppBundle\Form\Type\CommandType;
 use AppBundle\Form\Type\ConfirmationPaymentType;
+use AppBundle\OverbookingChecker\Exception\TooManyReservationsException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\Tests\Compiler\C;
@@ -85,39 +86,29 @@ class CommandController extends Controller
 
 
         $token = $request->get('stripeToken');
-        \Stripe\Stripe::setApiKey("sk_test_mfJw0Iv3XC5qJQENGOhoDxyr");
+        \Stripe\Stripe::setApiKey("");
 
         $overbookingChecker = $this->get('overbooking.checker');
-        if ($overbookingChecker->isValidReservation($commandEntity) === true)
-        {
+        try {
+            $overbookingChecker->checkReservationIsValid($commandEntity);
             $commandRepository = $this->get('command.repository');
             $commandRepository->insert($commandEntity);
 //            \Stripe\Charge::retrieve(
 //                $token,
 //                array('api_key' => "sk_test_O321nE3YtINTDtnR9t66uFGN")
 //            );
-            \Stripe\Stripe::setApiKey("sk_test_mfJw0Iv3XC5qJQENGOhoDxyr");
+            \Stripe\Stripe::setApiKey("");
             $this->chargeUserCreditCart($token, $amount);
 
             $this->get('custom.mailer')->sendConfirmationMail($command);
 
             return $this->render('AppBundle:Default:paymentSuccess.html.twig');
-        } else {
-            $numberOfTicketsLeft = $overbookingChecker->isValidReservation($commandEntity);
-            $flashMessage = "Nombre de tickets insuffisant, il ne reste que ".$numberOfTicketsLeft;
+
+        } catch (TooManyReservationsException $e) {
+            $flashMessage = "Nombre de tickets insuffisant, il ne reste que ". $e->getLeftTickets();
             $this->get('session')->getFlashBag()->add('insuffisant', $flashMessage);
             return $this->redirectToRoute('show_command_form');
         }
-//        try{
-//            $this->chargeUserCreditCart($token);
-//        } catch (Exception $e) {
-//            return $this->redirect();
-//        }
-//        vérifier les place disponibles
-//        if(true){
-//        }
-
-
 
 
     }

@@ -123,9 +123,6 @@ class VisitorModel
     //            sans tarif réduit => 16 euros
     // à partir de 60 => 12 euros
 
-
-
-
     public function ticketPriceCalculator()
     {
         $birthday = $this->getBirthday();

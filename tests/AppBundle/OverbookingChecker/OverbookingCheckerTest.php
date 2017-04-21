@@ -19,18 +19,35 @@ class OverbookingCheckerTest extends TestCase
 {
     /**
      * @test
+     * @expectedException \AppBundle\OverbookingChecker\Exception\TooManyReservationsException
      */
-    public function addsUpToMoreThanAThousand_ReturnsUnvalidReservation(){
+    public function alreadyMoreThanAThousand_ThrowsException(){
         $overBookingChecker = new OverbookingChecker();
         $overBookingChecker->setCommandGateway(new InMemoryCommandGateway());
         InMemoryCommandGateway::$countReservations = 1001;
-        $actual = $overBookingChecker->isValidReservation(new Command());
-        $this->assertFalse($actual);
+        $overBookingChecker->checkReservationIsValid(new Command());
     }
 
-//    public function TotalReservationIncludingThisCommandOverAThousand_ReturnsRefusedCommand(){
-//
-//    }
+    /**
+     * @test
+     * @expectedException \AppBundle\OverbookingChecker\Exception\TooManyReservationsException
+     */
+    public function addsUpToMoreThanAThousand_ThrowsException(){
+        $overBookingChecker = new OverbookingChecker();
+        $overBookingChecker->setCommandGateway(new InMemoryCommandGateway());
+        InMemoryCommandGateway::$countReservations = 995;
+        $command = new Command();
+        $command->setNumberOfVisitors(7);
+        $overBookingChecker->checkReservationIsValid($command);
+
+    }
+
+    /**
+     * @test
+     */
+    public function lessThanAThousand_DoNothing(){
+
+    }
 
 
 }

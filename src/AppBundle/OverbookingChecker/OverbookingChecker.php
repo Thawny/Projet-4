@@ -10,6 +10,7 @@
 namespace AppBundle\OverbookingChecker;
 
 use AppBundle\Entity\Command;
+use AppBundle\OverbookingChecker\Exception\TooManyReservationsException;
 use AppBundle\Repository\CommandGateway;
 
 /**
@@ -22,27 +23,23 @@ class OverbookingChecker
      */
     private $commandGateway;
 
-//    public function __construct(\AppBundle\Repository\CommandRepository $commandRepository)
-//    {
-//        $this->commandRepository = $commandRepository;
-//    }
-
 
     public function setCommandGateway(CommandGateway $commandGateway)
     {
         $this->commandGateway = $commandGateway;
     }
 
-    public function isValidReservation(Command $command)
+    /**
+     * @param Command $command
+     * @throws TooManyReservationsException
+     */
+    public function checkReservationIsValid(Command $command)
     {
         $dateVisit = $command->getDateVisit();
         $totalReservations = $this->commandGateway->countReservationAt($dateVisit);
 
-        if ($command->getNumberOfVisitors()+ $totalReservations <= 1000)
-            return true;
-        else {
-            $leftTickets = 1000 - $totalReservations;
-            return $leftTickets;
+        if ($command->getNumberOfVisitors() + $totalReservations > 1000) {
+            throw new TooManyReservationsException(1000 - $totalReservations);
         }
     }
 }
