@@ -79,23 +79,23 @@ class CommandController extends Controller
 
     public function processPaymentAction(Request $request)
     {
-        $command = $request->getSession()->get('command');
-        $commandFactory = $this->get('command.factory');
-        $commandEntity = $commandFactory->create($command);
-
-        $amount = $command->getTotalAmount();
-
-
-        $token = $request->get('stripeToken');
-        \Stripe\Stripe::setApiKey("");
-
-        $overbookingChecker = $this->get('overbooking.checker');
         try {
+            $command = $request->getSession()->get('command');
+            $commandFactory = $this->get('command.factory');
+             $commandEntity = $commandFactory->create($command);
+
+            $amount = $command->getTotalAmount();
+
+
+            $token = $request->get('stripeToken');
+
+            $overbookingChecker = $this->get('overbooking.checker');
+
             $overbookingChecker->checkReservationIsValid($commandEntity);
             $commandRepository = $this->get('command.repository');
             $commandRepository->insert($commandEntity);
 
-            \Stripe\Stripe::setApiKey("");
+            \Stripe\Stripe::setApiKey($this->getParameter('stripe_api_key'));
             $this->chargeUserCreditCart($token, $amount);
 
             $this->get('custom.mailer')->sendConfirmationMail($command);
