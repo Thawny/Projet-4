@@ -1,3 +1,30 @@
+.success {
+    margin-top: 33vh !important;
+    /*border: 1px solid gray;*/
+
+}
+.panel {
+    margin-bottom: 0px !important;
+    border-color: #f3f3f3 !important;
+    background-color: #f3f3f3 !important;
+
+}
+a {
+    color: white !important;
+}
+a:hover {
+    color: white !important;
+    text-decoration: none !important;
+}
+button {
+    min-width: 150px !important;
+    min-height: 50px !important;
+}
+
+.back-to-mainpage {
+    padding-top: 30px !important;
+}
+
 
 
 .titre-horaires {
@@ -300,14 +327,3 @@ button {
     padding-right: 6%;
 }
 
-
-.recap-container {
-    padding-top: 100px;
-}
-
-.titre-recap {
-    background-color: #6C6074;
-    color: white;
-    height: 30px;
-    padding-left: 5px;
-}

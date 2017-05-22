@@ -61,6 +61,7 @@ class CommandController extends Controller
         {
             $session = $this->get('session');
             $command = $commandForm->getData();
+            $command->setCodeResa($command->makeCodeResa());
             $command->bindTotalAmount();
             $session->set('command', $command);
 
@@ -93,10 +94,7 @@ class CommandController extends Controller
             $overbookingChecker->checkReservationIsValid($commandEntity);
             $commandRepository = $this->get('command.repository');
             $commandRepository->insert($commandEntity);
-//            \Stripe\Charge::retrieve(
-//                $token,
-//                array('api_key' => "sk_test_O321nE3YtINTDtnR9t66uFGN")
-//            );
+
             \Stripe\Stripe::setApiKey("");
             $this->chargeUserCreditCart($token, $amount);
 
@@ -138,5 +136,14 @@ class CommandController extends Controller
             "source" => $token
         ));
     }
+
+
+
+
+
 }
+
+
+
+
 

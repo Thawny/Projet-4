@@ -34,4 +34,25 @@ class VisitorModelTest extends TestCase
         $ticketPrice = $visitorModel->ticketPriceCalculator();
         $this->assertEquals(8, $ticketPrice);
     }
+
+    public function testTicketPriceCalculator_twentyYearsOldReturnsSixteen() {
+        $visitorModel = new VisitorModel();
+        $now = $visitorModel->birthday = new \DateTime();
+        $now->format('d-m-Y');
+        $now->modify('-20 years');
+
+        $ticketPrice = $visitorModel->ticketPriceCalculator();
+        $this->assertEquals(16, $ticketPrice);
+    }
+
+    public function testTicketPriceCalculator_discountToTrueReturnsTen() {
+        $visitorModel = new VisitorModel();
+        $visitorModel->discount = true;
+        $now = $visitorModel->birthday = new \DateTime();
+        $now->format('d-m-Y');
+        $now->modify('-20 years');
+
+        $ticketPrice = $visitorModel->ticketPriceCalculator();
+        $this->assertEquals(10, $ticketPrice);
+    }
 }

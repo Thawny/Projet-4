@@ -12,3 +12,4 @@ process_payment:
     path: /payment
     defaults: {_controller: AppBundle:Command:processPayment }
     methods: [POST]
+

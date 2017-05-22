@@ -21,6 +21,7 @@ class CommandFactory
     public function create(CommandModel $model)
     {
         $command = new Command();
+        $command->setCodeResa(substr(md5(microtime()), 0, 12));
         $command->setEmail($model->getEmail());
         $command->setDateVisit($model->getDateVisit());
         $command->setFullDayTickets(($model->fullDayTickets));
@@ -32,7 +33,7 @@ class CommandFactory
            $this->count++;
         }
 
-        $command->setNumberOfVisitors($this->count);
+
 
         return $command;
 

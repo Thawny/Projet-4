@@ -1,79 +1,4 @@
 
-/*body {*/
-    /*height: 2000px;*/
-/*}*/
-
-/*header {*/
-    /*width: 100%;*/
-    /*padding-left: 0 !important;*/
-    /*margin-top: 0 !important;*/
-
-/*}*/
-
-
-
-/*h1 {*/
-    /*color: white;*/
-    /*margin-top: 25px;*/
-    /*margin-left: 13%;*/
-    /*letter-spacing: 9px;*/
-    /*!*text-align: center;*!*/
-/*}*/
-
-/*.entete {*/
-    /*position: fixed !important;*/
-    /*width: 100% !important;*/
-    /*background-color: #6C6074;*/
-    /*z-index: 1000;*/
-    /*!*margin-top: -30px !important;*!*/
-    /*max-height: 100px;*/
-
-/*}*/
-
-/*.logo {*/
-    /*margin-left: 0 !important;*/
-/*}*/
-
-/*.img-logo {*/
-    /*margin-left: -20px !important;*/
-/*}*/
-
-/*img{*/
-    /*height : 100px;*/
-    /*margin-left: 0 !important;*/
-
-/*}*/
-
-
-/*.corps {*/
-    /*padding-top: 120px;*/
-/*}*/
-
-/*.bienvenue {*/
-    /*text-align: center;*/
-    /*color: #6C6074;*/
-    /*line-height: 150% !important;*/
-    /*!*border: 1px solid black;*!*/
-    /*margin-bottom: 24px;*/
-/*}*/
-
-/*.details {*/
-    /*!*background-color: #E6E6E6;*!*/
-    /*color: #727373;*/
-
-
-/*}*/
-
-/*.tarifs {*/
-    /*!*border: 1px solid black;*!*/
-    /*color: #6C6074;*/
-    /*!*margin-left: -30px !important;*!*/
-/*}*/
-
-/*.hor {*/
-    /*!*border: 1px solid black;*!*/
-    /*color: #6C6074;*/
-/*}*/
 
 .titre-horaires {
     background-color: #6C6074;
@@ -93,18 +18,9 @@
     padding-top: 50px;
 }
 
-/*.img-shrink {*/
-    /*height : 60px !important;*/
-
-/*}*/
-
-/*.title-shrink {*/
-    /*font-size: medium; !important;*/
-/*}*/
 
 
 body {
-    height: 2000px;
     font-family: 'Lato', sans-serif;
 }
 .navbar-text {
@@ -115,8 +31,7 @@ body {
 .parallax {
     margin-top: 40px;
 
-    /*background-image: url('../images/Louvre.jpg');*/
-    /*    height: 20%;*/
+
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -204,21 +119,16 @@ strong {
 .innerblue {
     height: 400px;
     padding: 0;
-    /*border: 2px solid orange;*/
     margin-left: -35px;
 
 }
 .green {
-    /*border: 1px solid green;*/
     height: 133px;
     padding: 0;
 }
 .yellow {
-    /*border: 1px solid yellow;*/
     height: 133px;
     padding-top: 30px;
-    /*padding-right: 0px;*/
-    /*padding-left: 0px;*/
 }
 .round {
     border: 5px solid white;
@@ -236,11 +146,7 @@ strong {
 .round span {
     margin-left: 20px;
 }
-.yellow p{
-    /*        text-align: justify;*/
-    /*border: 1px solid black;*/
-    /*margin-top: -10px;*/
-}
+
 
 @media (max-width: 980px) {
     .yellow p {
@@ -309,7 +215,6 @@ p span {
 
 
 .partie-info {
-    /*border:1px solid black;*/
     padding-left: 0;
     padding-right: 0;
 
@@ -318,8 +223,6 @@ p span {
 
 .aaa {
     height: 300px;
-    /*background-color: #b2b2b2;*/
-
     padding: 40px;
 }
 .bbb {
@@ -327,12 +230,9 @@ p span {
     padding: 40px;
     padding-top: 10px !important;
 
-    /*background-color: #e5b112;*/
 }
 
 .note-prix {
-    /*padding: 30px;*/
-    /*background-color: #393E41;*/
     min-height: 200px;
 
 }

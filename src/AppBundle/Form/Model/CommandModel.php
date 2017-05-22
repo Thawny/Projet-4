@@ -38,6 +38,24 @@ class CommandModel
      */
     public $totalAmount;
 
+    public $codeResa;
+
+    /**
+     * @return mixed
+     */
+    public function getCodeResa()
+    {
+        return $this->codeResa;
+    }
+
+    /**
+     * @param mixed $codeResa
+     */
+    public function setCodeResa($codeResa)
+    {
+        $this->codeResa = $codeResa;
+    }
+
     public function getTotalAmount()
     {
         return $this->totalAmount;
@@ -145,6 +163,7 @@ class CommandModel
     {
         $dateVisit = $this->getDateVisit();
         $today = new \DateTime();
+        $today->modify('- 1 day');
 
         if ($dateVisit < $today)
         {
@@ -163,11 +182,11 @@ class CommandModel
         $dateVisit = $this->getDateVisit();
 
         $dateVisit_day = date_format($dateVisit, 'D');
-        $tuesday = date('D', time());
+//        $tuesday = date('D', time());
 
-        if ($dateVisit_day == $tuesday)
+        if ($dateVisit_day == 'Sun')
         {
-            $context->buildViolation('Le musée n\'est pas ouvert le mardi')
+            $context->buildViolation('Le musée n\'est pas ouvert le dimanche')
                     ->atPath('dateVisit')
                     ->addViolation();
         }
@@ -184,6 +203,11 @@ class CommandModel
                 ->addViolation();
         }
 
+    }
+
+    public function makeCodeResa() {
+        $codeResa = substr(md5(microtime()), 0, 12);
+        return $codeResa;
     }
 
 

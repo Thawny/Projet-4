@@ -11,6 +11,7 @@ namespace AppBundle\OverbookingChecker;
 
 
 use AppBundle\Entity\Command;
+use AppBundle\Entity\Visitor;
 use AppBundle\Repository\InMemoryCommandGateway;
 use PHPUnit\Framework\TestCase;
 
@@ -37,7 +38,9 @@ class OverbookingCheckerTest extends TestCase
         $overBookingChecker->setCommandGateway(new InMemoryCommandGateway());
         InMemoryCommandGateway::$countReservations = 995;
         $command = new Command();
-        $command->setNumberOfVisitors(7);
+        for ($i = 0; $i <= 7; $i++) {
+            $command->addVisitor(new Visitor());
+        }
         $overBookingChecker->checkReservationIsValid($command);
 
     }

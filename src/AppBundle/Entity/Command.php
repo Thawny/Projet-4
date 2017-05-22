@@ -55,11 +55,6 @@ class Command
      */
     private $fullDayTickets;
 
-    /**
-     * @var integer
-     * @ORM\Column(name="number_of_visitors", type="integer", nullable=true)
-     */
-    private $numberOfVisitors;
 
     /**
      * @var Visitor[]
@@ -229,12 +224,7 @@ class Command
      *
      * @return Command
      */
-    public function setNumberOfVisitors($numberOfVisitors)
-    {
-        $this->numberOfVisitors = $numberOfVisitors;
 
-        return $this;
-    }
 
     /**
      * Get numberOfVisitors
