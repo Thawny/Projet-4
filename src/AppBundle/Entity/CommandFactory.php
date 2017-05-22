@@ -12,6 +12,7 @@ class CommandFactory
      * @var VisitorFactory
      */
     private $visitorFactory;
+    private $count = 0;
 
     /**
      * @param CommandModel $model
@@ -20,10 +21,19 @@ class CommandFactory
     public function create(CommandModel $model)
     {
         $command = new Command();
+        $command->setCodeResa(substr(md5(microtime()), 0, 12));
         $command->setEmail($model->getEmail());
         $command->setDateVisit($model->getDateVisit());
         $command->setFullDayTickets(($model->fullDayTickets));
-        $this->getVisitorFactory()->create($model->getVisitors());
+        foreach ($model->getVisitors() as $visitor)
+        {
+           $visior_entity = $this->getVisitorFactory()->create($visitor);
+           $command->addVisitor($visior_entity);
+           $visior_entity->setCommand($command);
+           $this->count++;
+        }
+
+
 
         return $command;
 

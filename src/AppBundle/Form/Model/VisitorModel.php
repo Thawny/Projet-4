@@ -38,13 +38,17 @@ class VisitorModel
 
     public $discount;
 
-    public $ticket_price;
+    public $ticket_price = 0;
 
     /**
      * @return mixed
      */
     public function getTicketPrice()
     {
+        if ($this->ticket_price == 0)
+        {
+            $this->setTicketPrice($this->ticketPriceCalculator());
+        }
         return $this->ticket_price;
     }
 
@@ -113,6 +117,11 @@ class VisitorModel
         }
     }
 
+    // de 0 à 4   => gratuit
+    // de 4 à 12  => 8 euros
+    // de 12 à 60 => tarif réduit   => 10 euros
+    //            sans tarif réduit => 16 euros
+    // à partir de 60 => 12 euros
 
     public function ticketPriceCalculator()
     {
@@ -127,11 +136,11 @@ class VisitorModel
         {
             return 0;
         }
-        elseif (($today->modify('-4 years') > $birthday) && ($today->modify('-12 years') < $birthday))
+        elseif (($today > $birthday) && ($today->modify('-8 years') < $birthday))
         {
             return 8;
         }
-        elseif ($today->modify('-12 years') > $birthday && $today->modify('-60 years') < $birthday)
+        elseif ($today > $birthday && $today->modify('-48 years') < $birthday)
         {
             if ($discount)
             {

@@ -1,7 +1,8 @@
 {% extends "base.html.twig" %}
 
 {% block css %}
-{% stylesheets '@AppBundle/Resources/views/Public/CSS/base.css' %}
+
+{% stylesheets 'bundles/app/css/base.css' filter="cssrewrite"%}
 <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
 {% endstylesheets %}
 {% endblock %}
@@ -10,79 +11,167 @@
 {% block body %}
 
 
-  <div class="container-fluid corps">
 
-    <div class="container-fluid debut">
-    <div class="row title2">
-        <h4 class="col-xs-12 bienvenue">Bienvenue sur la billeterie en ligne du musée du Louvre.<br/>
-            Bénéficiez en quelques clics
-        et où que vous soyez de toute la gamme de billets et de tarifs du musée du Louvre</h4>
+
+    <div class="parallax" style="background-image: url('{{ asset('bundles/app/images/Louvre.jpg') }}')">
+
+        <div class="overlay">
+            <div class="text-center titre">
+                <h1>Bienvenue sur la billetterie en ligne du <strong>musée du Louvre</strong></h1>
+            </div>
+
+        </div>
+
     </div>
 
 
 
-    <div class="row details">
-        <section class="col-sm-6 col-xs-12 hor">
-            <h3 class="titre-horaires">Horaires</h3>
-            Ouvert tous les jours de 9h à 18h à l’exception du mardi ainsi que du 1er mai et du 25 décembre.
-        </section>
-        <section class="col-sm-6 col-xs-12 tarifs">
-            <h3 class="titre-tarifs">Tarifs</h3>
-                <ul style="list-style: none; margin-left: -33px">
-                    <li>de 0 ans à 4 ans - gratuit</li>
-                    <li>de 4 ans à 12 - tarif enfant - 8 euros</li>
-                    <li>de 12 ans à 60 - tarif normal - 16 euros - tarif réduit - 10 euros</li>
-                    <li>à partir de 60 ans - tarif sénior - 12 euros</li>
+    <div class="yellow-rectangle text-center">
+        <div class="intro">
+            Bénéficiez en quelques clics où que vous soyez à toute la gamme de billets du musée du Louvre
+        </div>
+    </div>
+
+    <div>
+
+    </div>
+
+    {#EXPLICATION DES ÉTAPES À SUIVRES#}
+
+    <div class="container-fluid conteneeur">
+        <div class="row red row1">
+            <div class="col-lg-12 col-sm-12">
+                <div class="vline"></div>
+                <div class="row">
+                    <div class="blue col-lg-11 col-sm-11 innerblue row">
+                        <div class="col-lg-12 col-sm-12 green">
+                            <div class="col-xs-2 yellow">
+                                <div class="round"><span>1</span></div>
+                            </div>
+                            <div class="col-xs-10 yellow texte">
+                                <p>
+                                    <span>PREMIÈRE ÉTAPE</span><br>
+                                    Choisissez la date de votre visite puis renseignez le champ email avec votre adresse électronique.<br>
+                                    Cliquez sur "Ajouter un visiteur" pour ajouter un visiteur à votre commande ou "supprimer"<br> pour le supprimer. Une fois satisfait, cliquez sur "Continuer".
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-sm-12 green">
+                            <div class="col-xs-2 yellow">
+                                <div class="round"><span>2</span></div>
+                            </div>
+                            <div class="col-xs-10 yellow texte">
+                                <p>
+                                    <span>DEUXIÈME ÉTAPE</span><br>
+                                    Vérifiez que le récapitulatif correspond bien à votre commande. Pour effectuer une modification, cliquez sur "Modifier".<br class="modifier">
+                                    Si vous êtes satisfait, cliquez sur "Payer". Vous seront alors demandées vos coordonnées bancaire. Le paiement alors traité en toute sécurité grâce au serivice de paiement Stripe.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-sm-12 green">
+                            <div class="col-xs-2 yellow">
+                                <div class="round"><span>3</span></div>
+                            </div>
+                            <div class="col-xs-10 yellow texte">
+                                <p>
+                                    <span>DERNIÈRE ÉTAPE</span><br>
+                                    Rendez-vous sur votre messagerie électronique. Vous avez reçu email de confirmation contenant le récapitulatif de votre commande. Celui-ci fait office de billet pour tous les visiteurs.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+      {% for flashMessage in app.session.flashBag.get('insuffisant') %}
+      {{ flashMessage }}
+      {% endfor %}
+
+
+<div class="container-fluid">
+
+    <div class="row">
+
+
+        <div class="col-md-4 col-sm-12 partie-info">
+            <div class="col-xs-12 aaa">
+                <div class="note-prix panel panel-default">
+                    <div class="panel-heading text-center">TARIFS</div>
+                    <div class="panel-body">
+                        <ul class="text-center">
+                            <li>De O à 4 ans    -  gratuit</li>
+                            <li>De 4 à 12 ans   -  8 €</li>
+                            <li>De 12 À 60 ans  -  16* €</li>
+                            <li>À partir de 60  -  12</li>
+                        </ul>
+                        <div class="panel-footer text-center">*10 € pour les militaires, le personnel du musée ainsi que les employés du ministère de la culture
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 bbb">
+                <div class="note-horaires panel panel-default">
+                    <div class="panel-heading text-center">OUVERTURE</div>
+                    <div class="panel-body text-center">
+                    Ouvert du tous les jours de 9h à 18h à l'excéption du mardi ainsi que du 1er novembre et du 25 décembre.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-8 col-sm-12 col-  le-formulaire">
+
+        {{  form_start(form) }}
+        {#render the task's only field: description#}
+        {{ form_row(form.dateVisit) }}
+        {{ form_row(form.fullDayTickets) }}
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email) }}
+        <div class="alert-danger">
+
+            {{ form_errors(form.email, {'attr': {'class': 'alert alert-danger'}}) }}
+
+        </div>
+        <div class="alert-danger">
+            {{ form_errors(form)}}
+        </div>
+
+
+        <h3>Visiteur(s)</h3>
+        <ul class="visitors list-unstyled" data-prototype="{{ form_widget(form.visitors.vars.prototype)|e('html_attr') }}">
+
+            {% for visitor in form.visitors %}
+
+                <ul class="list-unstyled new-visitor">
+                    <li>{{ form_row(visitor.firstName) }}</li>
+                    <li>{{ form_row(visitor.lastName) }}</li>
+                    <li>{{ form_row(visitor.birthday) }}</li>
+                    <li>{{ form_row(visitor.country) }}</li>
+                    <li>{{ form_row(visitor.discount) }}</li>
                 </ul>
-        </section>
-    </div>
+
+            {% endfor %}
+        </ul>
+
+        {{ form_end(form) }}
 
 
-</div>
+
+        </div>
 
 
-<div class="container-fluid formulaire">
 
-<div class="row">
-    <div class="col-xs-12">
-
-{{  form_start(form) }}
-    {# render the task's only field: description #}
-    {{ form_row(form.dateVisit) }}
-    {{ form_row(form.fullDayTickets) }}
-    {{ form_label(form.email) }}
-    {{ form_widget(form.email) }}
-    {#<div class="alert-danger">#}
-
-        {{ form_errors(form.email, {'attr': {'class': 'alert alert-danger'}}) }}
-
-    {#</div>#}
-    <div class="alert-danger">
-        {{ form_errors(form)}}
-    </div>
-
-
-    <h3>Visiteur(s)</h3>
-    <ul class="visitors list-unstyled" data-prototype="{{ form_widget(form.visitors.vars.prototype)|e('html_attr') }}">
-
-        {% for visitor in form.visitors %}
-
-            <ul class="list-unstyled">
-            <li>{{ form_row(visitor.firstName) }}</li>
-            <li>{{ form_row(visitor.lastName) }}</li>
-            <li>{{ form_row(visitor.birthday) }}</li>
-            <li>{{ form_row(visitor.country) }}</li>
-            <li>{{ form_row(visitor.discount) }}</li>
-            </ul>
-
-        {% endfor %}
-    </ul>
-
-    {{ form_end(form) }}
-
-
-    </div>
- </div>
+     </div>
 
 </div>
 
@@ -104,6 +193,11 @@
     // Get the ul that holds the collection of Visitors
     $collectionHolder = $('ul.visitors');
 
+     // add a delete link to all of the existing tag form li elements
+     $collectionHolder.find('.new-visitor').each(function() {
+         addTagFormDeleteLink($(this));
+      });
+
     // add the "add a Visitor" anchor and li to the Visitors ul
     $collectionHolder.append($newLinkLi);
 
@@ -120,6 +214,18 @@
     });
     });
 
+    function addTagFormDeleteLink($tagFormLi) {
+        var $removeFormA = $('<a href="#">Supprimer ce visiteur</a>');
+        $tagFormLi.append($removeFormA);
+
+        $removeFormA.on('click', function(e) {
+            // prevent the link from creating a "#" on the URL
+            e.preventDefault();
+
+            // remove the li for the tag form
+            $tagFormLi.remove();
+        });
+    }
 
     function addVisitorForm($collectionHolder, $newLinkLi) {
         // Get the data-prototype explained earlier
@@ -138,9 +244,32 @@
         // Display the form in the page in an li, before the "Add a Visitor" link li
         var $newFormLi = $('<li></li>').append(newForm);
         $newLinkLi.before($newFormLi);
+
+        // add a delete link to the new form
+        addTagFormDeleteLink($newFormLi);
     }
 
 </script>
+
+    <script>
+        $(function() {
+
+            $(window).resize(function () {
+                var viewportWidth = $(window).width();
+                var viewportHeight = $(window).height();
+                console.log(viewportHeight);
+                console.log(viewportWidth);
+                if(viewportWidth < 1120) {
+                    $(".modifier").remove();
+                }
+
+            });
+
+            $('.glyphicon-exclamation-sign').removeClass();
+            $('.has-error').removeClass();
+        });
+
+    </script>
 
 {% endblock %}
 
@@ -148,4 +277,3 @@
 {% block style %}
 
 {% endblock %}
-

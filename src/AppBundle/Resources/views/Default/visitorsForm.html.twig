@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block css %}
-{% stylesheets '@AppBundle/Resources/views/Public/CSS/base.css' '@AppBundle/Resources/views/Public/CSS/visitorForm.css'%}
+{% stylesheets 'bundles/app/css/base.css' 'bundles/app/css/visitorForm.css' filter="cssrewrite"%}
 <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
 <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
 
@@ -16,84 +16,86 @@
     <div class="container-fluid recap-container">
     <div class="row">
         <section class="col-xs-12">
-            <h3 class="titre-recap">Récapitulatif de vos achats</h3>
+            {#<h3 class="titre-recap">Récapitulatif de vos achats</h3>#}
 
         </section>
 
          <div class="container-fluid">
-            <table class="table">
-                <tr>
-                    <td>Email</td>
-                    <td>{{ model.email }}</td>
-                </tr>
-                <tr>
-                    <td>Date de visite</td>
-                    <td>{{ model.dateVisit|date("d/m/Y") }}</td>
-                </tr>
-                <tr>
-                    <td>Journée complète</td>
-                    <td>{% if model.fullDayTickets %}
-                            Oui
-                        {% else %}
-                            Non
-                        {% endif %}
-                    </td>
-                </tr>
-            </table>
+             <div class="panel">
+                 <div class="panel-heading">Votre commande</div>
+                    <div class="panel-body panel-2">
+                        <table class="table table-hover">
+                            <tr>
+                                <td>Email</td>
+                                <td>{{ model.email }}</td>
+                            </tr>
+                            <tr>
+                                <td>Date de visite</td>
+                                <td>{{ model.dateVisit|date("d/m/Y") }}</td>
+                            </tr>
+                            <tr>
+                                <td>Journée complète</td>
+                                <td>{% if model.fullDayTickets %}
+                                        Oui
+                                    {% else %}
+                                        Non
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Prix total</td>
+                                <td>{{ model.totalAmount }}</td>
+                            </tr>
+                        </table>
+                    </div>
+             </div>
 
-             <h4>Visiteur(s)</h4>
-             {#<table class="table">#}
-                {#<tr>#}
-                    {#<td>Nom</td>#}
-                    {#<td>Tony</td>#}
-                {#</tr>#}
-                {#<tr>#}
-                    {#<td>Prénom</td>#}
-                    {#<td>Tony</td>#}
-                {#</tr>#}
-                {#<tr>#}
-                    {#<td>Date de naissance</td>#}
-                    {#<td>18/11/1993</td>#}
-                {#</tr>#}
-                {#<tr>#}
-                    {#<td>Tarif réduit</td>#}
-                    {#<td>Non</td>#}
-                {#</tr>#}
-                {#<tr>#}
-                    {#<td>Prix du billet</td>#}
-                    {#<td>16,00 €</td>#}
-                {#</tr>#}
-            {#</table>#}
 
              {% for visitors in model.visitors %}
-             <table class="table">
-                 <tr>
-                     <td>Nom</td>
-                     <td>{{ visitors.lastName }}</td>
-                 </tr>
-                 <tr>
-                     <td>Prénom</td>
-                     <td>{{ visitors.firstName }}</td>
-                 </tr>
-                 <tr>
-                     <td>Date de naissance</td>
-                     <td>{{ visitors.birthday|date("d/m/Y") }}</td>
-                 </tr>
-                 <tr>
-                     <td>Journée complète</td>
-                     <td>{% if visitors.discount %}
-                             Oui
-                         {% else %}
-                             Non
-                         {% endif %}
-                     </td>
-                 </tr>
-                 <tr>
-                     <td>Prix du billet</td>
-                     <td>{{ visitors.ticket_price }}</td>
-                 </tr>
-             </table>
+             <div class="panel">
+                 <div class="panel-heading">{{ visitors.firstName }}</div>
+                 <div class="panel-body panel-2">
+
+
+                         <table class="table table-hover">
+                             <tr>
+                                 <td>Nom</td>
+                                 <td>{{ visitors.lastName }}</td>
+                             </tr>
+                             <tr>
+                                 <td>Prénom</td>
+                                 <td>{{ visitors.firstName }}</td>
+                             </tr>
+                             <tr>
+                                 <td>Date de naissance</td>
+                                 <td>{{ visitors.birthday|date("d/m/Y") }}</td>
+                             </tr>
+                             <tr>
+                                 <td>Journée complète</td>
+                                 <td>{% if visitors.discount %}
+                                         Oui
+                                     {% else %}
+                                         Non
+                                     {% endif %}
+                                 </td>
+                             </tr>
+                             <tr>
+                                 <td>Prix du billet</td>
+                                 <td>{{ visitors.getTicketPrice}}</td>
+                             </tr>
+                         </table>
+
+
+
+
+                 </div>
+             </div>
              {% endfor %}
+
+
+             <button id="customButton">Payer</button>
+             <a href="{{ path('show_command_form') }}"><button>Modifier</button></a>
+         </div>
 
          </div>
     </div>
@@ -112,8 +114,9 @@
 
 
 
-    <button id="customButton">Payer</button>
-    </div>
+
+
+
 
     <script src="https://checkout.stripe.com/checkout.js"></script>
 
@@ -133,6 +136,12 @@
             }
         });
 
+        var amount = (function(){
+            var rawAmount = {{ model.totalAmount }};
+            var stripeAmount = rawAmount.toString() + '00';
+            return parseInt(stripeAmount);
+        })();
+
         document.getElementById('customButton').addEventListener('click', function(e) {
             // Open Checkout with further options:
             handler.open({
@@ -140,7 +149,7 @@
                 description: 'Données de paiement',
                 zipCode: true,
                 currency: 'eur',
-                amount: 2000
+                amount: amount
             });
             e.preventDefault();
         });

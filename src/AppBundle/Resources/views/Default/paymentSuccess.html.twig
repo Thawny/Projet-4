@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block css %}
-    {% stylesheets '@AppBundle/Resources/views/Public/CSS/base.css' '@AppBundle/Resources/views/Public/CSS/visitorForm.css'%}
+    {% stylesheets 'bundles/app/css/base.css' 'bundles/app/css/paymentSuccess.css' filter="cssrewrite"%}
     <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
 
@@ -10,15 +10,27 @@
 
 {% block body %}
 
-    {{ parent() }}
 
 
+<div class="container success">
+    <div class="row">
+        <div class="panel panel-default col-lg-10 col-sm-10 col-sm-offset-1 col-lg-offset-1">
+            <div class="panel-body">
+                <p class="text-center">
+                    Votre réservation a bien été effectuée. Un mail de confirmation vous a été envoyé, il comporte un récapitulatif
+                    de votre commande et fera office de billet pour tous les visiteurs associés le jour de votre visite.
+                    Nous vous remercions et vous souhaitons une agréable visite au musée du Louvre.
+                </p>
 
-<div>
- {{ token }}
+            </div>
+        </div>
+        <div class="row">
+        <p class="text-center col-lg-10 col-sm-10 col-sm-offset-1 col-lg-offset-1 back-to-mainpage">
+            <button><a href="{{ path('show_command_form') }}">Revenir à la page principale</a></button>
+        </p>
+        </div>
+    </div>
 </div>
-
-
 
 
 

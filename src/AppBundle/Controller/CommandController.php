@@ -2,8 +2,14 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Command;
+use AppBundle\Entity\CommandFactory;
+use AppBundle\Entity\VisitorFactory;
 use AppBundle\Form\Model\CommandModel;
+use AppBundle\Form\Model\ConfirmationPaymentModel;
 use AppBundle\Form\Type\CommandType;
+use AppBundle\Form\Type\ConfirmationPaymentType;
+use AppBundle\OverbookingChecker\Exception\TooManyReservationsException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\Tests\Compiler\C;
@@ -17,39 +23,26 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class CommandController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function homeAction(Request $request)
     {
-//        if($this->get('session')->isStarted()){
-//            $this->get('session')->getBag('commande');
 
-//        $session = new Session();
-
-
-//        $this->get('session');
-        $tony = new VisitorModel();
-        $tony->birthday = new \DateTime();
-        $tony->country = "France";
-        $tony->discount = true;
-        $tony->firstName = "Tony";
-        $tony->lastName = "Malto";
-
-        $paul = new VisitorModel();
-        $paul->birthday = new \DateTime();
-        $paul->country = "Iran";
-        $paul->discount = true;
-        $paul->firstName = "Paul";
-        $paul->lastName = "Machin";
 
         $commandModel = new CommandModel();
-        $commandModel->visitors->add($tony);
-        $commandModel->visitors->add($paul);
+
+        if ($this->get('session')->has('command'))
+        {
+            $commandModel = $this->get("session")->get('command');
+        }
 
         $form = $this->get('form.factory')->create(CommandType::class, $commandModel);
         return $this->render('AppBundle:Default:home.html.twig', array(
             'form' => $form->createView()
         ));
     }
-
 
     /**
      * @param Request $request
@@ -60,32 +53,24 @@ class CommandController extends Controller
 
         // Récupère le form
         $commandModel = new CommandModel();
-        $form = $this->get('form.factory')->create(CommandType::class, $commandModel);
+        $commandForm = $this->get('form.factory')->create(CommandType::class, $commandModel);
 
-        //RECUPERATION DE LA SESSION
-//        $session = $request->getSession();
-//        $session->set('name', 'Jean');
 
-        if ($form->handleRequest($request)->isValid())
+
+        if ($commandForm->handleRequest($request)->isValid())
         {
+            $session = $this->get('session');
+            $command = $commandForm->getData();
+            $command->setCodeResa($command->makeCodeResa());
+            $command->bindTotalAmount();
+            $session->set('command', $command);
 
 
-
-            $model = $this->getCommandModel($form);
-            foreach ($model->getVisitors() as $visitor)
-            {
-                $visitor->setTicketPrice($visitor->ticketPriceCalculator());
-            }
-
-
-
-
-
-            return $this->render('AppBundle:Default:visitorsForm.html.twig', array('model' => $model));
+            return $this->render('AppBundle:Default:visitorsForm.html.twig', array('model' => $command));
         }
 
         return $this->render('AppBundle:Default:home.html.twig', array(
-            'form' => $form->createView()
+            'form' => $commandForm->createView()
         ));
 
     }
@@ -94,22 +79,38 @@ class CommandController extends Controller
 
     public function processPaymentAction(Request $request)
     {
-        $command = $request->getSession()->get('command');
-        \Stripe\Stripe::setApiKey("");
-        $token = $request->get('stripeToken');
-//        try{
-//            $this->chargeUserCreditCart($token);
-//        } catch (Exception $e) {
-//            return $this->redirect();
-//        }
-        // vérifier les place disponibles
-        if(true){
-            $this
-                ->get('command.repository')
-                ->insert($command);
+        try {
+            $command = $request->getSession()->get('command');
+            $commandFactory = $this->get('command.factory');
+             $commandEntity = $commandFactory->create($command);
+
+            $amount = $command->getTotalAmount();
+
+
+            $token = $request->get('stripeToken');
+
+            $overbookingChecker = $this->get('overbooking.checker');
+
+            $overbookingChecker->checkReservationIsValid($commandEntity);
+            $commandRepository = $this->get('command.repository');
+            $commandRepository->insert($commandEntity);
+
+            \Stripe\Stripe::setApiKey($this->getParameter('stripe_api_key'));
+            $this->chargeUserCreditCart($token, $amount);
+
+            $this->get('custom.mailer')->sendConfirmationMail($command);
+
+            return $this->render('AppBundle:Default:paymentSuccess.html.twig');
+
+        } catch (TooManyReservationsException $e) {
+            $flashMessage = "Nombre de tickets insuffisant, il ne reste que ". $e->getLeftTickets();
+            $this->get('session')->getFlashBag()->add('insuffisant', $flashMessage);
+            return $this->redirectToRoute('show_command_form');
         }
-        return $this->render('AppBundle:Default:paymentSuccess.html.twig');
+
+
     }
+
     /**
      * @param $form
      * @return CommandModel
@@ -122,14 +123,27 @@ class CommandController extends Controller
      * @param $token
      * @return \Stripe\Charge
      */
-    protected function chargeUserCreditCart($token)
+    protected function chargeUserCreditCart($token, $amount)
     {
+        $stripeFormatAmount = (string) $amount;
+        $stripeFormatAmount = $stripeFormatAmount . "00";
+        $stripeFormatAmount = (int) $stripeFormatAmount;
+
         return $charge = \Stripe\Charge::create(array(
-            "amount" => 10,
+            "amount" => $stripeFormatAmount,
             "currency" => "eur",
             "description" => "Example charge",
             "source" => $token
         ));
     }
+
+
+
+
+
 }
+
+
+
+
 

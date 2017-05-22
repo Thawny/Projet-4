@@ -1,0 +1,329 @@
+
+
+.titre-horaires {
+    background-color: #6C6074;
+    color: white;
+    height: 30px;
+    padding-left: 5px;
+}
+
+.titre-tarifs {
+    background-color: #6C6074;
+    color: white;
+    height: 30px;
+    padding-left: 5px;
+}
+
+.formulaire {
+    padding-top: 50px;
+}
+
+
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+.navbar-text {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.parallax {
+    margin-top: 40px;
+
+
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.yellow-rectangle {
+    height: 200px;
+    background-color: #e5b112;
+    width: 100%;
+    font-size: 23px;
+    box-sizing: border-box;
+    padding-left: 30px;
+    padding-right: 30px;
+    letter-spacing: 1px;
+    word-spacing: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.intro {
+    line-height: 1.5em;
+
+
+}
+
+.overlay {
+    /*    padding-top: 40px;*/
+    /*    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 17%, rgba(0, 0, 0, 0.66) 35%, rgba(0, 0, 0,                                 0.3) 62%, rgba(0, 0, 0, 0.4) 100%);*/
+    background-attachment: fixed;
+    padding: 13% 0;
+    padding-left: 10%;
+    padding-right: 10%;
+    background: rgba(0, 0, 0, 0.2);
+
+}
+
+.titre {
+    /*    background:  rgba(0, 0, 0, 0.1);*/
+    /*      border: 1px solid red;*/
+    margin-bottom: 5%;
+    /*    background: rgba(0, 0, 0, 0.2);*/
+    padding-bottom: 1%;
+    padding-top: 1%;
+
+/**/
+}
+
+h1 {
+    color: #fff;
+}
+
+strong {
+    color: #e5b112 !important;
+
+}
+
+.intro {
+    color: white;
+}
+
+
+
+
+/*ÉTAPES À SUIVRE*/
+
+@media (max-width: 800px){
+    .innerblue {
+        right: 13px;
+    }
+}
+
+.row1 {
+    height: 400px;
+    background-color: #f3f3f3;
+    padding-left: 15%;
+}
+.vline {
+    background-color: white;
+    height: 400px;
+    width: 4px;
+    position: absolute;
+}
+.innerblue {
+    height: 400px;
+    padding: 0;
+    margin-left: -35px;
+
+}
+.green {
+    height: 133px;
+    padding: 0;
+}
+.yellow {
+    height: 133px;
+    padding-top: 30px;
+}
+.round {
+    border: 5px solid white;
+    border-radius: 0 50px 50px 50px;
+    height: 70px;
+    width: 70px;
+    min-width: 70px;
+    display: table-cell;
+    background-color: #FFCC33;
+    color: white;
+    font-weight: bolder;
+    font-size: 30px;
+    padding-top: 5px;
+}
+.round span {
+    margin-left: 20px;
+}
+
+
+@media (max-width: 980px) {
+    .yellow p {
+        margin-top: -10px;
+    }
+}
+@media (max-width: 733px) {
+    .yellow p {
+        font-size:13px;
+    }
+}
+
+p span {
+    font-weight: bold;
+    line-height: 2em;
+}
+
+
+
+
+/*ZONE FORULAIRE, TARIFS, HORAIRES*/
+
+
+
+.formulaire {
+    /*background-color: white;*/
+    border:1px solid black;
+    height: 400px;
+}
+.horaires {
+    background-color: #f3f3f3;
+    height: 200px;
+}
+.tarifs {
+    background-color: #e5b112;
+    height: 200px;
+}
+.formblock {
+    padding-left:0px;
+    padding-right: 0px;
+}
+
+
+.ouverture {
+    padding-top: 20px;
+}
+.ouverture span {
+    line-height: 3em;
+    display: block;
+}
+.tarifs {
+    color: white;
+}
+
+.tarifs span {
+    font-weight: bold;
+    display: block;
+    padding-top: 20px;
+}
+.tarifs ul {
+    margin-left: 80px;
+    line-height: 1.9em;
+}
+
+
+
+
+.partie-info {
+    padding-left: 0;
+    padding-right: 0;
+
+
+}
+
+.aaa {
+    height: 300px;
+    padding: 40px;
+}
+.bbb {
+    height: 300px;
+    padding: 40px;
+    padding-top: 10px !important;
+
+}
+
+.note-prix {
+    min-height: 200px;
+
+}
+.note-horaires {
+    height: 200px;
+}
+.note-horaires .panel-body {
+    padding-top: 40px;
+}
+
+.le-formulaire {
+    padding-top: 40px;
+    padding-right: 40px;
+}
+
+.aaa ul {
+    list-style: none;
+    margin-left: -40px;
+}
+
+.panel-footer {
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-bottom: -15px;
+    background-color: white;
+}
+.panel-heading, panel-footer {
+    background-color: #e5b112 !important;
+    font-weight:bold;
+    color: white !important;
+}
+
+span ul {
+    color: #a94442;
+}
+
+.panel-heading {
+    background-color: #e5b112;
+    color: white;
+    border-color: #e5b112;
+}
+.panel {
+    border: 0.5px solid #e5b112;
+}
+.panel-2 {
+    padding: 0;
+    padding-left: 10px !important;
+}
+
+button {
+    background-color: #e5b112;
+    color: white;
+    font-weight: bold;
+    border: none;
+    height: 35px;
+    width: 90px;
+    margin-right: 5px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.recap-container .row {
+    padding-left: 6%;
+    padding-right: 6%;
+}
+
+
+.success {
+    margin-top: 33vh !important;
+    /*border: 1px solid gray;*/
+
+}
+.panel {
+    margin-bottom: 0px !important;
+    border-color: #f3f3f3 !important;
+    background-color: #f3f3f3 !important;
+
+}
+a {
+    color: white !important;
+}
+a:hover {
+    color: white !important;
+    text-decoration: none !important;
+}
+button {
+    min-width: 150px !important;
+    min-height: 50px !important;
+}
+
+.back-to-mainpage {
+    padding-top: 30px !important;
+}

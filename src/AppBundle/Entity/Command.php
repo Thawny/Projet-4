@@ -39,7 +39,7 @@ class Command
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_resa", type="datetime")
+     * @ORM\Column(name="date_resa", type="datetime", nullable=true)
      */
     private $dateResa;
 
@@ -55,16 +55,20 @@ class Command
      */
     private $fullDayTickets;
 
-    /**
-     * @var integer
-     * @ORM\Column(name="number_of_visitors", type="integer", nullable=true)
-     */
-    private $numberOfVisitors;
 
     /**
      * @var Visitor[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Visitor",mappedBy="command", cascade={"persist"})
      */
     private $visitors;
+
+    /**
+     * @param Visitor[] $visitors
+     */
+    public function setVisitors($visitors)
+    {
+        $this->visitors = $visitors;
+    }
 
     /**
      * Command constructor.
@@ -73,6 +77,7 @@ class Command
     public function __construct()
     {
         $this->visitors = new ArrayCollection();
+//        $this->setDateResa(new \DateTime());
     }
 
     /**
@@ -219,12 +224,7 @@ class Command
      *
      * @return Command
      */
-    public function setNumberOfVisitors($numberOfVisitors)
-    {
-        $this->numberOfVisitors = $numberOfVisitors;
 
-        return $this;
-    }
 
     /**
      * Get numberOfVisitors
@@ -233,7 +233,7 @@ class Command
      */
     public function getNumberOfVisitors()
     {
-        return $this->numberOfVisitors;
+        return $this->visitors->count();
     }
 
     public function getTotalAmount(){

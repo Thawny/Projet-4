@@ -4,18 +4,20 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "": "src/"
+            "": ["src/", "tests/"]
+        },
+        "autoload-dev": {
+            "psr-0": {
+                "": "tests/"
+            }
         },
         "classmap": [
             "app/AppKernel.php",
             "app/AppCache.php"
         ]
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
+
+
     "require": {
         "php": ">=5.5.9",
         "symfony/symfony": "3.2.*",
@@ -29,12 +31,15 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
         "symfony/assetic-bundle": "^2.8",
-        "stripe/stripe-php": "4.*"
+        "stripe/stripe-php": "4.*",
+        "doctrine/doctrine-migrations-bundle": "^1.0"
+
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0",
-        "stripe/stripe-php": "4.*"
+        "stripe/stripe-php": "4.*",
+        "phpunit/phpunit": "^6.0"
     },
     "scripts": {
         "symfony-scripts": [
@@ -65,5 +70,3 @@
         "branch-alias": null
     }
 }
-
-

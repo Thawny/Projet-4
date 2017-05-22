@@ -3,6 +3,8 @@ services:
 #        class: AppBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
 
+
+
     command.form.type:
           class: AppBundle\Form\Type\CommandType
           calls:
@@ -20,4 +22,21 @@ services:
 
     command.repository:
             class: AppBundle\Repository\CommandRepository
-            parent: doctrine.orm.entity_manager
+            factory: ["@doctrine.orm.entity_manager", getRepository]
+            arguments:
+                - AppBundle\Entity\Command
+
+#            parent: doctrine.orm.entity_manager
+
+    overbooking.checker:
+            class: AppBundle\OverbookingChecker\OverbookingChecker
+#            arguments: AppBundle\Repository\CommandRepository
+            calls:
+              - [setCommandGateway, ['@command.repository']]
+
+
+    custom.mailer:
+            class: AppBundle\CustomMailer\CustomMailer
+            arguments:
+                - "@swiftmailer.mailer"
+                - "@twig"
