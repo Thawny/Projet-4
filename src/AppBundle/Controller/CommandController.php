@@ -65,6 +65,8 @@ class CommandController extends Controller
             $command->bindTotalAmount();
             $session->set('command', $command);
 
+            aziodhjaiozhdziauh
+
 
             return $this->render('AppBundle:Default:visitorsForm.html.twig', array('model' => $command));
         }
