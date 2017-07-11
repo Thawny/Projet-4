@@ -1,3 +1,6 @@
-group :development do
-  gem "capistrano", "~> 3.4"
-end
+# File : Gemfile
+source "https://rubygems.org"
+
+gem 'capistrano', github: 'capistrano/capistrano', branch: 'master'
+gem 'capistrano-symfony', :github => 'TheBigBrainsCompany/capistrano-symfony'
+gem 'capistrano-composer'
