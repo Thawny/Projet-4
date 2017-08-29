@@ -45,12 +45,7 @@ class OverbookingCheckerTest extends TestCase
 
     }
 
-    /**
-     * @test
-     */
-    public function lessThanAThousand_DoNothing(){
 
-    }
 
 
 }
