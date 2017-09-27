@@ -82,7 +82,7 @@ class CommandController extends Controller
         try {
             $command = $request->getSession()->get('command');
             $commandFactory = $this->get('command.factory');
-             $commandEntity = $commandFactory->create($command);
+            $commandEntity = $commandFactory->create($command);
 
             $amount = $command->getTotalAmount();
 
